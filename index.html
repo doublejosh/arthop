@@ -48,46 +48,173 @@
             overflow: hidden;
         }
 
-        /* Layered background images */
-        .bg-layer {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.3s ease-out;
-        }
-
-        .bg-layer-1 {
-            background-image: url('https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=1920&q=80');
-            z-index: 1;
-            opacity: 0.3;
-        }
-
-        .bg-layer-2 {
-            background-image: url('https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=1920&q=80');
-            z-index: 2;
-            opacity: 0.4;
-        }
-
-        .bg-layer-3 {
-            background-image: url('https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=1920&q=80');
-            z-index: 3;
-            opacity: 0.5;
-        }
-
-        /* Overlay gradient */
-        .overlay {
+        /* Sky background */
+        .sky-layer {
             position: absolute;
             width: 100%;
             height: 100%;
             background: linear-gradient(
                 to bottom,
-                rgba(0, 0, 0, 0.2) 0%,
-                rgba(0, 0, 0, 0.4) 70%,
-                rgba(0, 0, 0, 0.7) 100%
+                #5a8ba5 0%,
+                #7ba5b8 25%,
+                #d4a574 50%,
+                #f4c96b 70%,
+                #e8b55d 100%
             );
+            z-index: 1;
+        }
+
+        /* Sun and rays */
+        .sun-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            transition: transform 0.3s ease-out;
+            overflow: hidden;
+        }
+
+        .sun {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #f4a84c 0%, #e69338 100%);
+            border-radius: 50%;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .sun-rays {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .ray {
+            position: absolute;
+            width: 120px;
+            height: 400px;
+            background: linear-gradient(to bottom,
+                rgba(244, 201, 107, 0.6) 0%,
+                transparent 100%);
+            top: 50%;
+            left: 50%;
+            transform-origin: 60px 0;
+            opacity: 0.7;
+        }
+
+        /* Mountain layers */
+        .bg-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease-out;
+        }
+
+        .mountain-back {
+            z-index: 3;
+            bottom: 30%;
+        }
+
+        .mountain-mid {
             z-index: 4;
+            bottom: 25%;
+        }
+
+        .mountain-front {
+            z-index: 5;
+            bottom: 0;
+        }
+
+        /* Water reflection */
+        .water-layer {
+            position: absolute;
+            width: 100%;
+            height: 40%;
+            bottom: 35%;
+            background: linear-gradient(
+                to bottom,
+                #e8b55d 0%,
+                #d4a574 50%,
+                #c89960 100%
+            );
+            z-index: 2;
+            opacity: 0.8;
+            transition: transform 0.3s ease-out;
+        }
+
+        .water-shimmer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                180deg,
+                transparent 0px,
+                rgba(255, 255, 255, 0.1) 2px,
+                transparent 4px
+            );
+        }
+
+        /* Decorative elements */
+        .tree-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 6;
+            transition: transform 0.3s ease-out;
+        }
+
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #f4e4c1;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #f4e4c1;
+        }
+
+        .star.sparkle {
+            width: 0;
+            height: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .star.sparkle::before,
+        .star.sparkle::after {
+            content: '';
+            position: absolute;
+            background: #f4e4c1;
+            box-shadow: 0 0 10px #f4e4c1;
+        }
+
+        .star.sparkle::before {
+            width: 20px;
+            height: 2px;
+            top: 0;
+            left: -10px;
+        }
+
+        .star.sparkle::after {
+            width: 2px;
+            height: 20px;
+            top: -10px;
+            left: 0;
+        }
+
+        /* Texture overlay */
+        .texture-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 7;
+            opacity: 0.4;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            pointer-events: none;
         }
 
         /* Content container */
@@ -98,7 +225,7 @@
             transform: translateX(-50%);
             text-align: center;
             color: white;
-            z-index: 5;
+            z-index: 10;
             width: 90%;
             max-width: 800px;
             padding: 20px;
@@ -182,7 +309,7 @@
             transform: translateX(-50%);
             color: rgba(255, 255, 255, 0.6);
             font-size: 0.9rem;
-            z-index: 5;
+            z-index: 10;
             animation: float 2s ease-in-out infinite;
         }
 
@@ -198,13 +325,71 @@
 </head>
 <body>
     <div class="container">
-        <!-- Layered background images -->
-        <div class="bg-layer bg-layer-1" data-speed="0.5"></div>
-        <div class="bg-layer bg-layer-2" data-speed="0.3"></div>
-        <div class="bg-layer bg-layer-3" data-speed="0.1"></div>
+        <!-- Sky gradient background -->
+        <div class="sky-layer"></div>
 
-        <!-- Overlay -->
-        <div class="overlay"></div>
+        <!-- Water reflection -->
+        <div class="water-layer" data-speed="0.3">
+            <div class="water-shimmer"></div>
+        </div>
+
+        <!-- Sun with radiating beams -->
+        <div class="sun-layer" data-speed="0.4">
+            <div class="sun"></div>
+            <div class="sun-rays">
+                <div class="ray" style="transform: rotate(0deg);"></div>
+                <div class="ray" style="transform: rotate(30deg);"></div>
+                <div class="ray" style="transform: rotate(60deg);"></div>
+                <div class="ray" style="transform: rotate(90deg);"></div>
+                <div class="ray" style="transform: rotate(120deg);"></div>
+                <div class="ray" style="transform: rotate(150deg);"></div>
+                <div class="ray" style="transform: rotate(180deg);"></div>
+                <div class="ray" style="transform: rotate(210deg);"></div>
+                <div class="ray" style="transform: rotate(240deg);"></div>
+                <div class="ray" style="transform: rotate(270deg);"></div>
+                <div class="ray" style="transform: rotate(300deg);"></div>
+                <div class="ray" style="transform: rotate(330deg);"></div>
+            </div>
+        </div>
+
+        <!-- Back mountains -->
+        <div class="bg-layer mountain-back" data-speed="0.8">
+            <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="none" style="position: absolute; bottom: 0;">
+                <path d="M 0 800 Q 300 600 600 700 T 1200 650 T 1920 750 L 1920 1080 L 0 1080 Z" fill="#6b9aad" opacity="0.8"/>
+            </svg>
+        </div>
+
+        <!-- Middle mountains -->
+        <div class="bg-layer mountain-mid" data-speed="1.2">
+            <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="none" style="position: absolute; bottom: 0;">
+                <path d="M 0 850 Q 400 650 800 750 T 1600 700 L 1920 780 L 1920 1080 L 0 1080 Z" fill="#547a8a" opacity="0.9"/>
+            </svg>
+        </div>
+
+        <!-- Front mountains -->
+        <div class="bg-layer mountain-front" data-speed="1.8">
+            <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="none" style="position: absolute; bottom: 0;">
+                <path d="M 0 650 L 200 900 L 500 700 L 800 850 L 1200 600 L 1500 800 L 1920 650 L 1920 1080 L 0 1080 Z" fill="#3d4f6b"/>
+            </svg>
+        </div>
+
+        <!-- Decorative tree and stars -->
+        <div class="tree-layer" data-speed="2.0">
+            <!-- Tree silhouette -->
+            <svg width="120" height="180" style="position: absolute; left: 8%; bottom: 28%;">
+                <polygon points="60,30 40,80 50,80 30,130 45,130 25,180 95,180 75,130 90,130 70,80 80,80" fill="#2d3b52"/>
+                <rect x="52" y="180" width="16" height="40" fill="#2d3b52"/>
+            </svg>
+
+            <!-- Stars -->
+            <div class="star" style="top: 15%; left: 25%;"></div>
+            <div class="star sparkle" style="top: 12%; left: 75%;"></div>
+            <div class="star" style="top: 20%; right: 20%;"></div>
+            <div class="star" style="top: 25%; left: 15%;"></div>
+        </div>
+
+        <!-- Grainy texture overlay -->
+        <div class="texture-overlay"></div>
 
         <!-- Main content -->
         <div class="content">
@@ -225,16 +410,16 @@
     <script>
         // Parallax effect on mouse move
         const container = document.querySelector('.container');
-        const layers = document.querySelectorAll('.bg-layer');
+        const layers = document.querySelectorAll('[data-speed]');
 
         container.addEventListener('mousemove', (e) => {
             const mouseX = e.clientX / window.innerWidth;
             const mouseY = e.clientY / window.innerHeight;
 
             layers.forEach((layer) => {
-                const speed = layer.getAttribute('data-speed');
-                const x = (window.innerWidth - mouseX * window.innerWidth) * speed * 0.02;
-                const y = (window.innerHeight - mouseY * window.innerHeight) * speed * 0.02;
+                const speed = parseFloat(layer.getAttribute('data-speed'));
+                const x = (mouseX - 0.5) * speed * 30;
+                const y = (mouseY - 0.5) * speed * 30;
 
                 layer.style.transform = `translate(${x}px, ${y}px)`;
             });
@@ -250,9 +435,9 @@
             const touchY = touch.clientY / window.innerHeight;
 
             layers.forEach((layer) => {
-                const speed = layer.getAttribute('data-speed');
-                const x = (window.innerWidth - touchX * window.innerWidth) * speed * 0.02;
-                const y = (window.innerHeight - touchY * window.innerHeight) * speed * 0.02;
+                const speed = parseFloat(layer.getAttribute('data-speed'));
+                const x = (touchX - 0.5) * speed * 30;
+                const y = (touchY - 0.5) * speed * 30;
 
                 layer.style.transform = `translate(${x}px, ${y}px)`;
             });
