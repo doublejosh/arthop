@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ArtHop - Explore the vibrant art scene on Camano Island, Washington. Discover local artists, galleries, and creative spaces.">
+    <meta name="keywords" content="ArtHop, Camano Island, Washington, art galleries, local artists, art tour, Pacific Northwest art">
+    <meta name="author" content="ArtHop Camano Island">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://arthop-camano.com/">
+    <meta property="og:title" content="ArtHop - Camano Island, WA">
+    <meta property="og:description" content="Explore the vibrant art scene on Camano Island, Washington. Discover local artists, galleries, and creative spaces.">
+    <meta property="og:image" content="https://arthop-camano.com/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://arthop-camano.com/">
+    <meta property="twitter:title" content="ArtHop - Camano Island, WA">
+    <meta property="twitter:description" content="Explore the vibrant art scene on Camano Island, Washington. Discover local artists, galleries, and creative spaces.">
+    <meta property="twitter:image" content="https://arthop-camano.com/twitter-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <title>ArtHop - Camano Island, WA</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Layered background images */
+        .bg-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.3s ease-out;
+        }
+
+        .bg-layer-1 {
+            background-image: url('https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=1920&q=80');
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .bg-layer-2 {
+            background-image: url('https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=1920&q=80');
+            z-index: 2;
+            opacity: 0.4;
+        }
+
+        .bg-layer-3 {
+            background-image: url('https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=1920&q=80');
+            z-index: 3;
+            opacity: 0.5;
+        }
+
+        /* Overlay gradient */
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.2) 0%,
+                rgba(0, 0, 0, 0.4) 70%,
+                rgba(0, 0, 0, 0.7) 100%
+            );
+            z-index: 4;
+        }
+
+        /* Content container */
+        .content {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            z-index: 5;
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .content h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .content .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-weight: 300;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+            letter-spacing: 1px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .content .description {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+            animation: fadeInUp 1.4s ease-out;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border: 2px solid white;
+            border-radius: 50px;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1.6s ease-out;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .content {
+                bottom: 15%;
+                width: 95%;
+            }
+        }
+
+        /* Parallax effect hint */
+        .parallax-hint {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            z-index: 5;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0px);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Layered background images -->
+        <div class="bg-layer bg-layer-1" data-speed="0.5"></div>
+        <div class="bg-layer bg-layer-2" data-speed="0.3"></div>
+        <div class="bg-layer bg-layer-3" data-speed="0.1"></div>
+
+        <!-- Overlay -->
+        <div class="overlay"></div>
+
+        <!-- Main content -->
+        <div class="content">
+            <h1>ArtHop</h1>
+            <div class="subtitle">Camano Island, WA</div>
+            <div class="description">
+                Discover the vibrant art scene of Camano Island. Join us for a journey through
+                local galleries, artist studios, and creative spaces nestled in the beauty of
+                the Pacific Northwest.
+            </div>
+            <a href="#explore" class="cta-button">Explore Art</a>
+        </div>
+
+        <!-- Parallax hint -->
+        <div class="parallax-hint">Move your mouse to explore</div>
+    </div>
+
+    <script>
+        // Parallax effect on mouse move
+        const container = document.querySelector('.container');
+        const layers = document.querySelectorAll('.bg-layer');
+
+        container.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+
+            layers.forEach((layer) => {
+                const speed = layer.getAttribute('data-speed');
+                const x = (window.innerWidth - mouseX * window.innerWidth) * speed * 0.02;
+                const y = (window.innerHeight - mouseY * window.innerHeight) * speed * 0.02;
+
+                layer.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Mobile touch parallax
+        let lastTouchX = 0;
+        let lastTouchY = 0;
+
+        container.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            const touchX = touch.clientX / window.innerWidth;
+            const touchY = touch.clientY / window.innerHeight;
+
+            layers.forEach((layer) => {
+                const speed = layer.getAttribute('data-speed');
+                const x = (window.innerWidth - touchX * window.innerWidth) * speed * 0.02;
+                const y = (window.innerHeight - touchY * window.innerHeight) * speed * 0.02;
+
+                layer.style.transform = `translate(${x}px, ${y}px)`;
+            });
+
+            lastTouchX = touchX;
+            lastTouchY = touchY;
+        });
+
+        // Smooth scroll for CTA button (placeholder for future sections)
+        document.querySelector('.cta-button').addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Explore Art clicked - add your navigation logic here');
+            // You can add navigation to other sections or pages here
+        });
+
+        // Optional: Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') {
+                console.log('Navigate to next section');
+                // Add navigation logic
+            }
+        });
+    </script>
+</body>
+</html>
