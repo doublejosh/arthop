@@ -538,15 +538,15 @@
             75% {
                 background:
                     radial-gradient(ellipse at 50% 40%,
-                        rgba(255, 240, 175, 0.4) 0%,
+                        rgba(255, 245, 200, 0.3) 0%,
                         transparent 50%
                     ),
                     linear-gradient(
                         to bottom,
-                        #96C4DC 0%,
-                        #E0D2A8 35%,
-                        #F9BE64 70%,
-                        #FFF5D0 100%
+                        #8db1c4 0%,
+                        #c8cab0 35%,
+                        #f4d88b 70%,
+                        #fff2be 100%
                     );
             }
         }
@@ -587,14 +587,14 @@
             }
             75% {
                 background: radial-gradient(circle,
-                    #FBD5A1 0%,
-                    #F7BE78 30%,
-                    #F1A96E 70%,
-                    #E28449 100%);
-                width: 425px;
-                height: 425px;
+                    #f7b760 0%,
+                    #f5a850 30%,
+                    #e8943d 70%,
+                    #d67d2a 100%);
+                width: 400px;
+                height: 400px;
                 border-radius: 50%;
-                top: 52%;
+                top: 55%;
             }
         }
 
@@ -603,57 +603,57 @@
             0%, 100% { stop-color: #7ba6b5; }
             25% { stop-color: #92B7C7; }
             41.67%, 58.33% { stop-color: #A8C8D8; }
-            75% { stop-color: #92B7C7; }
+            75% { stop-color: #7ba6b5; }
         }
         @keyframes mountainBackColor2 {
             0%, 100% { stop-color: #6a93a4; }
             25% { stop-color: #7DA4B6; }
             41.67%, 58.33% { stop-color: #8FB5C8; }
-            75% { stop-color: #7DA4B6; }
+            75% { stop-color: #6a93a4; }
         }
         @keyframes mountainBackColor3 {
             0%, 100% { stop-color: #5a8194; }
             25% { stop-color: #6990A5; }
             41.67%, 58.33% { stop-color: #789FB5; }
-            75% { stop-color: #6990A5; }
+            75% { stop-color: #5a8194; }
         }
 
         @keyframes mountainMidColor1 {
             0%, 100% { stop-color: #648599; }
             25% { stop-color: #7797AB; }
             41.67%, 58.33% { stop-color: #8AA8BD; }
-            75% { stop-color: #7797AB; }
+            75% { stop-color: #648599; }
         }
         @keyframes mountainMidColor2 {
             0%, 100% { stop-color: #547387; }
             25% { stop-color: #658499; }
             41.67%, 58.33% { stop-color: #7595AB; }
-            75% { stop-color: #658499; }
+            75% { stop-color: #547387; }
         }
         @keyframes mountainMidColor3 {
             0%, 100% { stop-color: #456275; }
             25% { stop-color: #557286; }
             41.67%, 58.33% { stop-color: #658297; }
-            75% { stop-color: #557286; }
+            75% { stop-color: #456275; }
         }
 
         @keyframes mountainFrontColor1 {
             0%, 100% { stop-color: #4a3d5e; }
             25% { stop-color: #625476; }
             41.67%, 58.33% { stop-color: #7A6B8E; }
-            75% { stop-color: #625476; }
+            75% { stop-color: #4a3d5e; }
         }
         @keyframes mountainFrontColor2 {
             0%, 100% { stop-color: #3d2f52; }
             25% { stop-color: #544569; }
             41.67%, 58.33% { stop-color: #6B5A7F; }
-            75% { stop-color: #544569; }
+            75% { stop-color: #3d2f52; }
         }
         @keyframes mountainFrontColor3 {
             0%, 100% { stop-color: #2f2242; }
             25% { stop-color: #453657; }
             41.67%, 58.33% { stop-color: #5A4A6B; }
-            75% { stop-color: #453657; }
+            75% { stop-color: #2f2242; }
         }
 
         #mountainBackGrad stop:nth-child(1) {
@@ -946,7 +946,7 @@
         .map-container h2 {
             color: #f0ddb0;
             font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 700;
+            font-weight: 300;
             text-align: center;
             margin-bottom: 20px;
             text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
@@ -1155,7 +1155,7 @@
     <section class="locations-section">
         <div class="locations-container">
             <h3 class="locations-intro">
-               All locations within 2 miles.
+               All locations within 2 miles
             </h3>
             <div id="locations-grid" class="locations-grid">
                 <!-- Locations will be dynamically inserted here -->
@@ -1171,7 +1171,7 @@
             <div class="map-embed">
                 <div id="arthop-map" style="width: 100%; height: 100%;"></div>
             </div>
-             <p class="map-intro">All locations are on Camano Island, WA - within 2 miles of each other</p>
+             <p class="map-intro">All locations on Camano Island, WA - within 2 miles</p>
         </div>
     </section>
 
