@@ -53,36 +53,48 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                to bottom,
-                #5a8ba5 0%,
-                #7ba5b8 25%,
-                #d4a574 50%,
-                #f4c96b 70%,
-                #e8b55d 100%
-            );
+            background:
+                radial-gradient(ellipse at 50% 40%,
+                    rgba(255, 230, 150, 0.15) 0%,
+                    transparent 50%
+                ),
+                linear-gradient(
+                    to bottom,
+                    #658ea1 0%,
+                    #7a9fae 20%,
+                    #a8ae92 35%,
+                    #d9b176 50%,
+                    #e8b862 70%,
+                    #f0c56f 100%
+                );
             z-index: 1;
         }
 
         /* Sun and rays */
         .sun-layer {
             position: absolute;
-            width: 100%;
+            width: 120%;
+            left: -10%;
             height: 100%;
             z-index: 2;
             transition: transform 0.3s ease-out;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .sun {
             position: absolute;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, #f4a84c 0%, #e69338 100%);
+            background: radial-gradient(circle,
+                #f7b760 0%,
+                #f5a850 30%,
+                #e8943d 70%,
+                #d67d2a 100%);
             border-radius: 50%;
             top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
+            z-index: 2;
         }
 
         .sun-rays {
@@ -92,6 +104,7 @@
             top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
+            z-index: 1;
         }
 
         .ray {
@@ -99,18 +112,19 @@
             width: 120px;
             height: 400px;
             background: linear-gradient(to bottom,
-                rgba(244, 201, 107, 0.6) 0%,
+                rgba(240, 197, 111, 0.5) 0%,
                 transparent 100%);
             top: 50%;
             left: 50%;
             transform-origin: 60px 0;
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
         /* Mountain layers */
         .bg-layer {
             position: absolute;
-            width: 100%;
+            width: 120%;
+            left: -10%;
             height: 100%;
             transition: transform 0.3s ease-out;
         }
@@ -133,17 +147,27 @@
         /* Water reflection */
         .water-layer {
             position: absolute;
-            width: 100%;
+            width: 120%;
+            left: -10%;
             height: 40%;
             bottom: 35%;
-            background: linear-gradient(
-                to bottom,
-                #e8b55d 0%,
-                #d4a574 50%,
-                #c89960 100%
-            );
+            background:
+                linear-gradient(to right,
+                    rgba(232, 184, 98, 0.3) 0%,
+                    transparent 30%,
+                    transparent 70%,
+                    rgba(232, 184, 98, 0.2) 100%
+                ),
+                linear-gradient(
+                    to bottom,
+                    #f0c56f 0%,
+                    #e8b862 25%,
+                    #e0a857 50%,
+                    #d49944 75%,
+                    #c89347 100%
+                );
             z-index: 2;
-            opacity: 0.8;
+            opacity: 0.75;
             transition: transform 0.3s ease-out;
         }
 
@@ -154,15 +178,37 @@
             background: repeating-linear-gradient(
                 180deg,
                 transparent 0px,
-                rgba(255, 255, 255, 0.1) 2px,
-                transparent 4px
+                rgba(255, 255, 255, 0.08) 1px,
+                transparent 2px,
+                transparent 6px,
+                rgba(200, 147, 71, 0.15) 7px,
+                transparent 8px
             );
+        }
+
+        /* Water ripples */
+        .water-ripples {
+            position: absolute;
+            width: 120%;
+            left: -10%;
+            height: 100%;
+            z-index: 4;
+            bottom: 0;
+            transition: transform 0.3s ease-out;
+        }
+
+        .ripple-line {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            opacity: 0.6;
         }
 
         /* Decorative elements */
         .tree-layer {
             position: absolute;
-            width: 100%;
+            width: 120%;
+            left: -10%;
             height: 100%;
             z-index: 6;
             transition: transform 0.3s ease-out;
@@ -172,9 +218,9 @@
             position: absolute;
             width: 4px;
             height: 4px;
-            background: #f4e4c1;
+            background: #f0ddb0;
             border-radius: 50%;
-            box-shadow: 0 0 8px #f4e4c1;
+            box-shadow: 0 0 8px #f0ddb0;
         }
 
         .star.sparkle {
@@ -188,8 +234,8 @@
         .star.sparkle::after {
             content: '';
             position: absolute;
-            background: #f4e4c1;
-            box-shadow: 0 0 10px #f4e4c1;
+            background: #f0ddb0;
+            box-shadow: 0 0 10px #f0ddb0;
         }
 
         .star.sparkle::before {
@@ -355,30 +401,108 @@
         <!-- Back mountains -->
         <div class="bg-layer mountain-back" data-speed="0.8">
             <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="none" style="position: absolute; bottom: 0;">
-                <path d="M 0 800 Q 300 600 600 700 T 1200 650 T 1920 750 L 1920 1080 L 0 1080 Z" fill="#6b9aad" opacity="0.8"/>
+                <defs>
+                    <linearGradient id="mountainBackGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#7ba6b5;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#6a93a4;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#5a8194;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <path d="M -200 850 Q 0 750 200 800 Q 400 850 600 780 Q 800 710 1000 760 Q 1200 810 1400 750 Q 1600 700 1800 780 Q 2000 850 2120 800 L 2120 1080 L -200 1080 Z" fill="url(#mountainBackGrad)"/>
             </svg>
         </div>
 
         <!-- Middle mountains -->
         <div class="bg-layer mountain-mid" data-speed="1.2">
             <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="none" style="position: absolute; bottom: 0;">
-                <path d="M 0 850 Q 400 650 800 750 T 1600 700 L 1920 780 L 1920 1080 L 0 1080 Z" fill="#547a8a" opacity="0.9"/>
+                <defs>
+                    <linearGradient id="mountainMidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#648599;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#547387;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#456275;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <path d="M -200 900 Q 100 800 400 850 Q 700 900 1000 820 Q 1300 740 1600 820 Q 1800 860 2000 840 Q 2060 850 2120 860 L 2120 1080 L -200 1080 Z" fill="url(#mountainMidGrad)"/>
+            </svg>
+        </div>
+
+        <!-- Water ripples -->
+        <div class="water-ripples" data-speed="1.5">
+            <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="none" style="position: absolute; bottom: 0;">
+                <!-- Wavy ripple lines -->
+                <path d="M -200 820 Q 200 815 600 820 Q 1000 825 1400 820 Q 1800 815 2120 820"
+                    stroke="#d9a54e" stroke-width="2" fill="none" opacity="0.4"/>
+                <path d="M -200 840 Q 300 838 700 840 Q 1100 842 1500 840 Q 1900 838 2120 840"
+                    stroke="#d9a54e" stroke-width="2" fill="none" opacity="0.35"/>
+                <path d="M -200 860 Q 250 856 650 860 Q 1050 864 1450 860 Q 1850 856 2120 860"
+                    stroke="#e0ad59" stroke-width="2" fill="none" opacity="0.4"/>
+                <path d="M -200 880 Q 350 878 750 880 Q 1150 882 1550 880 Q 1950 878 2120 880"
+                    stroke="#d9a54e" stroke-width="2" fill="none" opacity="0.3"/>
+                <path d="M -200 900 Q 280 897 680 900 Q 1080 903 1480 900 Q 1880 897 2120 900"
+                    stroke="#c89347" stroke-width="2" fill="none" opacity="0.35"/>
+                <path d="M -200 920 Q 320 918 720 920 Q 1120 922 1520 920 Q 1920 918 2120 920"
+                    stroke="#d9a54e" stroke-width="2" fill="none" opacity="0.3"/>
+                <path d="M -200 945 Q 260 941 660 945 Q 1060 949 1460 945 Q 1860 941 2120 945"
+                    stroke="#e0ad59" stroke-width="2" fill="none" opacity="0.4"/>
+                <path d="M -200 970 Q 340 968 740 970 Q 1140 972 1540 970 Q 1940 968 2120 970"
+                    stroke="#c89347" stroke-width="2" fill="none" opacity="0.25"/>
             </svg>
         </div>
 
         <!-- Front mountains -->
         <div class="bg-layer mountain-front" data-speed="1.8">
-            <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="none" style="position: absolute; bottom: 0;">
-                <path d="M 0 650 L 200 900 L 500 700 L 800 850 L 1200 600 L 1500 800 L 1920 650 L 1920 1080 L 0 1080 Z" fill="#3d4f6b"/>
+            <svg width="100%" height="120%" viewBox="0 0 1920 1200" preserveAspectRatio="none" style="position: absolute; bottom: -10%;">
+                <defs>
+                    <linearGradient id="mountainFrontGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#4a3d5e;stop-opacity:1" />
+                        <stop offset="40%" style="stop-color:#3d2f52;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#2f2242;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <path d="M -200 700 Q -50 850 100 920 Q 250 990 400 900 Q 600 780 800 850 Q 1000 920 1200 880 Q 1400 840 1600 900 Q 1800 960 2000 920 Q 2060 910 2120 930 L 2120 1300 L -200 1300 Z" fill="url(#mountainFrontGrad)"/>
             </svg>
         </div>
 
         <!-- Decorative tree and stars -->
         <div class="tree-layer" data-speed="2.0">
-            <!-- Tree silhouette -->
-            <svg width="120" height="180" style="position: absolute; left: 8%; bottom: 28%;">
-                <polygon points="60,30 40,80 50,80 30,130 45,130 25,180 95,180 75,130 90,130 70,80 80,80" fill="#2d3b52"/>
-                <rect x="52" y="180" width="16" height="40" fill="#2d3b52"/>
+            <!-- Tree silhouettes connected to purple foreground -->
+            <!-- Left tree -->
+            <svg width="140" height="280" style="position: absolute; left: 6%; bottom: 13.5%;">
+                <defs>
+                    <linearGradient id="treeGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#312948;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#2a2540;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#1f1a32;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <polygon points="70,40 45,100 58,100 35,160 52,160 28,220 112,220 88,160 105,160 82,100 95,100" fill="url(#treeGrad1)"/>
+                <rect x="61" y="220" width="18" height="60" fill="url(#treeGrad1)"/>
+            </svg>
+
+            <!-- Middle-right tree (smaller, further back) -->
+            <svg width="100" height="200" style="position: absolute; right: 35%; bottom: 18%;">
+                <defs>
+                    <linearGradient id="treeGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#2d2745;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#25213d;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#1c1830;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <polygon points="50,25 35,65 43,65 25,105 37,105 20,145 80,145 63,105 75,105 57,65 65,65" fill="url(#treeGrad2)"/>
+                <rect x="43" y="145" width="14" height="55" fill="url(#treeGrad2)"/>
+            </svg>
+
+            <!-- Right tree -->
+            <svg width="110" height="220" style="position: absolute; right: 8%; bottom: 15%;">
+                <defs>
+                    <linearGradient id="treeGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#2f2846;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#28233f;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#1e1a31;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <polygon points="55,30 38,75 47,75 28,120 41,120 23,165 87,165 69,120 82,120 63,75 72,75" fill="url(#treeGrad3)"/>
+                <rect x="48" y="165" width="14" height="55" fill="url(#treeGrad3)"/>
             </svg>
 
             <!-- Stars -->
