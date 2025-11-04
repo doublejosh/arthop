@@ -60,17 +60,19 @@
             height: 100%;
             background:
                 radial-gradient(ellipse at 50% 40%,
-                    rgba(255, 230, 150, 0.15) 0%,
+                    rgba(255, 240, 180, 0.2) 0%,
                     transparent 50%
                 ),
                 linear-gradient(
                     to bottom,
-                    #658ea1 0%,
-                    #7a9fae 20%,
-                    #a8ae92 35%,
-                    #d9b176 50%,
-                    #e8b862 70%,
-                    #f0c56f 100%
+                    #5a7d8f 0%,
+                    #6a8fa1 15%,
+                    #89a0ab 30%,
+                    #b5b48f 45%,
+                    #d9b176 60%,
+                    #edc46e 75%,
+                    #f5d382 90%,
+                    #fce49a 100%
                 );
             z-index: 1;
         }
@@ -104,8 +106,8 @@
 
         .sun-rays {
             position: absolute;
-            width: 800px;
-            height: 800px;
+            width: 1000px;
+            height: 1000px;
             top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -114,15 +116,39 @@
 
         .ray {
             position: absolute;
-            width: 120px;
-            height: 400px;
-            background: linear-gradient(to bottom,
-                rgba(240, 197, 111, 0.5) 0%,
-                transparent 100%);
+            width: 0;
+            height: 0;
             top: 50%;
             left: 50%;
-            transform-origin: 60px 0;
-            opacity: 0.6;
+            transform-origin: 0 0;
+        }
+
+        .ray::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-top: 500px solid rgba(240, 197, 111, 0.4);
+            filter: blur(8px);
+            transform: translateX(-40px);
+        }
+
+        .ray:nth-child(odd)::before {
+            border-left-width: 50px;
+            border-right-width: 50px;
+            border-top-width: 550px;
+            border-top-color: rgba(245, 205, 120, 0.35);
+            transform: translateX(-50px);
+        }
+
+        .ray:nth-child(3n)::before {
+            border-left-width: 35px;
+            border-right-width: 35px;
+            border-top-width: 480px;
+            border-top-color: rgba(232, 184, 98, 0.38);
+            transform: translateX(-35px);
         }
 
         /* Mountain layers */
