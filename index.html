@@ -1166,10 +1166,10 @@
         function generateCloud() {
             const numOvals = 6 + Math.floor(Math.random() * 7); // 6-12 ovals
             const cloudWidth = 250 + Math.random() * 300; // 250-550px (bigger)
-            const cloudHeight = cloudWidth * 0.5; // Maintain aspect ratio
+            const cloudHeight = cloudWidth * 0.6; // Slightly taller for more spread
 
             // Add padding for blur and overflow
-            const padding = cloudWidth * 0.15;
+            const padding = cloudWidth * 0.2;
             const viewBoxWidth = cloudWidth + padding * 2;
             const viewBoxHeight = cloudHeight + padding * 2;
 
@@ -1187,26 +1187,61 @@
                     </filter>
                 </defs>`;
 
-            // Generate random overlapping ovals
+            // Generate random overlapping ovals with looser spacing
             for (let i = 0; i < numOvals; i++) {
                 // Base size with up to 250% variation
-                const baseSize = cloudWidth / 7;
+                const baseSize = cloudWidth / 8;
                 const sizeVariation = 1 + Math.random() * 1.5; // 1.0 to 2.5x
                 const rx = baseSize * sizeVariation;
                 const ry = rx * (0.6 + Math.random() * 0.4); // Slightly elliptical
 
-                // Random position within cloud bounds (accounting for oval size)
-                const cx = rx + Math.random() * (cloudWidth - rx * 2);
-                const cy = ry + Math.random() * (cloudHeight - ry * 2);
+                // Looser spread - use full cloud area without tight clustering
+                const cx = cloudWidth * 0.1 + Math.random() * cloudWidth * 0.8;
+                const cy = cloudHeight * 0.1 + Math.random() * cloudHeight * 0.8;
 
                 // Random color (white to light gray)
                 const grayValue = 224 + Math.floor(Math.random() * 31); // 224-255
                 const color = `rgb(${grayValue}, ${grayValue}, ${grayValue})`;
 
-                // Random opacity (0.2-0.4) - lower opacity
-                const opacity = 0.2 + Math.random() * 0.2;
+                // Random opacity (0.15-0.3) - even lower opacity
+                const opacity = 0.15 + Math.random() * 0.15;
 
-                svgContent += `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${color}" opacity="${opacity}" filter="url(#${filterId})"/>`;
+                // Random animation duration for each oval (8-12 seconds)
+                const animDuration = 8 + Math.random() * 4;
+
+                // Random animation delay for variety
+                const animDelay = Math.random() * 4;
+
+                // Create unique animation name for this oval
+                const animName = `cloudShift_${i}_${Date.now()}`;
+
+                // Generate random shift amounts
+                const shiftX = -10 + Math.random() * 20;
+                const shiftY = -10 + Math.random() * 20;
+                const scaleChange = 0.85 + Math.random() * 0.3; // 0.85 to 1.15
+
+                svgContent += `
+                    <ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${color}" opacity="${opacity}" filter="url(#${filterId})">
+                        <animateTransform
+                            attributeName="transform"
+                            type="translate"
+                            values="0,0; ${shiftX},${shiftY}; 0,0"
+                            dur="${animDuration}s"
+                            begin="${animDelay}s"
+                            repeatCount="indefinite"/>
+                        <animate
+                            attributeName="rx"
+                            values="${rx}; ${rx * scaleChange}; ${rx}"
+                            dur="${animDuration}s"
+                            begin="${animDelay}s"
+                            repeatCount="indefinite"/>
+                        <animate
+                            attributeName="ry"
+                            values="${ry}; ${ry * scaleChange}; ${ry}"
+                            dur="${animDuration}s"
+                            begin="${animDelay}s"
+                            repeatCount="indefinite"/>
+                    </ellipse>`;
             }
 
             svgContent += '</svg>';
@@ -1234,8 +1269,8 @@
             // Random direction
             const direction = Math.random() < 0.5 ? 'leftToRight' : 'rightToLeft';
 
-            // Random duration (20-35 seconds) - slower movement
-            const duration = 20 + Math.random() * 15;
+            // Random duration (40-60 seconds) - much slower movement
+            const duration = 40 + Math.random() * 20;
 
             // Random pulse duration (4-6 seconds) for variety
             const pulseDuration = 4 + Math.random() * 2;
