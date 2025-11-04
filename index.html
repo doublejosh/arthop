@@ -223,6 +223,32 @@
             transition: transform 0.3s ease-out;
         }
 
+        .cloud-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 8;
+            overflow: hidden;
+            pointer-events: none;
+            transition: transform 0.3s ease-out;
+        }
+
+        .cloud {
+            position: absolute;
+            will-change: transform, opacity;
+            transform: translateZ(0);
+            animation: cloudPulse 5s ease-in-out infinite;
+        }
+
+        @keyframes cloudPulse {
+            0%, 100% {
+                transform: translateZ(0) scale(1);
+            }
+            50% {
+                transform: translateZ(0) scale(1.02);
+            }
+        }
+
         .star {
             position: absolute;
             width: 4px;
@@ -422,6 +448,41 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        /* Bird Flight Animations */
+        @keyframes flyLeftToRight {
+            from {
+                left: -10%;
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            to {
+                left: 110%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes flyRightToLeft {
+            from {
+                right: -10%;
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            to {
+                right: 110%;
+                opacity: 0;
             }
         }
 
@@ -847,6 +908,9 @@
             </div>
         </div>
 
+        <!-- Floating clouds -->
+        <div class="cloud-layer" data-speed="1.6"></div>
+
         <!-- Back mountains -->
         <div class="bg-layer mountain-back" data-speed="0.8">
             <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="none" style="position: absolute; bottom: 0;">
@@ -1092,6 +1156,127 @@
 
         // Initialize locations on page load
         document.addEventListener('DOMContentLoaded', loadLocations);
+
+        // Cloud animation system
+        const cloudLayer = document.querySelector('.cloud-layer');
+        let activeClouds = 0;
+        const MAX_CLOUDS = 6;
+
+        // Generate a random cloud cluster
+        function generateCloud() {
+            const numOvals = 6 + Math.floor(Math.random() * 7); // 6-12 ovals
+            const cloudWidth = 250 + Math.random() * 300; // 250-550px (bigger)
+            const cloudHeight = cloudWidth * 0.5; // Maintain aspect ratio
+
+            // Add padding for blur and overflow
+            const padding = cloudWidth * 0.15;
+            const viewBoxWidth = cloudWidth + padding * 2;
+            const viewBoxHeight = cloudHeight + padding * 2;
+
+            // Create unique filter ID
+            const filterId = `cloudBlur_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
+            let svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-padding} ${-padding} ${viewBoxWidth} ${viewBoxHeight}" width="${cloudWidth}" height="${cloudHeight}" style="overflow: visible;">
+                <defs>
+                    <filter id="${filterId}" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="4" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>`;
+
+            // Generate random overlapping ovals
+            for (let i = 0; i < numOvals; i++) {
+                // Base size with up to 250% variation
+                const baseSize = cloudWidth / 7;
+                const sizeVariation = 1 + Math.random() * 1.5; // 1.0 to 2.5x
+                const rx = baseSize * sizeVariation;
+                const ry = rx * (0.6 + Math.random() * 0.4); // Slightly elliptical
+
+                // Random position within cloud bounds (accounting for oval size)
+                const cx = rx + Math.random() * (cloudWidth - rx * 2);
+                const cy = ry + Math.random() * (cloudHeight - ry * 2);
+
+                // Random color (white to light gray)
+                const grayValue = 224 + Math.floor(Math.random() * 31); // 224-255
+                const color = `rgb(${grayValue}, ${grayValue}, ${grayValue})`;
+
+                // Random opacity (0.2-0.4) - lower opacity
+                const opacity = 0.2 + Math.random() * 0.2;
+
+                svgContent += `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${color}" opacity="${opacity}" filter="url(#${filterId})"/>`;
+            }
+
+            svgContent += '</svg>';
+            return svgContent;
+        }
+
+        function spawnCloud() {
+            // Check if we're on mobile or at max clouds
+            if (window.innerWidth <= 768 || activeClouds >= MAX_CLOUDS) {
+                return;
+            }
+
+            // Generate random cloud
+            const cloudSvg = generateCloud();
+
+            // Create cloud element
+            const cloud = document.createElement('div');
+            cloud.className = 'cloud';
+            cloud.innerHTML = cloudSvg;
+
+            // Random vertical position (5-35% from top) - higher up on screen
+            const topPosition = 5 + Math.random() * 30;
+            cloud.style.top = `${topPosition}%`;
+
+            // Random direction
+            const direction = Math.random() < 0.5 ? 'leftToRight' : 'rightToLeft';
+
+            // Random duration (20-35 seconds) - slower movement
+            const duration = 20 + Math.random() * 15;
+
+            // Random pulse duration (4-6 seconds) for variety
+            const pulseDuration = 4 + Math.random() * 2;
+            cloud.style.animationDuration = `${pulseDuration}s`;
+
+            // Apply animation
+            if (direction === 'leftToRight') {
+                cloud.style.animation = `flyLeftToRight ${duration}s linear, cloudPulse ${pulseDuration}s ease-in-out infinite`;
+                cloud.style.left = '-10%';
+            } else {
+                cloud.style.animation = `flyRightToLeft ${duration}s linear, cloudPulse ${pulseDuration}s ease-in-out infinite`;
+                cloud.style.right = '-10%';
+            }
+
+            // Add to DOM
+            cloudLayer.appendChild(cloud);
+            activeClouds++;
+
+            console.log(`Spawned cloud, active: ${activeClouds}, direction: ${direction}`);
+
+            // Remove cloud after animation completes
+            setTimeout(() => {
+                cloud.remove();
+                activeClouds--;
+            }, duration * 1000);
+        }
+
+        // Spawn clouds at random intervals (2-3 seconds for testing)
+        if (window.innerWidth > 768) {
+            console.log('Cloud system initialized - window width:', window.innerWidth);
+
+            setInterval(() => {
+                const randomDelay = 2000 + Math.random() * 1000; // 2-3 seconds
+                setTimeout(spawnCloud, randomDelay);
+            }, 2500);
+
+            // Spawn initial cloud
+            setTimeout(spawnCloud, 1000);
+        } else {
+            console.log('Cloud system disabled - mobile device detected');
+        }
     </script>
 </body>
 </html>
