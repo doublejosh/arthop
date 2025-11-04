@@ -543,6 +543,11 @@
         }
 
         @media (max-width: 768px) {
+            /* Disable parallax on mobile */
+            [data-speed] {
+                transform: none !important;
+            }
+
             .locations-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -699,7 +704,7 @@
         <div class="content">
             <h1><img src="logo-black_white.png" alt="ArtHop"></h1>
             <div class="info-block">
-                <div class="date"> Dec 6&7, 2025 · 10am-4pm</div>
+                <div class="date"> Dec 6&7, 2025<span class="times"> · 10am-4pm</span></div>
                 <div class="subtitle">Camano Island, WA</div>
             </div>
         </div>
@@ -712,7 +717,7 @@
     <section class="locations-section">
         <div class="locations-container">
             <p class="locations-intro">
-                Gifts of fine art, craft, galleries, and creative spaces.
+                Gifts of fine art and craft, galleries  and creative spaces.
             </p>
             <div id="locations-grid" class="locations-grid">
                 <!-- Locations will be dynamically inserted here -->
@@ -762,43 +767,25 @@
     </script>
 
     <script>
-        // Parallax effect on mouse move
+        // Parallax effect - only on desktop
         const container = document.querySelector('.container');
         const layers = document.querySelectorAll('[data-speed]');
 
-        container.addEventListener('mousemove', (e) => {
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
+        // Check if not mobile before enabling parallax
+        if (window.innerWidth > 768) {
+            container.addEventListener('mousemove', (e) => {
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
 
-            layers.forEach((layer) => {
-                const speed = parseFloat(layer.getAttribute('data-speed'));
-                const x = (mouseX - 0.5) * speed * 30;
-                const y = (mouseY - 0.5) * speed * 30;
+                layers.forEach((layer) => {
+                    const speed = parseFloat(layer.getAttribute('data-speed'));
+                    const x = (mouseX - 0.5) * speed * 30;
+                    const y = (mouseY - 0.5) * speed * 30;
 
-                layer.style.transform = `translate(${x}px, ${y}px)`;
+                    layer.style.transform = `translate(${x}px, ${y}px)`;
+                });
             });
-        });
-
-        // Mobile touch parallax
-        let lastTouchX = 0;
-        let lastTouchY = 0;
-
-        container.addEventListener('touchmove', (e) => {
-            const touch = e.touches[0];
-            const touchX = touch.clientX / window.innerWidth;
-            const touchY = touch.clientY / window.innerHeight;
-
-            layers.forEach((layer) => {
-                const speed = parseFloat(layer.getAttribute('data-speed'));
-                const x = (touchX - 0.5) * speed * 30;
-                const y = (touchY - 0.5) * speed * 30;
-
-                layer.style.transform = `translate(${x}px, ${y}px)`;
-            });
-
-            lastTouchX = touchX;
-            lastTouchY = touchY;
-        });
+        }
 
         // Load and display locations
         function loadLocations() {
