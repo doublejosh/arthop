@@ -65,17 +65,16 @@
                 ),
                 linear-gradient(
                     to bottom,
-                    #7b9fb5 0%,
-                    #8db1c4 15%,
-                    #a5bcc8 30%,
-                    #c8cab0 45%,
-                    #e5c791 60%,
-                    #f4d88b 75%,
-                    #fce8a8 90%,
+                    #8db1c4 0%,
+                    #c8cab0 35%,
+                    #f4d88b 70%,
                     #fff2be 100%
                 );
             z-index: 1;
             animation: skyColorCycle 30s linear infinite;
+            will-change: background;
+            transform: translateZ(0);
+            contain: paint;
         }
 
         /* Sun and rays */
@@ -101,8 +100,10 @@
             border-radius: 50%;
             top: 40%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) translateZ(0);
             animation: sunGlow 30s linear infinite;
+            will-change: background, top, width, height;
+            contain: paint;
         }
 
         .sun-rays {
@@ -111,9 +112,11 @@
             height: 1000px;
             top: 40%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) translateZ(0);
             z-index: 1;
             animation: sunGlow 30s linear infinite;
+            will-change: top;
+            contain: paint;
         }
 
         .ray {
@@ -406,86 +409,24 @@
                     ),
                     linear-gradient(
                         to bottom,
-                        #7b9fb5 0%,
-                        #8db1c4 15%,
-                        #a5bcc8 30%,
-                        #c8cab0 45%,
-                        #e5c791 60%,
-                        #f4d88b 75%,
-                        #fce8a8 90%,
+                        #8db1c4 0%,
+                        #c8cab0 35%,
+                        #f4d88b 70%,
                         #fff2be 100%
                     );
             }
-            10% {
+            25% {
                 background:
                     radial-gradient(ellipse at 50% 40%,
-                        rgba(255, 243, 193, 0.33) 0%,
+                        rgba(255, 240, 175, 0.4) 0%,
                         transparent 50%
                     ),
                     linear-gradient(
                         to bottom,
-                        #7DA4BC 0%,
-                        #90B8CA 15%,
-                        #A8C3CE 30%,
-                        #CECBAE 45%,
-                        #E7C088 60%,
-                        #F6DF82 75%,
-                        #FDE7A7 90%,
-                        #FFF4C4 100%
-                    );
-            }
-            20% {
-                background:
-                    radial-gradient(ellipse at 50% 40%,
-                        rgba(255, 241, 181, 0.37) 0%,
-                        transparent 50%
-                    ),
-                    linear-gradient(
-                        to bottom,
-                        #7FAEC7 0%,
-                        #94BFD6 15%,
-                        #ACCBDA 30%,
-                        #DACDAA 45%,
-                        #EBAE7A 60%,
-                        #F8CD6E 75%,
-                        #FEE7A5 90%,
-                        #FFF5CD 100%
-                    );
-            }
-            30% {
-                background:
-                    radial-gradient(ellipse at 50% 40%,
-                        rgba(255, 239, 169, 0.42) 0%,
-                        transparent 50%
-                    ),
-                    linear-gradient(
-                        to bottom,
-                        #83BDD7 0%,
-                        #98C9E2 15%,
-                        #B0D7E6 30%,
-                        #E8D4A5 45%,
-                        #EFA864 60%,
-                        #FAC35C 75%,
-                        #FFE7A3 90%,
-                        #FFF6D2 100%
-                    );
-            }
-            40% {
-                background:
-                    radial-gradient(ellipse at 50% 40%,
-                        rgba(255, 236, 156, 0.47) 0%,
-                        transparent 50%
-                    ),
-                    linear-gradient(
-                        to bottom,
-                        #85C6E4 0%,
-                        #9DD3EE 15%,
-                        #B5DDF2 30%,
-                        #F5D79D 45%,
-                        #F7B355 60%,
-                        #FCAC48 75%,
-                        #FFE6A1 90%,
-                        #FFF7D4 100%
+                        #96C4DC 0%,
+                        #E0D2A8 35%,
+                        #F9BE64 70%,
+                        #FFF5D0 100%
                     );
             }
             50% {
@@ -496,86 +437,24 @@
                     ),
                     linear-gradient(
                         to bottom,
-                        #87CEEB 0%,
-                        #9FD8F4 15%,
-                        #B8E2F8 30%,
-                        #FFD99A 45%,
-                        #FFB84D 60%,
-                        #FFA63D 75%,
-                        #FFE5A0 90%,
+                        #9FD8F4 0%,
+                        #FFD99A 35%,
+                        #FFA63D 70%,
                         #FFF8D5 100%
                     );
             }
-            60% {
+            75% {
                 background:
                     radial-gradient(ellipse at 50% 40%,
-                        rgba(255, 236, 156, 0.47) 0%,
+                        rgba(255, 240, 175, 0.4) 0%,
                         transparent 50%
                     ),
                     linear-gradient(
                         to bottom,
-                        #85C6E4 0%,
-                        #9DD3EE 15%,
-                        #B5DDF2 30%,
-                        #F5D79D 45%,
-                        #F7B355 60%,
-                        #FCAC48 75%,
-                        #FFE6A1 90%,
-                        #FFF7D4 100%
-                    );
-            }
-            70% {
-                background:
-                    radial-gradient(ellipse at 50% 40%,
-                        rgba(255, 239, 169, 0.42) 0%,
-                        transparent 50%
-                    ),
-                    linear-gradient(
-                        to bottom,
-                        #83BDD7 0%,
-                        #98C9E2 15%,
-                        #B0D7E6 30%,
-                        #E8D4A5 45%,
-                        #EFA864 60%,
-                        #FAC35C 75%,
-                        #FFE7A3 90%,
-                        #FFF6D2 100%
-                    );
-            }
-            80% {
-                background:
-                    radial-gradient(ellipse at 50% 40%,
-                        rgba(255, 241, 181, 0.37) 0%,
-                        transparent 50%
-                    ),
-                    linear-gradient(
-                        to bottom,
-                        #7FAEC7 0%,
-                        #94BFD6 15%,
-                        #ACCBDA 30%,
-                        #DACDAA 45%,
-                        #EBAE7A 60%,
-                        #F8CD6E 75%,
-                        #FEE7A5 90%,
-                        #FFF5CD 100%
-                    );
-            }
-            90% {
-                background:
-                    radial-gradient(ellipse at 50% 40%,
-                        rgba(255, 243, 193, 0.33) 0%,
-                        transparent 50%
-                    ),
-                    linear-gradient(
-                        to bottom,
-                        #7DA4BC 0%,
-                        #90B8CA 15%,
-                        #A8C3CE 30%,
-                        #CECBAE 45%,
-                        #E7C088 60%,
-                        #F6DF82 75%,
-                        #FDE7A7 90%,
-                        #FFF4C4 100%
+                        #96C4DC 0%,
+                        #E0D2A8 35%,
+                        #F9BE64 70%,
+                        #FFF5D0 100%
                     );
             }
         }
@@ -592,28 +471,6 @@
                 border-radius: 50%;
                 top: 55%;
             }
-            10% {
-                background: radial-gradient(circle,
-                    #F8C487 0%,
-                    #F6B164 30%,
-                    #ECA056 70%,
-                    #DC833A 100%);
-                width: 410px;
-                height: 410px;
-                border-radius: 50%;
-                top: 54%;
-            }
-            20% {
-                background: radial-gradient(circle,
-                    #FACCA0 0%,
-                    #F7BC6E 30%,
-                    #F0A660 70%,
-                    #E38742 100%);
-                width: 417px;
-                height: 417px;
-                border-radius: 50%;
-                top: 53%;
-            }
             25% {
                 background: radial-gradient(circle,
                     #FBD5A1 0%,
@@ -624,28 +481,6 @@
                 height: 425px;
                 border-radius: 50%;
                 top: 52%;
-            }
-            30% {
-                background: radial-gradient(circle,
-                    #FCD6A4 0%,
-                    #F8C482 30%,
-                    #F3AD76 70%,
-                    #E88A54 100%);
-                width: 430px;
-                height: 430px;
-                border-radius: 50%;
-                top: 51%;
-            }
-            40% {
-                background: radial-gradient(circle,
-                    #FEE5A4 0%,
-                    #FDC941 30%,
-                    #F9A857 70%,
-                    #F28D46 100%);
-                width: 440px;
-                height: 440px;
-                border-radius: 50%;
-                top: 50.5%;
             }
             50% {
                 background: radial-gradient(circle,
@@ -658,28 +493,6 @@
                 border-radius: 50%;
                 top: 50%;
             }
-            60% {
-                background: radial-gradient(circle,
-                    #FEE5A4 0%,
-                    #FDC941 30%,
-                    #F9A857 70%,
-                    #F28D46 100%);
-                width: 440px;
-                height: 440px;
-                border-radius: 50%;
-                top: 50.5%;
-            }
-            70% {
-                background: radial-gradient(circle,
-                    #FCD6A4 0%,
-                    #F8C482 30%,
-                    #F3AD76 70%,
-                    #E88A54 100%);
-                width: 430px;
-                height: 430px;
-                border-radius: 50%;
-                top: 51%;
-            }
             75% {
                 background: radial-gradient(circle,
                     #FBD5A1 0%,
@@ -691,140 +504,64 @@
                 border-radius: 50%;
                 top: 52%;
             }
-            80% {
-                background: radial-gradient(circle,
-                    #FACCA0 0%,
-                    #F7BC6E 30%,
-                    #F0A660 70%,
-                    #E38742 100%);
-                width: 417px;
-                height: 417px;
-                border-radius: 50%;
-                top: 53%;
-            }
-            90% {
-                background: radial-gradient(circle,
-                    #F8C487 0%,
-                    #F6B164 30%,
-                    #ECA056 70%,
-                    #DC833A 100%);
-                width: 410px;
-                height: 410px;
-                border-radius: 50%;
-                top: 54%;
-            }
         }
 
         /* Mountain gradient animations */
         @keyframes mountainBackColor1 {
             0%, 100% { stop-color: #7ba6b5; }
-            10% { stop-color: #84ACBB; }
-            20% { stop-color: #8BB2C1; }
-            30% { stop-color: #94B8C4; }
-            40% { stop-color: #9EC0CE; }
+            25% { stop-color: #92B7C7; }
             50% { stop-color: #A8C8D8; }
-            60% { stop-color: #9EC0CE; }
-            70% { stop-color: #94B8C4; }
-            80% { stop-color: #8BB2C1; }
-            90% { stop-color: #84ACBB; }
+            75% { stop-color: #92B7C7; }
         }
         @keyframes mountainBackColor2 {
             0%, 100% { stop-color: #6a93a4; }
-            10% { stop-color: #739AAD; }
-            20% { stop-color: #7B9FB2; }
-            30% { stop-color: #84A5B7; }
-            40% { stop-color: #8BADC0; }
+            25% { stop-color: #7DA4B6; }
             50% { stop-color: #8FB5C8; }
-            60% { stop-color: #8BADC0; }
-            70% { stop-color: #84A5B7; }
-            80% { stop-color: #7B9FB2; }
-            90% { stop-color: #739AAD; }
+            75% { stop-color: #7DA4B6; }
         }
         @keyframes mountainBackColor3 {
             0%, 100% { stop-color: #5a8194; }
-            10% { stop-color: #62889A; }
-            20% { stop-color: #698DA0; }
-            30% { stop-color: #7193A6; }
-            40% { stop-color: #7599AE; }
+            25% { stop-color: #6990A5; }
             50% { stop-color: #789FB5; }
-            60% { stop-color: #7599AE; }
-            70% { stop-color: #7193A6; }
-            80% { stop-color: #698DA0; }
-            90% { stop-color: #62889A; }
+            75% { stop-color: #6990A5; }
         }
 
         @keyframes mountainMidColor1 {
             0%, 100% { stop-color: #648599; }
-            10% { stop-color: #6C8C9F; }
-            20% { stop-color: #7291A5; }
-            30% { stop-color: #7898A9; }
-            40% { stop-color: #81A0B3; }
+            25% { stop-color: #7797AB; }
             50% { stop-color: #8AA8BD; }
-            60% { stop-color: #81A0B3; }
-            70% { stop-color: #7898A9; }
-            80% { stop-color: #7291A5; }
-            90% { stop-color: #6C8C9F; }
+            75% { stop-color: #7797AB; }
         }
         @keyframes mountainMidColor2 {
             0%, 100% { stop-color: #547387; }
-            10% { stop-color: #5C7B8D; }
-            20% { stop-color: #627F93; }
-            30% { stop-color: #698597; }
-            40% { stop-color: #6F8CA1; }
+            25% { stop-color: #658499; }
             50% { stop-color: #7595AB; }
-            60% { stop-color: #6F8CA1; }
-            70% { stop-color: #698597; }
-            80% { stop-color: #627F93; }
-            90% { stop-color: #5C7B8D; }
+            75% { stop-color: #658499; }
         }
         @keyframes mountainMidColor3 {
             0%, 100% { stop-color: #456275; }
-            10% { stop-color: #4D6A7C; }
-            20% { stop-color: #536F81; }
-            30% { stop-color: #597485; }
-            40% { stop-color: #5F7B8E; }
+            25% { stop-color: #557286; }
             50% { stop-color: #658297; }
-            60% { stop-color: #5F7B8E; }
-            70% { stop-color: #597485; }
-            80% { stop-color: #536F81; }
-            90% { stop-color: #4D6A7C; }
+            75% { stop-color: #557286; }
         }
 
         @keyframes mountainFrontColor1 {
             0%, 100% { stop-color: #4a3d5e; }
-            10% { stop-color: #534567; }
-            20% { stop-color: #5B4C70; }
-            30% { stop-color: #625376; }
-            40% { stop-color: #6E5F82; }
+            25% { stop-color: #625476; }
             50% { stop-color: #7A6B8E; }
-            60% { stop-color: #6E5F82; }
-            70% { stop-color: #625376; }
-            80% { stop-color: #5B4C70; }
-            90% { stop-color: #534567; }
+            75% { stop-color: #625476; }
         }
         @keyframes mountainFrontColor2 {
             0%, 100% { stop-color: #3d2f52; }
-            10% { stop-color: #46375B; }
-            20% { stop-color: #4D3E62; }
-            30% { stop-color: #544569; }
-            40% { stop-color: #5F5074; }
+            25% { stop-color: #544569; }
             50% { stop-color: #6B5A7F; }
-            60% { stop-color: #5F5074; }
-            70% { stop-color: #544569; }
-            80% { stop-color: #4D3E62; }
-            90% { stop-color: #46375B; }
+            75% { stop-color: #544569; }
         }
         @keyframes mountainFrontColor3 {
             0%, 100% { stop-color: #2f2242; }
-            10% { stop-color: #382A4B; }
-            20% { stop-color: #3F3152; }
-            30% { stop-color: #453657; }
-            40% { stop-color: #504061; }
+            25% { stop-color: #453657; }
             50% { stop-color: #5A4A6B; }
-            60% { stop-color: #504061; }
-            70% { stop-color: #453657; }
-            80% { stop-color: #3F3152; }
-            90% { stop-color: #382A4B; }
+            75% { stop-color: #453657; }
         }
 
         #mountainBackGrad stop:nth-child(1) {
