@@ -60,19 +60,19 @@
             height: 100%;
             background:
                 radial-gradient(ellipse at 50% 40%,
-                    rgba(255, 240, 180, 0.2) 0%,
+                    rgba(255, 245, 200, 0.3) 0%,
                     transparent 50%
                 ),
                 linear-gradient(
                     to bottom,
-                    #5a7d8f 0%,
-                    #6a8fa1 15%,
-                    #89a0ab 30%,
-                    #b5b48f 45%,
-                    #d9b176 60%,
-                    #edc46e 75%,
-                    #f5d382 90%,
-                    #fce49a 100%
+                    #7b9fb5 0%,
+                    #8db1c4 15%,
+                    #a5bcc8 30%,
+                    #c8cab0 45%,
+                    #e5c791 60%,
+                    #f4d88b 75%,
+                    #fce8a8 90%,
+                    #fff2be 100%
                 );
             z-index: 1;
         }
@@ -270,7 +270,7 @@
         /* Content container */
         .content {
             position: absolute;
-            bottom: 10%;
+            bottom: 20%;
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
@@ -290,14 +290,14 @@
             max-width: 100%;
             width: clamp(300px, 50vw, 600px);
             height: auto;
-            filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.8));
-            opacity: 0.5;
+            filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.5));
+            opacity: 0.35;
             transition: opacity 0.3s ease;
-            mix-blend-mode: overlay;
+            mix-blend-mode: soft-light;
         }
 
         .content h1 img:hover {
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
         .content .subtitle {
