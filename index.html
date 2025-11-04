@@ -225,7 +225,8 @@
 
         .cloud-layer {
             position: absolute;
-            width: 100%;
+            width: 120%;
+            left: -10%;
             height: 100%;
             z-index: 8;
             overflow: hidden;
@@ -451,10 +452,10 @@
             }
         }
 
-        /* Bird Flight Animations */
+        /* Cloud Flight Animations */
         @keyframes flyLeftToRight {
             from {
-                left: -10%;
+                left: -20%;
                 opacity: 0;
             }
             5% {
@@ -464,14 +465,14 @@
                 opacity: 1;
             }
             to {
-                left: 110%;
+                left: 120%;
                 opacity: 0;
             }
         }
 
         @keyframes flyRightToLeft {
             from {
-                right: -10%;
+                right: -20%;
                 opacity: 0;
             }
             5% {
@@ -481,7 +482,7 @@
                 opacity: 1;
             }
             to {
-                right: 110%;
+                right: 120%;
                 opacity: 0;
             }
         }
@@ -1269,8 +1270,8 @@
             // Random direction
             const direction = Math.random() < 0.5 ? 'leftToRight' : 'rightToLeft';
 
-            // Random duration (40-60 seconds) - much slower movement
-            const duration = 40 + Math.random() * 20;
+            // Random duration (60-180 seconds) - half as fast, very slow drift
+            const duration = 60 + Math.random() * 120;
 
             // Random pulse duration (4-6 seconds) for variety
             const pulseDuration = 4 + Math.random() * 2;
@@ -1279,10 +1280,10 @@
             // Apply animation
             if (direction === 'leftToRight') {
                 cloud.style.animation = `flyLeftToRight ${duration}s linear, cloudPulse ${pulseDuration}s ease-in-out infinite`;
-                cloud.style.left = '-10%';
+                cloud.style.left = '-20%';
             } else {
                 cloud.style.animation = `flyRightToLeft ${duration}s linear, cloudPulse ${pulseDuration}s ease-in-out infinite`;
-                cloud.style.right = '-10%';
+                cloud.style.right = '-20%';
             }
 
             // Add to DOM
