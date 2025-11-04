@@ -303,7 +303,7 @@
         .content .subtitle {
             font-size: clamp(1rem, 3vw, 1.5rem);
             font-weight: 300;
-            margin-bottom: 10px;
+            margin-top: 20px;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
             letter-spacing: 1px;
             animation: fadeInUp 1.2s ease-out;
@@ -332,6 +332,30 @@
             border-radius: 15px;
             backdrop-filter: blur(10px);
             display: inline-block;
+        }
+
+        .calendar-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 25px;
+            font-size: clamp(0.85rem, 1.8vw, 1rem);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            cursor: pointer;
+        }
+
+        .calendar-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .cta-button {
@@ -705,6 +729,7 @@
             <h1><img src="logo-black_white.png" alt="ArtHop"></h1>
             <div class="info-block">
                 <div class="date"> Dec 6&7, 2025<span class="times"> · 10am-4pm</span></div>
+                <a href="arthop-2025.ics" download class="calendar-button">📅 Add to Calendar</a>
                 <div class="subtitle">Camano Island, WA</div>
             </div>
         </div>

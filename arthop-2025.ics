@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ArtHop Camano Island//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:arthop2025@camanoarthop.com
+DTSTAMP:20241104T000000Z
+DTSTART:20251206T100000
+DTEND:20251206T160000
+RRULE:FREQ=DAILY;COUNT=2
+SUMMARY:ArtHop - Camano Island
+LOCATION:Camano Island, WA
+DESCRIPTION:Explore the vibrant art scene on Camano Island. Gifts of fine art and craft. Visit galleries\, artists\, and creative spaces.\n\n10am-4pm daily\n\nLOCATIONS:\n1. LB Art Glass - 679 Awa Ln\n2. Matzke Fine Art Gallery & Sculpture Park - 2345 Blanche Way\n3. South Camano Grange - 2227 S Camano Dr\n4. Dragon's Gate Studios - 2296 S Camano Dr\n5. The Compound - 159 E Dry Lake Rd\n\nFor more information: https://camanoarthop.com/
+URL:https://camanoarthop.com/
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR
