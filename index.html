@@ -239,6 +239,7 @@
             will-change: transform, opacity;
             transform: translateZ(0);
             animation: cloudPulse 5s ease-in-out infinite;
+            filter: blur(2px);
         }
 
         @keyframes cloudPulse {
@@ -1303,13 +1304,16 @@
         if (window.innerWidth > 768) {
             console.log('Cloud system initialized - window width:', window.innerWidth);
 
+            // Spawn first cloud immediately
+            spawnCloud();
+
+            // Spawn second cloud quickly
+            setTimeout(spawnCloud, 500);
+
             setInterval(() => {
                 const randomDelay = 2000 + Math.random() * 1000; // 2-3 seconds
                 setTimeout(spawnCloud, randomDelay);
             }, 2500);
-
-            // Spawn initial cloud
-            setTimeout(spawnCloud, 1000);
         } else {
             console.log('Cloud system disabled - mobile device detected');
         }
