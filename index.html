@@ -144,33 +144,6 @@
             bottom: 0;
         }
 
-        /* Water reflection */
-        .water-layer {
-            position: absolute;
-            width: 120%;
-            left: -10%;
-            height: 40%;
-            bottom: 35%;
-            background:
-                linear-gradient(to right,
-                    rgba(232, 184, 98, 0.3) 0%,
-                    transparent 30%,
-                    transparent 70%,
-                    rgba(232, 184, 98, 0.2) 100%
-                ),
-                linear-gradient(
-                    to bottom,
-                    #f0c56f 0%,
-                    #e8b862 25%,
-                    #e0a857 50%,
-                    #d49944 75%,
-                    #c89347 100%
-                );
-            z-index: 2;
-            opacity: 0.75;
-            transition: transform 0.3s ease-out;
-        }
-
         .water-shimmer {
             position: absolute;
             width: 100%;
@@ -383,11 +356,6 @@
     <div class="container">
         <!-- Sky gradient background -->
         <div class="sky-layer"></div>
-
-        <!-- Water reflection -->
-        <div class="water-layer" data-speed="0.3">
-            <div class="water-shimmer"></div>
-        </div>
 
         <!-- Sun with radiating beams -->
         <div class="sun-layer" data-speed="0.4">
