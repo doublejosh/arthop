@@ -326,6 +326,14 @@
             animation: fadeInUp 1.2s ease-out;
         }
 
+        .info-block {
+            background-color: rgba(0, 0, 0, 0.15);
+            padding: 20px 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            display: inline-block;
+        }
+
         .cta-button {
             display: inline-block;
             padding: 15px 40px;
@@ -376,7 +384,7 @@
             bottom: 5%;
             left: 50%;
             transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 0.9rem;
             z-index: 10;
             animation: float 2s ease-in-out infinite;
@@ -423,6 +431,19 @@
             max-width: 1200px;
             margin: 0 auto;
             z-index: 1;
+        }
+
+        .locations-intro {
+            color: #e5c791;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-weight: 200;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .locations-container h2 {
@@ -675,10 +696,9 @@
         <!-- Main content -->
         <div class="content">
             <h1><img src="logo-black_white.png" alt="ArtHop"></h1>
-            <div class="date"> Dec 6&7 · 10-4</div>
-            <div class="subtitle">Camano Island, WA</div>
-            <div class="description">
-                Gifts of fine art and craft. Galleries, artists, and creative spaces.
+            <div class="info-block">
+                <div class="date"> Dec 6&7, 2025 · 10am-4pm</div>
+                <div class="subtitle">Camano Island, WA</div>
             </div>
         </div>
 
@@ -689,7 +709,9 @@
     <!-- Locations Section -->
     <section class="locations-section">
         <div class="locations-container">
-            <h2>Locations</h2>
+            <p class="locations-intro">
+                Gifts of fine art, craft, galleries, and creative spaces.
+            </p>
             <div id="locations-grid" class="locations-grid">
                 <!-- Locations will be dynamically inserted here -->
             </div>
