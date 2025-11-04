@@ -27,6 +27,9 @@
 
     <title>ArtHop - Camano Island, WA</title>
 
+    <!-- Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA6weoWIMcVKrG-tCJsg8_pVDskS76cqw&callback=initArtHopMap" async defer></script>
+
     <style>
         * {
             margin: 0;
@@ -865,6 +868,27 @@
             font-style: italic;
         }
 
+        .location-directions-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #e8b862 0%, #d49944 100%);
+            color: #241a35;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: clamp(0.9rem, 1.8vw, 1rem);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(232, 184, 98, 0.3);
+        }
+
+        .location-directions-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(232, 184, 98, 0.5);
+            background: linear-gradient(135deg, #f0c874 0%, #e0a855 100%);
+        }
+
         @media (max-width: 768px) {
             /* Disable parallax on mobile */
             [data-speed] {
@@ -883,6 +907,86 @@
 
         .smaller-text {
             font-size: 0.7em;
+        }
+
+        /* Map Section */
+        .map-section {
+            position: relative;
+            min-height: 90vh;
+            background: linear-gradient(
+                to bottom,
+                #1a1328 0%,
+                #241a35 30%,
+                #2f2242 70%,
+                #3d2f52 100%
+            );
+            padding: 80px 20px;
+            overflow: hidden;
+        }
+
+        .map-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .map-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .map-container h2 {
+            color: #f0ddb0;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .map-intro {
+            color: #d4a574;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .map-embed {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+            border: 2px solid rgba(240, 221, 176, 0.3);
+        }
+
+        .map-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: brightness(0.85) contrast(1.1) saturate(0.9);
+        }
+
+        @media (max-width: 768px) {
+            .map-section {
+                padding: 60px 15px;
+            }
+
+            .map-embed {
+                height: 400px;
+            }
         }
     </style>
 </head>
@@ -1034,7 +1138,7 @@
         <div class="content">
             <h1><img src="logo-black_white.png" alt="ArtHop"></h1>
             <div class="info-block">
-                <div class="date">Dec 6<span class="smaller-text">&</span>7<span class="times"> · 10<span class="smaller-text">a</span>-4<span class="smaller-text">p</span></span></div>
+                <div class="date">Dec 6<span class="smaller-text">&</span>7<span class="times"> · 10<span class="smaller-text">am</span>-4<span class="smaller-text">pm</span></span></div>
                 <a href="arthop-2025.ics" download class="calendar-button">📅 Add to Calendar</a>
                 <div class="subtitle">Camano Island, WA</div>
             </div>
@@ -1054,6 +1158,19 @@
             </h3>
             <div id="locations-grid" class="locations-grid">
                 <!-- Locations will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-container">
+            <h2>Find Your Way to ArtHop</h2>
+            <p class="map-intro">All locations are on Camano Island, WA - within 2 miles of each other</p>
+
+            <!-- Embedded Map with all ArtHop locations -->
+            <div class="map-embed">
+                <div id="arthop-map" style="width: 100%; height: 100%;"></div>
             </div>
         </div>
     </section>
@@ -1144,12 +1261,16 @@
                     notesHTML = `<div class="location-notes">${location.notes}</div>`;
                 }
 
+                // Create Google Maps directions URL
+                const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location.address + ' Camano Island WA 98282')}`;
+
                 card.innerHTML = `
                     <div class="location-number">${location.number}</div>
                     <div class="location-name">${location.name}</div>
                     <div class="location-address">${location.address}</div>
                     ${artistsHTML}
                     ${notesHTML}
+                    <a href="${mapsUrl}" target="_blank" class="location-directions-button">Get Directions</a>
                 `;
 
                 locationsGrid.appendChild(card);
@@ -1317,6 +1438,130 @@
         } else {
             console.log('Cloud system disabled - mobile device detected');
         }
+
+        // Generate map with all ArtHop locations using Google Maps JavaScript API
+        function initArtHopMap() {
+            // Get locations data from the JSON
+            const locationsData = JSON.parse(document.getElementById('locations-data').textContent);
+
+            // Location details with coordinates (approximate - will be geocoded)
+            const locations = [
+                {
+                    number: 1,
+                    name: 'LB Art Glass',
+                    address: '679 Awa Ln, Camano Island, WA 98282',
+                    position: { lat: 48.1234, lng: -122.4567 }
+                },
+                {
+                    number: 2,
+                    name: 'Matzke Fine Art Gallery & Sculpture Park',
+                    address: '2345 Blanche Way, Camano Island, WA 98282',
+                    position: { lat: 48.1265, lng: -122.4491 }
+                },
+                {
+                    number: 3,
+                    name: 'South Camano Grange',
+                    address: '2227 S Camano Dr, Camano Island, WA 98282',
+                    position: { lat: 48.1199, lng: -122.5012 }
+                },
+                {
+                    number: 4,
+                    name: "Dragon's Gate Studios",
+                    address: '2296 S Camano Dr, Camano Island, WA 98282',
+                    position: { lat: 48.1188, lng: -122.5023 }
+                },
+                {
+                    number: 5,
+                    name: 'The Compound',
+                    address: '159 E Dry Lake Rd, Camano Island, WA 98282',
+                    position: { lat: 48.1323, lng: -122.4657 }
+                }
+            ];
+
+            // Create map centered on South Camano area
+            const map = new google.maps.Map(document.getElementById('arthop-map'), {
+                zoom: 13,
+                center: { lat: 48.125, lng: -122.485 },
+                mapTypeId: 'roadmap',
+                styles: [
+                    {
+                        "featureType": "all",
+                        "stylers": [{ "saturation": -20 }]
+                    }
+                ]
+            });
+
+            // Create bounds to fit all markers
+            const bounds = new google.maps.LatLngBounds();
+
+            // Create a geocoder for accurate coordinates
+            const geocoder = new google.maps.Geocoder();
+
+            // Add markers for each location
+            locations.forEach((location, index) => {
+                // Geocode the address for accurate positioning
+                geocoder.geocode({ address: location.address }, (results, status) => {
+                    if (status === 'OK') {
+                        const position = results[0].geometry.location;
+
+                        // Create marker
+                        const marker = new google.maps.Marker({
+                            position: position,
+                            map: map,
+                            title: location.name,
+                            label: {
+                                text: location.number.toString(),
+                                color: '#241a35',
+                                fontWeight: 'bold',
+                                fontSize: '14px'
+                            },
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                scale: 20,
+                                fillColor: '#e8b862',
+                                fillOpacity: 1,
+                                strokeColor: '#d49944',
+                                strokeWeight: 3
+                            }
+                        });
+
+                        // Create info window
+                        const infoWindow = new google.maps.InfoWindow({
+                            content: `
+                                <div style="padding: 10px; font-family: 'Helvetica Neue', Arial, sans-serif;">
+                                    <h3 style="margin: 0 0 8px 0; color: #3d2f52; font-size: 16px; font-weight: 600;">${location.name}</h3>
+                                    <p style="margin: 0 0 10px 0; color: #666; font-size: 14px;">${location.address}</p>
+                                    <a href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location.address)}"
+                                       target="_blank"
+                                       style="display: inline-block; padding: 8px 20px; background: linear-gradient(135deg, #e8b862 0%, #d49944 100%); color: #241a35; text-decoration: none; border-radius: 20px; font-size: 14px; font-weight: 600;">
+                                        Get Directions
+                                    </a>
+                                </div>
+                            `
+                        });
+
+                        // Add click listener to marker
+                        marker.addListener('click', () => {
+                            infoWindow.open(map, marker);
+                        });
+
+                        // Extend bounds to include this marker
+                        bounds.extend(position);
+
+                        // Fit map to bounds after all markers are added
+                        if (index === locations.length - 1) {
+                            map.fitBounds(bounds);
+                            // Add some padding
+                            map.setZoom(map.getZoom() - 0.5);
+                        }
+                    } else {
+                        console.error('Geocode was not successful for: ' + location.address);
+                    }
+                });
+            });
+        }
+
+        // The initArtHopMap function will be called by the Google Maps API callback
     </script>
 </body>
 </html>
