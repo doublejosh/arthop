@@ -36,15 +36,20 @@
 
         body, html {
             width: 100%;
-            height: 100%;
-            overflow: hidden;
             font-family: 'Helvetica Neue', Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
         }
 
         .container {
             position: relative;
             width: 100%;
             height: 100vh;
+            min-height: 100vh;
             overflow: hidden;
         }
 
@@ -350,6 +355,145 @@
                 transform: translateX(-50%) translateY(-10px);
             }
         }
+
+        /* Locations Section */
+        .locations-section {
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(
+                to bottom,
+                #3d2f52 0%,
+                #2f2242 30%,
+                #241a35 70%,
+                #1a1328 100%
+            );
+            padding: 80px 20px;
+            overflow: hidden;
+        }
+
+        .locations-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .locations-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .locations-container h2 {
+            color: #f0ddb0;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .location-card {
+            background: linear-gradient(
+                135deg,
+                rgba(74, 61, 94, 0.6) 0%,
+                rgba(61, 47, 82, 0.4) 100%
+            );
+            border: 1px solid rgba(240, 221, 176, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(240, 221, 176, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .location-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #e8b862 0%, #d49944 100%);
+            color: #241a35;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .location-name {
+            color: #f0ddb0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .location-address {
+            color: #d4a574;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .location-artists {
+            margin-top: 15px;
+        }
+
+        .location-artists-label {
+            color: #e8b862;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .location-artists-list {
+            color: #c5b7d4;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .location-notes {
+            color: #a8ae92;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(240, 221, 176, 0.1);
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .locations-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .locations-section {
+                padding: 60px 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -498,16 +642,64 @@
             <h1><img src="logo-black_white.png" alt="ArtHop"></h1>
             <div class="subtitle">Camano Island, WA</div>
             <div class="description">
-                Discover the vibrant art scene of Camano Island. Join us for a journey through
-                local galleries, artist studios, and creative spaces nestled in the beauty of
-                the Pacific Northwest.
+                Discover galleries, artists, and creative spaces nestled in PNW beauty.
             </div>
-            <a href="#explore" class="cta-button">Explore Art</a>
         </div>
 
         <!-- Parallax hint -->
-        <div class="parallax-hint">Move your mouse to explore</div>
+        <div class="parallax-hint">Scroll for info</div>
     </div>
+
+    <!-- Locations Section -->
+    <section class="locations-section">
+        <div class="locations-container">
+            <h2>Locations</h2>
+            <div id="locations-grid" class="locations-grid">
+                <!-- Locations will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Data -->
+    <script type="application/json" id="locations-data">
+    [
+        {
+            "number": 1,
+            "name": "LB Art Glass",
+            "address": "679 Awa Ln",
+            "artists": ["Lee Beitz"],
+            "notes": ""
+        },
+        {
+            "number": 2,
+            "name": "Matzke Fine Art Gallery & Sculpture Park",
+            "address": "2345 Blanche Way",
+            "artists": [],
+            "notes": "\"Honey I Shrunk the Art\" - 40 artists, 36th annual gallery show"
+        },
+        {
+            "number": 3,
+            "name": "South Camano Grange",
+            "address": "2227 S Camano Dr",
+            "artists": [],
+            "notes": "Winter market (Sat only) - farmers, artisans, music, hot fare"
+        },
+        {
+            "number": 4,
+            "name": "Dragon's Gate Studios",
+            "address": "2296 S Camano Dr",
+            "artists": ["Dolors Ruscha", "Marc Boutté"],
+            "notes": ""
+        },
+        {
+            "number": 5,
+            "name": "The Compound",
+            "address": "159 E Dry Lake Rd",
+            "artists": ["Monika DeNasha", "Doug Landreth", "Brenda Bolte", "Betsy Morris", "David Taber", "Shogo Ota", "Amy Bush", "Josh Lind"],
+            "notes": ""
+        }
+    ]
+    </script>
 
     <script>
         // Parallax effect on mouse move
@@ -548,20 +740,44 @@
             lastTouchY = touchY;
         });
 
-        // Smooth scroll for CTA button (placeholder for future sections)
-        document.querySelector('.cta-button').addEventListener('click', (e) => {
-            e.preventDefault();
-            console.log('Explore Art clicked - add your navigation logic here');
-            // You can add navigation to other sections or pages here
-        });
+        // Load and display locations
+        function loadLocations() {
+            const locationsData = JSON.parse(document.getElementById('locations-data').textContent);
+            const locationsGrid = document.getElementById('locations-grid');
 
-        // Optional: Add keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowDown') {
-                console.log('Navigate to next section');
-                // Add navigation logic
-            }
-        });
+            locationsData.forEach(location => {
+                const card = document.createElement('div');
+                card.className = 'location-card';
+
+                let artistsHTML = '';
+                if (location.artists && location.artists.length > 0) {
+                    artistsHTML = `
+                        <div class="location-artists">
+                            <div class="location-artists-label">Artists</div>
+                            <div class="location-artists-list">${location.artists.join(', ')}</div>
+                        </div>
+                    `;
+                }
+
+                let notesHTML = '';
+                if (location.notes && location.notes.trim() !== '') {
+                    notesHTML = `<div class="location-notes">${location.notes}</div>`;
+                }
+
+                card.innerHTML = `
+                    <div class="location-number">${location.number}</div>
+                    <div class="location-name">${location.name}</div>
+                    <div class="location-address">${location.address}</div>
+                    ${artistsHTML}
+                    ${notesHTML}
+                `;
+
+                locationsGrid.appendChild(card);
+            });
+        }
+
+        // Initialize locations on page load
+        document.addEventListener('DOMContentLoaded', loadLocations);
     </script>
 </body>
 </html>
