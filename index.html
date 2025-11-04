@@ -75,6 +75,7 @@
                     #fff2be 100%
                 );
             z-index: 1;
+            animation: skyColorCycle 30s linear infinite;
         }
 
         /* Sun and rays */
@@ -102,6 +103,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 2;
+            animation: sunGlow 30s linear infinite;
         }
 
         .sun-rays {
@@ -392,6 +394,455 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Day/Night Cycle Animations */
+        @keyframes skyColorCycle {
+            0%, 100% {
+                background:
+                    radial-gradient(ellipse at 50% 40%,
+                        rgba(255, 245, 200, 0.3) 0%,
+                        transparent 50%
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        #7b9fb5 0%,
+                        #8db1c4 15%,
+                        #a5bcc8 30%,
+                        #c8cab0 45%,
+                        #e5c791 60%,
+                        #f4d88b 75%,
+                        #fce8a8 90%,
+                        #fff2be 100%
+                    );
+            }
+            10% {
+                background:
+                    radial-gradient(ellipse at 50% 40%,
+                        rgba(255, 243, 193, 0.33) 0%,
+                        transparent 50%
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        #7DA4BC 0%,
+                        #90B8CA 15%,
+                        #A8C3CE 30%,
+                        #CECBAE 45%,
+                        #E7C088 60%,
+                        #F6DF82 75%,
+                        #FDE7A7 90%,
+                        #FFF4C4 100%
+                    );
+            }
+            20% {
+                background:
+                    radial-gradient(ellipse at 50% 40%,
+                        rgba(255, 241, 181, 0.37) 0%,
+                        transparent 50%
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        #7FAEC7 0%,
+                        #94BFD6 15%,
+                        #ACCBDA 30%,
+                        #DACDAA 45%,
+                        #EBAE7A 60%,
+                        #F8CD6E 75%,
+                        #FEE7A5 90%,
+                        #FFF5CD 100%
+                    );
+            }
+            30% {
+                background:
+                    radial-gradient(ellipse at 50% 40%,
+                        rgba(255, 239, 169, 0.42) 0%,
+                        transparent 50%
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        #83BDD7 0%,
+                        #98C9E2 15%,
+                        #B0D7E6 30%,
+                        #E8D4A5 45%,
+                        #EFA864 60%,
+                        #FAC35C 75%,
+                        #FFE7A3 90%,
+                        #FFF6D2 100%
+                    );
+            }
+            40% {
+                background:
+                    radial-gradient(ellipse at 50% 40%,
+                        rgba(255, 236, 156, 0.47) 0%,
+                        transparent 50%
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        #85C6E4 0%,
+                        #9DD3EE 15%,
+                        #B5DDF2 30%,
+                        #F5D79D 45%,
+                        #F7B355 60%,
+                        #FCAC48 75%,
+                        #FFE6A1 90%,
+                        #FFF7D4 100%
+                    );
+            }
+            50% {
+                background:
+                    radial-gradient(ellipse at 50% 40%,
+                        rgba(255, 235, 150, 0.5) 0%,
+                        transparent 50%
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        #87CEEB 0%,
+                        #9FD8F4 15%,
+                        #B8E2F8 30%,
+                        #FFD99A 45%,
+                        #FFB84D 60%,
+                        #FFA63D 75%,
+                        #FFE5A0 90%,
+                        #FFF8D5 100%
+                    );
+            }
+            60% {
+                background:
+                    radial-gradient(ellipse at 50% 40%,
+                        rgba(255, 236, 156, 0.47) 0%,
+                        transparent 50%
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        #85C6E4 0%,
+                        #9DD3EE 15%,
+                        #B5DDF2 30%,
+                        #F5D79D 45%,
+                        #F7B355 60%,
+                        #FCAC48 75%,
+                        #FFE6A1 90%,
+                        #FFF7D4 100%
+                    );
+            }
+            70% {
+                background:
+                    radial-gradient(ellipse at 50% 40%,
+                        rgba(255, 239, 169, 0.42) 0%,
+                        transparent 50%
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        #83BDD7 0%,
+                        #98C9E2 15%,
+                        #B0D7E6 30%,
+                        #E8D4A5 45%,
+                        #EFA864 60%,
+                        #FAC35C 75%,
+                        #FFE7A3 90%,
+                        #FFF6D2 100%
+                    );
+            }
+            80% {
+                background:
+                    radial-gradient(ellipse at 50% 40%,
+                        rgba(255, 241, 181, 0.37) 0%,
+                        transparent 50%
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        #7FAEC7 0%,
+                        #94BFD6 15%,
+                        #ACCBDA 30%,
+                        #DACDAA 45%,
+                        #EBAE7A 60%,
+                        #F8CD6E 75%,
+                        #FEE7A5 90%,
+                        #FFF5CD 100%
+                    );
+            }
+            90% {
+                background:
+                    radial-gradient(ellipse at 50% 40%,
+                        rgba(255, 243, 193, 0.33) 0%,
+                        transparent 50%
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        #7DA4BC 0%,
+                        #90B8CA 15%,
+                        #A8C3CE 30%,
+                        #CECBAE 45%,
+                        #E7C088 60%,
+                        #F6DF82 75%,
+                        #FDE7A7 90%,
+                        #FFF4C4 100%
+                    );
+            }
+        }
+
+        @keyframes sunGlow {
+            0%, 100% {
+                background: radial-gradient(circle,
+                    #f7b760 0%,
+                    #f5a850 30%,
+                    #e8943d 70%,
+                    #d67d2a 100%);
+                width: 400px;
+                height: 400px;
+                top: 65%;
+            }
+            10% {
+                background: radial-gradient(circle,
+                    #F8C487 0%,
+                    #F6B164 30%,
+                    #ECA056 70%,
+                    #DC833A 100%);
+                width: 410px;
+                height: 410px;
+                top: 57%;
+            }
+            20% {
+                background: radial-gradient(circle,
+                    #FACCA0 0%,
+                    #F7BC6E 30%,
+                    #F0A660 70%,
+                    #E38742 100%);
+                width: 417px;
+                height: 417px;
+                top: 50%;
+            }
+            25% {
+                background: radial-gradient(circle,
+                    #FBD5A1 0%,
+                    #F7BE78 30%,
+                    #F1A96E 70%,
+                    #E28449 100%);
+                width: 425px;
+                height: 425px;
+                top: 45%;
+            }
+            30% {
+                background: radial-gradient(circle,
+                    #FCD6A4 0%,
+                    #F8C482 30%,
+                    #F3AD76 70%,
+                    #E88A54 100%);
+                width: 430px;
+                height: 430px;
+                top: 40%;
+            }
+            40% {
+                background: radial-gradient(circle,
+                    #FEE5A4 0%,
+                    #FDC941 30%,
+                    #F9A857 70%,
+                    #F28D46 100%);
+                width: 440px;
+                height: 440px;
+                top: 32%;
+            }
+            50% {
+                background: radial-gradient(circle,
+                    #FFF4A3 0%,
+                    #FFD700 30%,
+                    #FFA500 70%,
+                    #FF8C00 100%);
+                width: 450px;
+                height: 450px;
+                top: 25%;
+            }
+            60% {
+                background: radial-gradient(circle,
+                    #FEE5A4 0%,
+                    #FDC941 30%,
+                    #F9A857 70%,
+                    #F28D46 100%);
+                width: 440px;
+                height: 440px;
+                top: 32%;
+            }
+            70% {
+                background: radial-gradient(circle,
+                    #FCD6A4 0%,
+                    #F8C482 30%,
+                    #F3AD76 70%,
+                    #E88A54 100%);
+                width: 430px;
+                height: 430px;
+                top: 40%;
+            }
+            75% {
+                background: radial-gradient(circle,
+                    #FBD5A1 0%,
+                    #F7BE78 30%,
+                    #F1A96E 70%,
+                    #E28449 100%);
+                width: 425px;
+                height: 425px;
+                top: 45%;
+            }
+            80% {
+                background: radial-gradient(circle,
+                    #FACCA0 0%,
+                    #F7BC6E 30%,
+                    #F0A660 70%,
+                    #E38742 100%);
+                width: 417px;
+                height: 417px;
+                top: 50%;
+            }
+            90% {
+                background: radial-gradient(circle,
+                    #F8C487 0%,
+                    #F6B164 30%,
+                    #ECA056 70%,
+                    #DC833A 100%);
+                width: 410px;
+                height: 410px;
+                top: 57%;
+            }
+        }
+
+        /* Mountain gradient animations */
+        @keyframes mountainBackColor1 {
+            0%, 100% { stop-color: #7ba6b5; }
+            10% { stop-color: #84ACBB; }
+            20% { stop-color: #8BB2C1; }
+            30% { stop-color: #94B8C4; }
+            40% { stop-color: #9EC0CE; }
+            50% { stop-color: #A8C8D8; }
+            60% { stop-color: #9EC0CE; }
+            70% { stop-color: #94B8C4; }
+            80% { stop-color: #8BB2C1; }
+            90% { stop-color: #84ACBB; }
+        }
+        @keyframes mountainBackColor2 {
+            0%, 100% { stop-color: #6a93a4; }
+            10% { stop-color: #739AAD; }
+            20% { stop-color: #7B9FB2; }
+            30% { stop-color: #84A5B7; }
+            40% { stop-color: #8BADC0; }
+            50% { stop-color: #8FB5C8; }
+            60% { stop-color: #8BADC0; }
+            70% { stop-color: #84A5B7; }
+            80% { stop-color: #7B9FB2; }
+            90% { stop-color: #739AAD; }
+        }
+        @keyframes mountainBackColor3 {
+            0%, 100% { stop-color: #5a8194; }
+            10% { stop-color: #62889A; }
+            20% { stop-color: #698DA0; }
+            30% { stop-color: #7193A6; }
+            40% { stop-color: #7599AE; }
+            50% { stop-color: #789FB5; }
+            60% { stop-color: #7599AE; }
+            70% { stop-color: #7193A6; }
+            80% { stop-color: #698DA0; }
+            90% { stop-color: #62889A; }
+        }
+
+        @keyframes mountainMidColor1 {
+            0%, 100% { stop-color: #648599; }
+            10% { stop-color: #6C8C9F; }
+            20% { stop-color: #7291A5; }
+            30% { stop-color: #7898A9; }
+            40% { stop-color: #81A0B3; }
+            50% { stop-color: #8AA8BD; }
+            60% { stop-color: #81A0B3; }
+            70% { stop-color: #7898A9; }
+            80% { stop-color: #7291A5; }
+            90% { stop-color: #6C8C9F; }
+        }
+        @keyframes mountainMidColor2 {
+            0%, 100% { stop-color: #547387; }
+            10% { stop-color: #5C7B8D; }
+            20% { stop-color: #627F93; }
+            30% { stop-color: #698597; }
+            40% { stop-color: #6F8CA1; }
+            50% { stop-color: #7595AB; }
+            60% { stop-color: #6F8CA1; }
+            70% { stop-color: #698597; }
+            80% { stop-color: #627F93; }
+            90% { stop-color: #5C7B8D; }
+        }
+        @keyframes mountainMidColor3 {
+            0%, 100% { stop-color: #456275; }
+            10% { stop-color: #4D6A7C; }
+            20% { stop-color: #536F81; }
+            30% { stop-color: #597485; }
+            40% { stop-color: #5F7B8E; }
+            50% { stop-color: #658297; }
+            60% { stop-color: #5F7B8E; }
+            70% { stop-color: #597485; }
+            80% { stop-color: #536F81; }
+            90% { stop-color: #4D6A7C; }
+        }
+
+        @keyframes mountainFrontColor1 {
+            0%, 100% { stop-color: #4a3d5e; }
+            10% { stop-color: #534567; }
+            20% { stop-color: #5B4C70; }
+            30% { stop-color: #625376; }
+            40% { stop-color: #6E5F82; }
+            50% { stop-color: #7A6B8E; }
+            60% { stop-color: #6E5F82; }
+            70% { stop-color: #625376; }
+            80% { stop-color: #5B4C70; }
+            90% { stop-color: #534567; }
+        }
+        @keyframes mountainFrontColor2 {
+            0%, 100% { stop-color: #3d2f52; }
+            10% { stop-color: #46375B; }
+            20% { stop-color: #4D3E62; }
+            30% { stop-color: #544569; }
+            40% { stop-color: #5F5074; }
+            50% { stop-color: #6B5A7F; }
+            60% { stop-color: #5F5074; }
+            70% { stop-color: #544569; }
+            80% { stop-color: #4D3E62; }
+            90% { stop-color: #46375B; }
+        }
+        @keyframes mountainFrontColor3 {
+            0%, 100% { stop-color: #2f2242; }
+            10% { stop-color: #382A4B; }
+            20% { stop-color: #3F3152; }
+            30% { stop-color: #453657; }
+            40% { stop-color: #504061; }
+            50% { stop-color: #5A4A6B; }
+            60% { stop-color: #504061; }
+            70% { stop-color: #453657; }
+            80% { stop-color: #3F3152; }
+            90% { stop-color: #382A4B; }
+        }
+
+        #mountainBackGrad stop:nth-child(1) {
+            animation: mountainBackColor1 30s linear infinite;
+        }
+        #mountainBackGrad stop:nth-child(2) {
+            animation: mountainBackColor2 30s linear infinite;
+        }
+        #mountainBackGrad stop:nth-child(3) {
+            animation: mountainBackColor3 30s linear infinite;
+        }
+
+        #mountainMidGrad stop:nth-child(1) {
+            animation: mountainMidColor1 30s linear infinite;
+        }
+        #mountainMidGrad stop:nth-child(2) {
+            animation: mountainMidColor2 30s linear infinite;
+        }
+        #mountainMidGrad stop:nth-child(3) {
+            animation: mountainMidColor3 30s linear infinite;
+        }
+
+        #mountainFrontGrad stop:nth-child(1) {
+            animation: mountainFrontColor1 30s linear infinite;
+        }
+        #mountainFrontGrad stop:nth-child(2) {
+            animation: mountainFrontColor2 30s linear infinite;
+        }
+        #mountainFrontGrad stop:nth-child(3) {
+            animation: mountainFrontColor3 30s linear infinite;
         }
 
         /* Responsive adjustments */
@@ -728,7 +1179,7 @@
         <div class="content">
             <h1><img src="logo-black_white.png" alt="ArtHop"></h1>
             <div class="info-block">
-                <div class="date"> Dec 6&7, 2025<span class="times"> · 10am-4pm</span></div>
+                <div class="date"> Dec 6&7<span class="times"> · 10am-4pm</span></div>
                 <a href="arthop-2025.ics" download class="calendar-button">📅 Add to Calendar</a>
                 <div class="subtitle">Camano Island, WA</div>
             </div>
