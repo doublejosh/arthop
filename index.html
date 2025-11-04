@@ -272,6 +272,23 @@
             pointer-events: none;
         }
 
+        .header {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+            font-weight: 300;
+            text-align: center;
+            opacity: 0.4;
+            letter-spacing: 4px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+            animation: fadeInUp 1.4s ease-out;
+            z-index: 10;
+        }
+
         /* Content container */
         .content {
             position: absolute;
@@ -306,7 +323,7 @@
         }
 
         .content .subtitle {
-            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-size: clamp(1rem, 2vw, 1.5rem);
             font-weight: 300;
             margin-top: 20px;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
@@ -429,7 +446,7 @@
                         #FFF5D0 100%
                     );
             }
-            50% {
+            41.67%, 58.33% {
                 background:
                     radial-gradient(ellipse at 50% 40%,
                         rgba(255, 235, 150, 0.5) 0%,
@@ -482,7 +499,7 @@
                 border-radius: 50%;
                 top: 52%;
             }
-            50% {
+            41.67%, 58.33% {
                 background: radial-gradient(circle,
                     #FFF4A3 0%,
                     #FFD700 30%,
@@ -510,57 +527,57 @@
         @keyframes mountainBackColor1 {
             0%, 100% { stop-color: #7ba6b5; }
             25% { stop-color: #92B7C7; }
-            50% { stop-color: #A8C8D8; }
+            41.67%, 58.33% { stop-color: #A8C8D8; }
             75% { stop-color: #92B7C7; }
         }
         @keyframes mountainBackColor2 {
             0%, 100% { stop-color: #6a93a4; }
             25% { stop-color: #7DA4B6; }
-            50% { stop-color: #8FB5C8; }
+            41.67%, 58.33% { stop-color: #8FB5C8; }
             75% { stop-color: #7DA4B6; }
         }
         @keyframes mountainBackColor3 {
             0%, 100% { stop-color: #5a8194; }
             25% { stop-color: #6990A5; }
-            50% { stop-color: #789FB5; }
+            41.67%, 58.33% { stop-color: #789FB5; }
             75% { stop-color: #6990A5; }
         }
 
         @keyframes mountainMidColor1 {
             0%, 100% { stop-color: #648599; }
             25% { stop-color: #7797AB; }
-            50% { stop-color: #8AA8BD; }
+            41.67%, 58.33% { stop-color: #8AA8BD; }
             75% { stop-color: #7797AB; }
         }
         @keyframes mountainMidColor2 {
             0%, 100% { stop-color: #547387; }
             25% { stop-color: #658499; }
-            50% { stop-color: #7595AB; }
+            41.67%, 58.33% { stop-color: #7595AB; }
             75% { stop-color: #658499; }
         }
         @keyframes mountainMidColor3 {
             0%, 100% { stop-color: #456275; }
             25% { stop-color: #557286; }
-            50% { stop-color: #658297; }
+            41.67%, 58.33% { stop-color: #658297; }
             75% { stop-color: #557286; }
         }
 
         @keyframes mountainFrontColor1 {
             0%, 100% { stop-color: #4a3d5e; }
             25% { stop-color: #625476; }
-            50% { stop-color: #7A6B8E; }
+            41.67%, 58.33% { stop-color: #7A6B8E; }
             75% { stop-color: #625476; }
         }
         @keyframes mountainFrontColor2 {
             0%, 100% { stop-color: #3d2f52; }
             25% { stop-color: #544569; }
-            50% { stop-color: #6B5A7F; }
+            41.67%, 58.33% { stop-color: #6B5A7F; }
             75% { stop-color: #544569; }
         }
         @keyframes mountainFrontColor3 {
             0%, 100% { stop-color: #2f2242; }
             25% { stop-color: #453657; }
-            50% { stop-color: #5A4A6B; }
+            41.67%, 58.33% { stop-color: #5A4A6B; }
             75% { stop-color: #453657; }
         }
 
@@ -936,14 +953,16 @@
 
         <!-- Parallax hint -->
         <div class="parallax-hint">Scroll for info</div>
+
+        <p class="header">Gifts of fine art and craft, galleries  and creative spaces.</p>
     </div>
 
     <!-- Locations Section -->
     <section class="locations-section">
         <div class="locations-container">
-            <p class="locations-intro">
-                Gifts of fine art and craft, galleries  and creative spaces.
-            </p>
+            <h3 class="locations-intro">
+               All locations within 2 miles.
+            </h3>
             <div id="locations-grid" class="locations-grid">
                 <!-- Locations will be dynamically inserted here -->
             </div>
