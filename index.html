@@ -2657,31 +2657,14 @@
 
             if (!car || !lowerContentWrapper) return;
 
-            let ticking = false;
             let tranquilityLoopTimeout = null;
             let isTranquilityMode = false;
 
-            function updateCarPosition() {
-                // Skip scroll-based positioning if in tranquility mode and animation is running
+            function updateCarPosition(progress) {
+                // Skip scroll-based positioning if in tranquility mode
                 if (isTranquilityMode) {
-                    ticking = false;
                     return;
                 }
-
-                // Get the position of the lower content wrapper
-                const wrapperRect = lowerContentWrapper.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-
-                // Calculate when the dots section is visible
-                // Start animation when wrapper enters viewport
-                const scrollStart = windowHeight - wrapperRect.top;
-
-                // Animation should complete when wrapper is mostly scrolled past
-                const animationRange = windowHeight + 200;
-
-                // Calculate progress (0 to 1)
-                let progress = scrollStart / animationRange;
-                progress = Math.max(0, Math.min(1, progress)); // Clamp between 0 and 1
 
                 // Calculate car position
                 // Start: mostly off-screen right (only front 20% visible)
@@ -2694,16 +2677,40 @@
 
                 // Apply transform
                 car.style.transform = `translateX(${currentX}px)`;
-
-                ticking = false;
             }
 
-            function onScroll() {
-                if (!ticking) {
-                    window.requestAnimationFrame(updateCarPosition);
-                    ticking = true;
-                }
+            // Create Intersection Observer for smooth scroll-based animation
+            // Generate fine-grained thresholds for smooth updates
+            const thresholds = [];
+            for (let i = 0; i <= 100; i++) {
+                thresholds.push(i / 100);
             }
+
+            const intersectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (isTranquilityMode) return;
+
+                    // Use intersection ratio as progress
+                    // When element enters viewport from bottom, ratio increases
+                    // We need to map this to our animation progress
+                    const rect = entry.boundingClientRect;
+                    const windowHeight = window.innerHeight;
+
+                    // Calculate custom progress based on element position
+                    const scrollStart = windowHeight - rect.top;
+                    const animationRange = windowHeight + 200;
+                    let progress = scrollStart / animationRange;
+                    progress = Math.max(0, Math.min(1, progress));
+
+                    updateCarPosition(progress);
+                });
+            }, {
+                threshold: thresholds,
+                rootMargin: '200px 0px 0px 0px' // Extend observation area
+            });
+
+            // Start observing the wrapper
+            intersectionObserver.observe(lowerContentWrapper);
 
             // Tranquility mode car animation
             function startCarDriveBy() {
@@ -2778,12 +2785,11 @@
                 // Remove animation class
                 car.classList.remove('tranquility-drive');
 
-                // Resume scroll-based positioning
-                updateCarPosition();
+                // Scroll-based positioning will resume automatically via Intersection Observer
             }
 
             // Watch for tranquility mode changes
-            const observer = new MutationObserver(() => {
+            const modeObserver = new MutationObserver(() => {
                 const isHidden = container.classList.contains('content-hidden');
 
                 if (isHidden && !isTranquilityMode) {
@@ -2793,16 +2799,10 @@
                 }
             });
 
-            observer.observe(container, {
+            modeObserver.observe(container, {
                 attributes: true,
                 attributeFilter: ['class']
             });
-
-            // Initialize
-            updateCarPosition();
-
-            // Listen to scroll events
-            window.addEventListener('scroll', onScroll, { passive: true });
         }
 
         // Initialize car animation when DOM is ready
