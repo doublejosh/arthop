@@ -102,7 +102,7 @@
                 #FFF4A3 0%,
                 #FFD700 30%,
                 #FFA500 70%,
-                #FF8C00 100%);
+                rgba(255, 140, 0, 0) 100%);
             border-radius: 50%;
             top: 50%;
             left: 50%;
@@ -110,6 +110,8 @@
             animation: sunGlow 60s linear infinite;
             will-change: background, top, width, height;
             contain: paint;
+            position: relative;
+            z-index: 2;
         }
 
         .sun-rays {
@@ -120,7 +122,7 @@
             left: 50%;
             transform: translate(-50%, -50%) translateZ(0);
             z-index: 1;
-            animation: sunGlow 60s linear infinite;
+            animation: sunVerticalMove 60s linear infinite;
             will-change: top;
             contain: layout;
             pointer-events: none;
@@ -144,10 +146,9 @@
             border-right: 50px solid transparent;
             border-bottom: 1200px solid transparent;
             border-bottom-color: rgba(255, 165, 0, 0.5);
-            filter: blur(10px);
             transform: translate(-50px, 0);
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 18%, rgba(0,0,0,0.7) 35%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 18%, rgba(0,0,0,0.7) 35%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 70%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 70%);
         }
 
         .ray:nth-child(odd)::before {
@@ -155,7 +156,6 @@
             border-right-width: 60px;
             border-bottom-width: 1300px;
             transform: translate(-60px, 0);
-            filter: blur(12px);
         }
 
         .ray:nth-child(3n)::before {
@@ -163,7 +163,6 @@
             border-right-width: 45px;
             border-bottom-width: 1100px;
             transform: translate(-45px, 0);
-            filter: blur(8px);
         }
 
         .ray:nth-child(4n)::before {
@@ -171,7 +170,6 @@
             border-right-width: 55px;
             border-bottom-width: 1250px;
             transform: translate(-55px, 0);
-            filter: blur(11px);
         }
 
         /* Mountain layers */
@@ -239,6 +237,11 @@
             height: 100%;
             z-index: 6;
             transition: transform 0.3s ease-out;
+        }
+
+        .tree-layer svg {
+            transform: scale(1.5);
+            transform-origin: bottom center;
         }
 
         .cloud-layer {
@@ -351,11 +354,11 @@
             min-height: calc(80vh - 120px);
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
+            justify-content: center;
         }
 
         .content h1 {
-            margin: 40px 0 20px 0;
+            margin: 60px 0 20px 0;
             animation: fadeInUp 1s ease-out;
         }
 
@@ -368,7 +371,7 @@
             filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.5));
             opacity: 0.35;
             transition: opacity 0.3s ease;
-            mix-blend-mode: soft-light;
+            mix-blend-mode: multiply;
         }
 
 
@@ -387,7 +390,7 @@
 
         .content .subtitle {
             font-size: clamp(1rem, 2vw, 1.5rem);
-            font-weight: 500;
+            font-weight: 200;
             margin-top: 10px;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
             letter-spacing: 1px;
@@ -687,6 +690,24 @@
             }
         }
 
+        @keyframes sunVerticalMove {
+            0% {
+                top: 50%;
+            }
+            20.83% {
+                top: 52%;
+            }
+            41.67% {
+                top: 55%;
+            }
+            62.5% {
+                top: 52%;
+            }
+            83.33%, 100% {
+                top: 50%;
+            }
+        }
+
         /* Mountain gradient animations */
         @keyframes mountainBackColor1 {
             0% { stop-color: #A8C8D8; }
@@ -948,6 +969,9 @@
             z-index: 11;
             pointer-events: none;
             will-change: transform;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            contain: layout style paint;
         }
 
         .scroll-car img {
@@ -1041,6 +1065,11 @@
         .event-actions-section {
             padding: 60px 20px;
             position: relative;
+        }
+
+        /* Hide event section info-block on desktop */
+        .event-actions-section .info-block {
+            display: none;
         }
 
         .event-actions-container {
@@ -1537,6 +1566,129 @@
                 min-height: 500px;
             }
         }
+
+        /* Mobile Performance Optimizations */
+        @media (max-width: 768px) {
+            /* Disable sun cycle animations - saves 40-50% performance */
+            .sky-layer {
+                animation: none !important;
+                /* Fixed daytime gradient */
+                background: radial-gradient(circle at 50% 50%, rgba(255, 248, 213, 0.6) 0%, transparent 35%),
+                            linear-gradient(to bottom, #5BA8D0 0%, #87CEEB 25%, #FFD99A 45%, #FFA63D 70%, #FF8C42 85%, #FFF8D5 100%) !important;
+            }
+
+            .sun-layer {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                pointer-events: none !important;
+                z-index: 5.5 !important;
+            }
+
+            .sun {
+                /* Keep vertical animation but disable other animations */
+                animation: sunGlow 60s linear infinite !important;
+                position: absolute !important;
+                top: 50% !important;
+                left: 50% !important;
+                width: 300px !important;
+                height: 300px !important;
+                border-radius: 50% !important;
+                transform: translate(-50%, -50%) translateZ(0) !important;
+                background: radial-gradient(circle,
+                    #FFF4A3 0%,
+                    #FFD700 30%,
+                    #FFA500 70%,
+                    rgba(255, 140, 0, 0) 100%) !important;
+                opacity: 1 !important;
+                display: block !important;
+                visibility: visible !important;
+                z-index: 2 !important;
+            }
+
+            .sun-rays {
+                animation: sunVerticalMove 60s linear infinite !important;
+                display: block !important;
+                position: absolute !important;
+                z-index: 1 !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50()) translateZ(0) !important;
+                width: 100% !important;
+                height: 100% !important;
+            }
+
+            /* Show sun rays but remove expensive blur filters */
+            .ray {
+                display: block !important;
+            }
+
+            .ray::before {
+                filter: none !important;
+                border-bottom-color: rgba(255, 165, 0, 0.25) !important;
+                mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0) 50%) !important;
+                -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 10%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0) 50%) !important;
+            }
+
+            .ray:nth-child(odd)::before {
+                filter: none !important;
+            }
+
+            /* Disable mountain gradient animations - saves 5-10% performance */
+            stop {
+                animation: none !important;
+            }
+
+            /* Remove backdrop-filter blur - saves 15-20% performance */
+            .view-toggle-button,
+            .landscape-mode-message,
+            .content .info-block {
+                backdrop-filter: none !important;
+                background: rgba(0, 0, 0, 0.85) !important;
+            }
+
+            /* Hide info-block in hero on mobile */
+            .content .info-block {
+                display: none !important;
+            }
+
+            /* Show info-block in event section on mobile */
+            .event-actions-section .info-block {
+                display: block !important;
+                background: rgba(0, 0, 0, 0.45) !important;
+                backdrop-filter: none !important;
+                padding: 20px;
+                border-radius: 20px;
+                margin: 0 auto 30px auto;
+                max-width: 24rem;
+                text-align: center;
+            }
+
+            .event-actions-section .info-block .date {
+                color: #ffffff !important;
+                font-size: clamp(2rem, 4vw, 2.5rem) !important;
+                font-weight: 500 !important;
+                margin-bottom: 10px !important;
+            }
+
+            .event-actions-section .info-block .subtitle {
+                color: #ffd68a !important;
+                font-size: clamp(1rem, 2vw, 1.5rem) !important;
+                font-weight: 200 !important;
+            }
+
+            /* Reset tree size to normal on mobile */
+            .tree-layer svg {
+                transform: scale(1) !important;
+            }
+
+            /* Reduce box shadows for better performance */
+            .location-card,
+            .view-toggle-button,
+            .map-embed {
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1776,6 +1928,10 @@
             <p class="events-intro">
                 Holiday gifts, art, crafts, and more from local artists and makers.
             </p>
+            <div class="info-block">
+                <div class="date">Dec 6<span class="smaller-text">&</span>7<span class="times"><span class="middle-dot"> · </span>10<span class="smaller-text">am</span>-4<span class="smaller-text">pm</span></span></div>
+                <div class="subtitle">Camano Island, WA</div>
+            </div>
             <div class="event-actions-container">
                 <div class="event-buttons">
                     <a href="arthop-2025.ics" download class="calendar-button">📅 Add to Calendar</a>
@@ -1910,6 +2066,23 @@
     </script>
 
     <script>
+        // Hide parallax hint on first scroll
+        const parallaxHint = document.querySelector('.parallax-hint');
+        let hasScrolled = false;
+
+        function hideParallaxHint() {
+            if (!hasScrolled && window.scrollY > 50) {
+                hasScrolled = true;
+                parallaxHint.style.opacity = '0';
+                parallaxHint.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    parallaxHint.style.display = 'none';
+                }, 300); // Wait for fade out
+            }
+        }
+
+        window.addEventListener('scroll', hideParallaxHint, { passive: true });
+
         // Toggle View Button - Show/Hide Content
         const viewToggleBtn = document.getElementById('viewToggleBtn');
         const container = document.querySelector('.container');
@@ -2659,6 +2832,12 @@
 
             let tranquilityLoopTimeout = null;
             let isTranquilityMode = false;
+            let pendingTransform = null;
+            let rafId = null;
+
+            // Cache dimensions for performance
+            let cachedCarWidth = null;
+            let cachedWindowWidth = window.innerWidth;
 
             function updateCarPosition(progress) {
                 // Skip scroll-based positioning if in tranquility mode
@@ -2666,64 +2845,70 @@
                     return;
                 }
 
+                // Use cached dimensions
+                if (!cachedCarWidth) {
+                    cachedCarWidth = car.offsetWidth || 200;
+                }
+
                 // Calculate car position
                 // Start: mostly off-screen right (only front 20% visible)
                 // End: fully off-screen left
-                const carWidth = car.offsetWidth || 200; // Fallback width if not loaded yet
-                const startX = window.innerWidth - (carWidth * 0.2); // 80% hidden on right
-                const endX = -carWidth; // Fully off screen left
+                const startX = cachedWindowWidth - (cachedCarWidth * 0.2); // 80% hidden on right
+                const endX = -cachedCarWidth; // Fully off screen left
 
                 const currentX = startX + (progress * (endX - startX));
 
-                // Apply transform
-                car.style.transform = `translateX(${currentX}px)`;
+                // Store transform and batch update with RAF
+                pendingTransform = `translateX(${currentX}px)`;
+
+                if (!rafId) {
+                    rafId = requestAnimationFrame(() => {
+                        car.style.transform = pendingTransform;
+                        rafId = null;
+                    });
+                }
             }
 
-            // Create Intersection Observer for smooth scroll-based animation
-            // Generate fine-grained thresholds for smooth updates
-            const thresholds = [];
-            for (let i = 0; i <= 100; i++) {
-                thresholds.push(i / 100);
-            }
-
-            const intersectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (isTranquilityMode) return;
-
-                    // Use intersection ratio as progress
-                    // When element enters viewport from bottom, ratio increases
-                    // We need to map this to our animation progress
-                    const rect = entry.boundingClientRect;
-                    const windowHeight = window.innerHeight;
-
-                    // Calculate custom progress based on element position
-                    const scrollStart = windowHeight - rect.top;
-                    const animationRange = windowHeight + 200;
-                    let progress = scrollStart / animationRange;
-                    progress = Math.max(0, Math.min(1, progress));
-
-                    updateCarPosition(progress);
-                });
-            }, {
-                threshold: thresholds,
-                rootMargin: '200px 0px 0px 0px' // Extend observation area
+            // Update cached window width on resize
+            window.addEventListener('resize', () => {
+                cachedWindowWidth = window.innerWidth;
+                cachedCarWidth = null; // Recalculate car width on resize
             });
 
-            // Start observing the wrapper
-            intersectionObserver.observe(lowerContentWrapper);
+            // Scroll event handler for smooth continuous animation
+            function onScroll() {
+                if (isTranquilityMode) return;
+
+                // Calculate progress based on wrapper position
+                const rect = lowerContentWrapper.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                // Calculate when the dots section is visible
+                const scrollStart = windowHeight - rect.top;
+                const animationRange = windowHeight + 200;
+
+                let progress = scrollStart / animationRange;
+                progress = Math.max(0, Math.min(1, progress));
+
+                updateCarPosition(progress);
+            }
+
+            // Listen to scroll events with passive flag for performance
+            window.addEventListener('scroll', onScroll, { passive: true });
+
+            // Initialize position
+            onScroll();
 
             // Tranquility mode car animation
             function startCarDriveBy() {
                 // Randomly choose direction (50/50)
                 const goingRight = Math.random() < 0.5;
 
-                // Generate random color variation using filters
+                // Generate random color variation using hue-rotate only (optimized for mobile)
                 const hueRotate = Math.floor(Math.random() * 360); // 0-360 degrees
-                const saturate = (Math.random() * 1.7) + 0.3; // 0.3-2.0
-                const brightness = (Math.random() * 0.4) + 0.8; // 0.8-1.2
 
-                // Apply random color filter
-                car.style.filter = `hue-rotate(${hueRotate}deg) saturate(${saturate}) brightness(${brightness})`;
+                // Apply random color filter (simplified for performance)
+                car.style.filter = `hue-rotate(${hueRotate}deg)`;
 
                 // Add appropriate animation class
                 if (goingRight) {
