@@ -351,7 +351,7 @@
             min-height: calc(80vh - 120px);
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-end;
         }
 
         .content h1 {
@@ -381,7 +381,7 @@
             border-radius: 20px;
             backdrop-filter: blur(10px);
             display: inline-block;
-            margin: 10px auto 0 auto;
+            margin: 10px auto 80px auto;
             max-width: 24rem;
             mix-blend-mode: multiply;
             position: relative;
@@ -941,6 +941,60 @@
             padding-bottom: 40px;
         }
 
+        .decorative-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: 36px;
+            padding: 0;
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: #d9a54e;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .dot:nth-child(3n) {
+            width: 26px;
+            height: 22px;
+            border-radius: 50% 48% 50% 52%;
+        }
+
+        .dot:nth-child(3n+1) {
+            width: 22px;
+            height: 26px;
+            border-radius: 48% 50% 52% 50%;
+        }
+
+        .dot:nth-child(3n+2) {
+            width: 25px;
+            height: 23px;
+            border-radius: 52% 50% 48% 50%;
+        }
+
+        .dot:nth-child(5n) {
+            width: 23px;
+            height: 25px;
+            border-radius: 51% 49% 50% 50%;
+        }
+
+        .dot:nth-child(7n) {
+            width: 24px;
+            height: 24px;
+            border-radius: 49% 51% 51% 49%;
+        }
+
         /* Event Actions Section */
         .event-actions-section {
             padding: 60px 20px;
@@ -1066,6 +1120,21 @@
             letter-spacing: 1.5px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
             font-style: italic;
+        }
+
+        .location-artists-list a {
+            color: #87CEEB;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .location-artists-list a:visited {
+            color: #87CEEB;
+        }
+
+        .location-artists-list a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
         }
 
         .location-notes {
@@ -1616,6 +1685,45 @@
 
     <!-- Lower Content Wrapper -->
     <div class="lower-content-wrapper">
+        <!-- Decorative Dots Border -->
+        <div class="decorative-dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
         <!-- Event Actions Section -->
         <section class="event-actions-section">
             <p class="events-intro">
@@ -1678,7 +1786,10 @@
             "number": 1,
             "name": "LB Art Glass",
             "address": "679 Awa Ln",
-            "artists": ["Lee Beitz"],
+            "artists": [],
+            "artistLinks": [
+                {"name": "Lee Beitz", "url": "https://camanoarts.org/gallery/lee-beitz/"}
+            ],
             "notes": "",
             "popup": {
                 "email": "LBART1@FRONTIER.COM",
@@ -1702,7 +1813,11 @@
             "number": 3,
             "name": "Dragon's Gate Studios",
             "address": "2296 S Camano Dr",
-            "artists": ["Dolors Ruscha", "Marc Boutté"],
+            "artists": [],
+            "artistLinks": [
+                {"name": "Dolors Ruscha", "url": "https://foreverartglass.com/"},
+                {"name": "Marc Boutté", "url": "#"}
+            ],
             "notes": "",
             "popup": {
                 "images": [
@@ -1731,8 +1846,18 @@
             "number": 5,
             "name": "The Compound",
             "address": "159 E Dry Lake Rd",
-            "artists": ["Monika DeNasha", "Doug Landreth", "Brenda Bolte", "Betsy Morris", "David Taber", "Shogo Ota", "Amy Bush", "Josh Lind"],
-            "notes": ""
+            "artists": [],
+            "notes": "",
+            "artistLinks": [
+                {"name": "Amy Bush", "url": "https://loyalsmith.com/"},
+                {"name": "Josh Lind", "url": "https://art.doublejosh.com/"},
+                {"name": "Betsy Morris", "url": "https://clubmeadowcamano.com/"},
+                {"name": "Doug Landreth", "url": "https://douglandreth.com/"},
+                {"name": "Brenda Bolte", "url": "https://ambientart.com/"},
+                {"name": "Monika DeNasha", "url": "https://www.matzkefineart.com/artists-2/monika-denasha-bead-work-collage/"},
+                {"name": "David Taber", "url": "https://davidtaberart.wixsite.com/stickandstone"},
+                {"name": "Shogo Ota", "url": "https://www.tiremanstudio.com/"}
+            ]
         }
     ]
     </script>
@@ -1876,7 +2001,22 @@
                 }
 
                 let artistsHTML = '';
-                if (location.artists && location.artists.length > 0) {
+                if (location.artistLinks && location.artistLinks.length > 0) {
+                    // Render artist links as clickable links
+                    const artistLinksHTML = location.artistLinks.map(artist => {
+                        if (artist.url === '#') {
+                            return artist.name;
+                        }
+                        return `<a href="${artist.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${artist.name}</a>`;
+                    }).join(', ');
+
+                    artistsHTML = `
+                        <div class="location-artists">
+                            <div class="location-artists-label">Artists</div>
+                            <div class="location-artists-list">${artistLinksHTML}</div>
+                        </div>
+                    `;
+                } else if (location.artists && location.artists.length > 0) {
                     artistsHTML = `
                         <div class="location-artists">
                             <div class="location-artists-label">Artists</div>
@@ -1967,6 +2107,23 @@
                     <div class="location-popup-section">
                         <div class="location-popup-section-label">Artists</div>
                         <div class="location-popup-section-content">${location.artists.join(', ')}</div>
+                    </div>
+                `;
+            }
+
+            // Add artist links if available
+            if (location.popup.artistLinks && location.popup.artistLinks.length > 0) {
+                popupHTML += `
+                    <div class="location-popup-section">
+                        <div class="location-popup-section-label">Artist Portfolios</div>
+                        <div class="location-popup-section-content">
+                `;
+                location.popup.artistLinks.forEach((artist, index) => {
+                    if (index > 0) popupHTML += `<br>`;
+                    popupHTML += `<a href="${artist.url}" target="_blank" rel="noopener noreferrer">${artist.name}</a>`;
+                });
+                popupHTML += `
+                        </div>
                     </div>
                 `;
             }
