@@ -2838,6 +2838,7 @@
             // Cache dimensions for performance
             let cachedCarWidth = null;
             let cachedWindowWidth = window.innerWidth;
+            let cachedDotsWidth = null;
 
             function updateCarPosition(progress) {
                 // Skip scroll-based positioning if in tranquility mode
@@ -2850,11 +2851,23 @@
                     cachedCarWidth = car.offsetWidth || 200;
                 }
 
-                // Calculate car position
-                // Start: mostly off-screen right (only front 20% visible)
-                // End: fully off-screen left
-                const startX = cachedWindowWidth - (cachedCarWidth * 0.2); // 80% hidden on right
-                const endX = -cachedCarWidth; // Fully off screen left
+                if (!cachedDotsWidth) {
+                    const dotsContainer = document.querySelector('.decorative-dots');
+                    cachedDotsWidth = dotsContainer ? dotsContainer.offsetWidth : cachedWindowWidth;
+                }
+
+                // Calculate car position limited to 50% of dots width, centered within dots container
+                const maxTravelDistance = cachedDotsWidth * 0.5;
+
+                // Find where dots container is positioned (centered in viewport)
+                const dotsLeftEdge = (cachedWindowWidth - cachedDotsWidth) / 2;
+
+                // Center the 80% travel range within the dots container
+                const travelRangeOffset = (cachedDotsWidth - maxTravelDistance) / 2;
+
+                // Start at right edge of centered 80% zone, end at left edge
+                const startX = dotsLeftEdge + travelRangeOffset + maxTravelDistance;
+                const endX = dotsLeftEdge + travelRangeOffset;
 
                 const currentX = startX + (progress * (endX - startX));
 
@@ -2873,6 +2886,7 @@
             window.addEventListener('resize', () => {
                 cachedWindowWidth = window.innerWidth;
                 cachedCarWidth = null; // Recalculate car width on resize
+                cachedDotsWidth = null; // Recalculate dots width on resize
             });
 
             // Scroll event handler for smooth continuous animation
