@@ -874,7 +874,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.5);
             color: white;
             padding: 20px 40px;
             border-radius: 12px;
@@ -888,7 +888,7 @@
         }
 
         .landscape-mode-message.show {
-            opacity: 1;
+            opacity: 0.7;
         }
 
         @media (max-width: 768px) {
@@ -1642,7 +1642,7 @@
     </button>
 
     <!-- Landscape Mode Message -->
-    <div class="landscape-mode-message" id="landscapeModeMessage">Landscape Mode</div>
+    <div class="landscape-mode-message" id="landscapeModeMessage">Tranquility Mode</div>
 
     <!-- Event Actions Section -->
     <section class="event-actions-section">
@@ -1691,7 +1691,12 @@
             "name": "LB Art Glass",
             "address": "679 Awa Ln",
             "artists": ["Lee Beitz"],
-            "notes": ""
+            "notes": "",
+            "popup": {
+                "email": "LBART1@FRONTIER.COM",
+                "phone": "360-387-2639",
+                "description": "A Gift for Everyone. Glass Pendants, Earrings, Nail Files, Ornaments, Candle Holders, Plates, Bowls, Wall Sconces, Tables, Garden Art and so much more!"
+            }
         },
         {
             "number": 2,
@@ -1762,7 +1767,7 @@
             }
         });
 
-        // Show landscape mode message for 4 seconds
+        // Show tranquility mode message for 3 seconds
         function showLandscapeModeMessage() {
             // Clear any existing timeout
             if (messageTimeout) {
@@ -1772,10 +1777,10 @@
             // Show message
             landscapeModeMessage.classList.add('show');
 
-            // Hide after 4 seconds
+            // Hide after 3 seconds
             messageTimeout = setTimeout(() => {
                 landscapeModeMessage.classList.remove('show');
-            }, 4000);
+            }, 3000);
         }
 
         // Check scroll position on load and scroll
@@ -1962,13 +1967,27 @@
                 `;
             }
 
-            // Add email if available
-            if (location.popup.email) {
+            // Add contact info if available
+            if (location.popup.email || location.popup.phone) {
                 popupHTML += `
                     <div class="location-popup-section">
                         <div class="location-popup-section-label">Contact</div>
                         <div class="location-popup-section-content">
-                            <a href="mailto:${location.popup.email}">${location.popup.email}</a>
+                `;
+
+                if (location.popup.email) {
+                    popupHTML += `<a href="mailto:${location.popup.email}">${location.popup.email}</a>`;
+                }
+
+                if (location.popup.email && location.popup.phone) {
+                    popupHTML += `<br>`;
+                }
+
+                if (location.popup.phone) {
+                    popupHTML += `<a href="tel:${location.popup.phone}">${location.popup.phone}</a>`;
+                }
+
+                popupHTML += `
                         </div>
                     </div>
                 `;
@@ -1980,6 +1999,16 @@
                     <div class="location-popup-section">
                         <div class="location-popup-section-label">Hours</div>
                         <div class="location-popup-section-content">${location.popup.hours}</div>
+                    </div>
+                `;
+            }
+
+            // Add description if available
+            if (location.popup.description) {
+                popupHTML += `
+                    <div class="location-popup-section">
+                        <div class="location-popup-section-label">About</div>
+                        <div class="location-popup-section-content">${location.popup.description}</div>
                     </div>
                 `;
             }
