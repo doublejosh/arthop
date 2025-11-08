@@ -390,7 +390,7 @@
         }
 
         .info-block {
-            background-color: rgba(0, 0, 0, 0.50);
+            background-color: rgba(0, 0, 0, 0.70);
             padding: 20px;
             margin-top: 40px;
             border-radius: 20px;
@@ -398,6 +398,7 @@
             display: inline-block;
             margin: 0 auto;
             max-width: 24rem;
+            mix-blend-mode: multiply;
         }
 
         .event-buttons {
@@ -852,7 +853,8 @@
         }
 
         .locations-intro {
-            font-size: clamp(1rem, 1.2vw, 1.8rem);
+            color: #ffd68a;
+            font-size: clamp(1.2rem, 1.1vw, 1.8rem);
             font-weight: 400;
             line-height: 1.6;
             text-align: center;
@@ -1326,6 +1328,7 @@
     <!-- Locations Section -->
     <section class="locations-section">
         <div class="locations-container">
+            <h2>Locations</h2>
             <div id="locations-grid" class="locations-grid">
                 <!-- Locations will be dynamically inserted here -->
             </div>
