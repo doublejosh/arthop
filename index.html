@@ -31,7 +31,7 @@
     <script defer src="https://cloud.umami.is/script.js" data-website-id="2235569b-386d-487f-a239-39fdaed1ddaa"></script>
 
     <!-- Google Maps JavaScript API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA6weoWIMcVKrG-tCJsg8_pVDskS76cqw&callback=initArtHopMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA6weoWIMcVKrG-tCJsg8_pVDskS76cqw" async defer></script>
 
     <style>
         * {
@@ -815,47 +815,39 @@
 
         /* Toggle View Button */
         .view-toggle-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 0, 0, 0.4);
-            border: none;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 12px;
+            margin: 40px auto;
+            padding: 15px 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border: none;
+            border-radius: 50px;
             cursor: pointer;
-            z-index: 100;
             transition: all 0.3s ease;
-            opacity: 0;
-            pointer-events: none;
             backdrop-filter: blur(10px);
             color: #ffffff;
-        }
-
-        .view-toggle-button.visible {
-            opacity: 0.6;
-            pointer-events: auto;
+            font-size: 1rem;
+            font-weight: 500;
         }
 
         .view-toggle-button.content-toggled {
-            opacity: 0.3;
-            background: rgba(0, 0, 0, 0.2);
+            opacity: 0.7;
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .view-toggle-button:hover {
-            opacity: 1;
             background: rgba(0, 0, 0, 0.6);
-            transform: scale(1.05);
+            transform: translateY(-2px);
         }
 
         .view-toggle-button svg {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             fill: white;
             stroke: white;
+            flex-shrink: 0;
         }
 
         /* Hidden state for content elements */
@@ -893,10 +885,8 @@
 
         @media (max-width: 768px) {
             .view-toggle-button {
-                width: 40px;
-                height: 40px;
-                bottom: 20px;
-                right: 20px;
+                padding: 12px 24px;
+                font-size: 0.9rem;
             }
 
             .view-toggle-button svg {
@@ -923,37 +913,25 @@
         .locations-section {
             position: relative;
             min-height: 100vh;
-            background: linear-gradient(
-                to bottom,
-                #3d2f52 0%,
-                #2f2242 30%,
-                #241a35 70%,
-                #1a1328 100%
-            );
             padding: 80px 20px;
             overflow: hidden;
         }
 
-        .locations-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.3;
-            pointer-events: none;
+        /* Lower Content Wrapper */
+        .lower-content-wrapper {
+            background: linear-gradient(
+                to bottom,
+                #3d2f52 0%,
+                #2f2242 50%,
+                #1a1328 100%
+            );
+            position: relative;
+            padding-bottom: 40px;
         }
 
         /* Event Actions Section */
         .event-actions-section {
             padding: 60px 20px;
-            background: linear-gradient(
-                to bottom,
-                rgba(45, 35, 65, 0.95) 0%,
-                rgba(60, 45, 80, 0.9) 100%
-            );
             position: relative;
         }
 
@@ -1012,12 +990,6 @@
             position: relative;
         }
 
-        .location-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(240, 221, 176, 0.4);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        }
-
         .location-card.has-popup {
             cursor: pointer;
             border-width: 2px;
@@ -1030,27 +1002,14 @@
             transform: translateY(-8px);
         }
 
-        .location-card-info-icon {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 32px;
-            height: 32px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: bold;
-            font-size: 16px;
-            transition: all 0.3s ease;
+        .location-card:last-child {
+            grid-column: span 2;
         }
 
-        .location-card.has-popup:hover .location-card-info-icon {
-            transform: scale(1.1);
-            background: rgba(0, 0, 0, 0.4);
-            color: rgba(255, 255, 255, 0.9);
+        @media (max-width: 768px) {
+            .location-card:last-child {
+                grid-column: span 1;
+            }
         }
 
         .location-number {
@@ -1295,6 +1254,40 @@
             text-decoration: underline;
         }
 
+        .location-popup-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .location-popup-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .location-popup-directions-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #e8b862 0%, #d49944 100%);
+            color: #241a35;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(232, 184, 98, 0.3);
+        }
+
+        .location-popup-directions-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(232, 184, 98, 0.5);
+            background: linear-gradient(135deg, #f0c874 0%, #e0a855 100%);
+        }
+
         @media (max-width: 768px) {
             .location-popup {
                 width: 95%;
@@ -1311,27 +1304,8 @@
         /* Map Section */
         .map-section {
             position: relative;
-            background: linear-gradient(
-                to bottom,
-                #1a1328 0%,
-                #241a35 30%,
-                #2f2242 70%,
-                #3d2f52 100%
-            );
             padding: 80px 20px;
             overflow: hidden;
-        }
-
-        .map-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.3;
-            pointer-events: none;
         }
 
         .map-container {
@@ -1362,7 +1336,7 @@
         .map-embed {
             position: relative;
             width: 90%;
-            max-width: 600px;
+            max-width: 1000px;
             height: auto;
             margin: 0 auto 40px;
             border-radius: 15px;
@@ -1372,7 +1346,7 @@
         }
 
         .map-embed.active {
-            min-height: 400px;
+            min-height: 600px;
         }
 
         .map-embed #arthop-map {
@@ -1430,13 +1404,19 @@
             display: none;
         }
 
+        @media (min-width: 769px) {
+            .map-embed.active {
+                height: 600px;
+            }
+        }
+
         @media (max-width: 768px) {
             .map-section {
                 padding: 60px 15px;
             }
 
             .map-embed {
-                width: 100%;
+                width: 95%;
                 height: auto;
             }
 
@@ -1631,21 +1611,13 @@
         <p class="header">Gifts of fine art and craft, galleries  and creative spaces.</p>
     </div>
 
-    <!-- Toggle View Button -->
-    <button class="view-toggle-button" id="viewToggleBtn" aria-label="Toggle content visibility">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <rect x="3" y="3" width="18" height="14" rx="1" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            <path d="M2 5 L22 5" stroke="currentColor" stroke-width="1.5"/>
-            <circle cx="7" cy="11" r="2.5" fill="currentColor" opacity="0.7"/>
-            <path d="M10 14 L14 10 L18 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
-
     <!-- Landscape Mode Message -->
     <div class="landscape-mode-message" id="landscapeModeMessage">Tranquility Mode</div>
 
-    <!-- Event Actions Section -->
-    <section class="event-actions-section">
+    <!-- Lower Content Wrapper -->
+    <div class="lower-content-wrapper">
+        <!-- Event Actions Section -->
+        <section class="event-actions-section">
         <div class="event-actions-container">
             <div class="event-buttons">
                 <a href="arthop-2025.ics" download class="calendar-button">📅 Add to Calendar</a>
@@ -1683,6 +1655,18 @@
         </div>
     </section>
 
+        <!-- Toggle View Button -->
+        <button class="view-toggle-button" id="viewToggleBtn" aria-label="Toggle content visibility">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="14" rx="1" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <path d="M2 5 L22 5" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="7" cy="11" r="2.5" fill="currentColor" opacity="0.7"/>
+                <path d="M10 14 L14 10 L18 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Tranquility Mode</span>
+        </button>
+    </div><!-- End Lower Content Wrapper -->
+
     <!-- Locations Data -->
     <script type="application/json" id="locations-data">
     [
@@ -1715,14 +1699,29 @@
             "name": "Dragon's Gate Studios",
             "address": "2296 S Camano Dr",
             "artists": ["Dolors Ruscha", "Marc Boutté"],
-            "notes": ""
+            "notes": "",
+            "popup": {
+                "images": [
+                    "spaceship-bus-shelter-camano-island-solar-system-gate-dragon-sculpture.jpg",
+                    "spaceship-bus-shelter-camano-island.jpg"
+                ]
+            }
         },
         {
             "number": 4,
             "name": "South Camano Grange",
             "address": "2227 S Camano Dr",
             "artists": [],
-            "notes": "Winter market (Sat only) - farmers, artisans, music, hot fare"
+            "notes": "Winter market (Sat only) - farmers, artisans, music, hot fare",
+            "popup": {
+                "phone": "(425) 754-7421",
+                "email": "southcamano930@gmail.com",
+                "facebook": "https://www.facebook.com/profile.php?id=100064592985672",
+                "news": {
+                    "title": "South Camano Grange gets facelift thanks to grant funding",
+                    "url": "https://www.goskagit.com/scnews/south-camano-grange-gets-facelift-thanks-to-grant-funding/article_5726e4b6-cbe8-11ef-9532-8356b4f0dbb9.html"
+                }
+            }
         },
         {
             "number": 5,
@@ -1742,24 +1741,21 @@
         let isContentHidden = false;
         let messageTimeout = null;
 
-        // Show button when at top of page
-        function checkScrollPosition() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop < 100) {
-                viewToggleBtn.classList.add('visible');
-            } else {
-                viewToggleBtn.classList.remove('visible');
-            }
-        }
-
         // Toggle content visibility
         viewToggleBtn.addEventListener('click', function() {
             isContentHidden = !isContentHidden;
+
+            // Scroll to top smoothly (always)
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+
             if (isContentHidden) {
                 container.classList.add('content-hidden');
                 viewToggleBtn.classList.add('content-toggled');
 
-                // Show landscape mode message
+                // Show tranquility mode message
                 showLandscapeModeMessage();
             } else {
                 container.classList.remove('content-hidden');
@@ -1782,10 +1778,6 @@
                 landscapeModeMessage.classList.remove('show');
             }, 3000);
         }
-
-        // Check scroll position on load and scroll
-        window.addEventListener('scroll', checkScrollPosition);
-        window.addEventListener('load', checkScrollPosition);
 
         // Umami tracking for all links and buttons
         function setupUmamiTracking() {
@@ -1897,14 +1889,7 @@
                 // Create Google Maps directions URL
                 const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location.address + ' Camano Island WA 98282')}`;
 
-                // Add info icon if location has popup
-                let infoIconHTML = '';
-                if (location.popup) {
-                    infoIconHTML = `<div class="location-card-info-icon">↗</div>`;
-                }
-
                 card.innerHTML = `
-                    ${infoIconHTML}
                     <div class="location-number">${location.number}</div>
                     <div class="location-name">${location.name}</div>
                     <div class="location-address">${location.address}</div>
@@ -1954,6 +1939,43 @@
                     </div>
                     <div class="location-popup-content">
             `;
+
+            // Add images if available
+            if (location.popup.images && location.popup.images.length > 0) {
+                popupHTML += `
+                    <div class="location-popup-section">
+                        <div class="location-popup-images">
+                `;
+
+                location.popup.images.forEach(image => {
+                    popupHTML += `<img src="${image}" alt="${location.name}" class="location-popup-image">`;
+                });
+
+                popupHTML += `
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Add artists if available
+            if (location.artists && location.artists.length > 0) {
+                popupHTML += `
+                    <div class="location-popup-section">
+                        <div class="location-popup-section-label">Artists</div>
+                        <div class="location-popup-section-content">${location.artists.join(', ')}</div>
+                    </div>
+                `;
+            }
+
+            // Add notes if available
+            if (location.notes && location.notes.trim() !== '') {
+                popupHTML += `
+                    <div class="location-popup-section">
+                        <div class="location-popup-section-label">Details</div>
+                        <div class="location-popup-section-content">${location.notes}</div>
+                    </div>
+                `;
+            }
 
             // Add website if available
             if (location.popup.website) {
@@ -2012,6 +2034,38 @@
                     </div>
                 `;
             }
+
+            // Add Facebook link if available
+            if (location.popup.facebook) {
+                popupHTML += `
+                    <div class="location-popup-section">
+                        <div class="location-popup-section-label">Facebook</div>
+                        <div class="location-popup-section-content">
+                            <a href="${location.popup.facebook}" target="_blank" rel="noopener noreferrer">Visit Facebook Page</a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Add news if available
+            if (location.popup.news) {
+                popupHTML += `
+                    <div class="location-popup-section">
+                        <div class="location-popup-section-label">Recent News</div>
+                        <div class="location-popup-section-content">
+                            <a href="${location.popup.news.url}" target="_blank" rel="noopener noreferrer">${location.popup.news.title}</a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Add Get Directions button
+            const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location.address + ' Camano Island WA 98282')}`;
+            popupHTML += `
+                <div class="location-popup-section" style="text-align: center; margin-top: 10px;">
+                    <a href="${mapsUrl}" target="_blank" class="location-popup-directions-button">Get Directions</a>
+                </div>
+            `;
 
             popupHTML += `
                     </div>
