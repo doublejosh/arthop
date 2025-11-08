@@ -382,6 +382,7 @@
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
             letter-spacing: 1px;
             animation: fadeInUp 1.2s ease-out;
+            color: #ffd68a;
         }
 
         .content .description {
@@ -402,7 +403,7 @@
         }
 
         .info-block {
-            background-color: rgba(0, 0, 0, 0.70);
+            background-color: rgba(0, 0, 0, 0.65);
             padding: 20px;
             margin-top: 40px;
             border-radius: 20px;
@@ -415,11 +416,22 @@
             z-index: 11;
         }
 
+        .events-intro {
+            font-size: clamp(1.2rem, 1.3vw, 1.8rem);
+            font-weight: 400;
+            line-height: 1.6;
+            text-align: center;
+            padding-top: 10px;
+            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            color: #ffffff;
+        }
+
         .event-buttons {
             display: flex;
             gap: 10px;
             justify-content: center;
-            margin-top: 15px;
             flex-wrap: wrap;
         }
 
@@ -946,17 +958,6 @@
             max-width: 1200px;
             margin: 0 auto;
             z-index: 1;
-        }
-
-        .locations-intro {
-            color: #ffd68a;
-            font-size: clamp(1.2rem, 1.1vw, 1.8rem);
-            font-weight: 400;
-            line-height: 1.6;
-            text-align: center;
-            margin-top: 10px;
-            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
-            max-width: 800px;
         }
 
         .locations-container h2 {
@@ -1600,7 +1601,6 @@
             <h1><img src="logo-black_white.png" alt="ArtHop"></h1>
             <div class="info-block">
                 <div class="date">Dec 6<span class="smaller-text">&</span>7<span class="times"><span class="middle-dot"> · </span>10<span class="smaller-text">am</span>-4<span class="smaller-text">pm</span></span></div>
-                <p class="locations-intro">Holiday gifts, art, crafts, and more from local artists and makers.</p>
                 <div class="subtitle">Camano Island, WA</div>
             </div>
         </div>
@@ -1618,42 +1618,45 @@
     <div class="lower-content-wrapper">
         <!-- Event Actions Section -->
         <section class="event-actions-section">
-        <div class="event-actions-container">
-            <div class="event-buttons">
-                <a href="arthop-2025.ics" download class="calendar-button">📅 Add to Calendar</a>
-                <a href="https://www.facebook.com/events/1144879013823740" target="_blank" rel="noopener noreferrer" class="facebook-button">
-                    <svg class="facebook-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                    Facebook Event
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Locations Section -->
-    <section class="locations-section">
-        <div class="locations-container">
-            <h2>Locations</h2>
-            <div id="locations-grid" class="locations-grid">
-                <!-- Locations will be dynamically inserted here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Map Section -->
-    <section class="map-section">
-        <div class="map-container">
-            <p class="map-intro">All locations on Camano Island, WA - within 2 miles</p>
-            <!-- Embedded Map with all ArtHop locations -->
-            <div class="map-embed" id="map-embed">
-                <div class="map-placeholder" id="map-placeholder">
-                    <img src="camano-art-hop-map.png" alt="ArtHop Locations Map">
+            <p class="events-intro">
+                Holiday gifts, art, crafts, and more from local artists and makers.
+            </p>
+            <div class="event-actions-container">
+                <div class="event-buttons">
+                    <a href="arthop-2025.ics" download class="calendar-button">📅 Add to Calendar</a>
+                    <a href="https://www.facebook.com/events/1144879013823740" target="_blank" rel="noopener noreferrer" class="facebook-button">
+                        <svg class="facebook-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        Facebook Event
+                    </a>
                 </div>
-                <div id="arthop-map" style="width: 100%; height: 100%; display: none;"></div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Locations Section -->
+        <section class="locations-section">
+            <div class="locations-container">
+                <h2>Locations</h2>
+                <div id="locations-grid" class="locations-grid">
+                    <!-- Locations will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map-section">
+            <div class="map-container">
+                <p class="map-intro">All locations on Camano Island, WA - within 2 miles</p>
+                <!-- Embedded Map with all ArtHop locations -->
+                <div class="map-embed" id="map-embed">
+                    <div class="map-placeholder" id="map-placeholder">
+                        <img src="camano-art-hop-map.png" alt="ArtHop Locations Map">
+                    </div>
+                    <div id="arthop-map" style="width: 100%; height: 100%; display: none;"></div>
+                </div>
+            </div>
+        </section>
 
         <!-- Toggle View Button -->
         <button class="view-toggle-button" id="viewToggleBtn" aria-label="Toggle content visibility">
@@ -1665,6 +1668,7 @@
             </svg>
             <span>Tranquility Mode</span>
         </button>
+
     </div><!-- End Lower Content Wrapper -->
 
     <!-- Locations Data -->
