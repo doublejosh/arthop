@@ -868,6 +868,48 @@
             transition: opacity 0.4s ease;
         }
 
+        /* Landscape Mode Message */
+        .landscape-mode-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .landscape-mode-message.show {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .view-toggle-button {
+                width: 40px;
+                height: 40px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .view-toggle-button svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .landscape-mode-message {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+        }
+
         @keyframes float {
             0%, 100% {
                 transform: translateX(-50%) translateY(0px);
@@ -967,12 +1009,48 @@
             padding: 40px;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
+            position: relative;
         }
 
         .location-card:hover {
             transform: translateY(-5px);
             border-color: rgba(240, 221, 176, 0.4);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .location-card.has-popup {
+            cursor: pointer;
+            border-width: 2px;
+            border-color: rgba(232, 184, 98, 0.5);
+        }
+
+        .location-card.has-popup:hover {
+            border-color: rgba(232, 184, 98, 0.8);
+            box-shadow: 0 15px 40px rgba(232, 184, 98, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .location-card-info-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 32px;
+            height: 32px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .location-card.has-popup:hover .location-card-info-icon {
+            transform: scale(1.1);
+            background: rgba(0, 0, 0, 0.4);
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .location-number {
@@ -1094,6 +1172,140 @@
 
         .smaller-text {
             font-size: 0.7em;
+        }
+
+        /* Location Popup Overlay and Modal */
+        .location-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .location-popup-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .location-popup {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .location-popup-overlay.active .location-popup {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .location-popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            color: #241a35;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .location-popup-close:hover {
+            background: rgba(0, 0, 0, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .location-popup-header {
+            margin-bottom: 30px;
+            padding-right: 40px;
+        }
+
+        .location-popup-title {
+            color: #3d2f52;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .location-popup-address {
+            color: #7A6B8E;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .location-popup-content {
+            color: #3d2f52;
+        }
+
+        .location-popup-section {
+            margin-bottom: 25px;
+        }
+
+        .location-popup-section-label {
+            color: #7A6B8E;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .location-popup-section-content {
+            color: #3d2f52;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .location-popup-section-content a {
+            color: #2563eb;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .location-popup-section-content a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .location-popup {
+                width: 95%;
+                padding: 30px 25px;
+                max-height: 90vh;
+            }
+
+            .location-popup-close {
+                top: 10px;
+                right: 10px;
+            }
         }
 
         /* Map Section */
@@ -1429,6 +1641,9 @@
         </svg>
     </button>
 
+    <!-- Landscape Mode Message -->
+    <div class="landscape-mode-message" id="landscapeModeMessage">Landscape Mode</div>
+
     <!-- Event Actions Section -->
     <section class="event-actions-section">
         <div class="event-actions-container">
@@ -1483,7 +1698,12 @@
             "name": "Matzke Fine Art Gallery & Sculpture Park",
             "address": "2345 Blanche Way",
             "artists": [],
-            "notes": "\"Honey I Shrunk the Art\" - 40 artists, 36th annual gallery show"
+            "notes": "\"Honey I Shrunk the Art\" - 40 artists, 36th annual gallery show",
+            "popup": {
+                "website": "http://www.matzkefineart.com/",
+                "email": "matzke@camano.net",
+                "hours": "Open every Friday - Saturday - Sunday 11-5<br>Monday - Thursday by Appt."
+            }
         },
         {
             "number": 3,
@@ -1513,7 +1733,9 @@
         // Toggle View Button - Show/Hide Content
         const viewToggleBtn = document.getElementById('viewToggleBtn');
         const container = document.querySelector('.container');
+        const landscapeModeMessage = document.getElementById('landscapeModeMessage');
         let isContentHidden = false;
+        let messageTimeout = null;
 
         // Show button when at top of page
         function checkScrollPosition() {
@@ -1531,11 +1753,30 @@
             if (isContentHidden) {
                 container.classList.add('content-hidden');
                 viewToggleBtn.classList.add('content-toggled');
+
+                // Show landscape mode message
+                showLandscapeModeMessage();
             } else {
                 container.classList.remove('content-hidden');
                 viewToggleBtn.classList.remove('content-toggled');
             }
         });
+
+        // Show landscape mode message for 4 seconds
+        function showLandscapeModeMessage() {
+            // Clear any existing timeout
+            if (messageTimeout) {
+                clearTimeout(messageTimeout);
+            }
+
+            // Show message
+            landscapeModeMessage.classList.add('show');
+
+            // Hide after 4 seconds
+            messageTimeout = setTimeout(() => {
+                landscapeModeMessage.classList.remove('show');
+            }, 4000);
+        }
 
         // Check scroll position on load and scroll
         window.addEventListener('scroll', checkScrollPosition);
@@ -1626,6 +1867,13 @@
                 const card = document.createElement('div');
                 card.className = 'location-card';
 
+                // Add special styling and click handler if location has popup
+                if (location.popup) {
+                    card.classList.add('has-popup');
+                    card.setAttribute('data-location-id', location.number);
+                    card.style.cursor = 'pointer';
+                }
+
                 let artistsHTML = '';
                 if (location.artists && location.artists.length > 0) {
                     artistsHTML = `
@@ -1644,14 +1892,32 @@
                 // Create Google Maps directions URL
                 const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location.address + ' Camano Island WA 98282')}`;
 
+                // Add info icon if location has popup
+                let infoIconHTML = '';
+                if (location.popup) {
+                    infoIconHTML = `<div class="location-card-info-icon">↗</div>`;
+                }
+
                 card.innerHTML = `
+                    ${infoIconHTML}
                     <div class="location-number">${location.number}</div>
                     <div class="location-name">${location.name}</div>
                     <div class="location-address">${location.address}</div>
                     ${artistsHTML}
                     ${notesHTML}
-                    <a href="${mapsUrl}" target="_blank" class="location-directions-button">Get Directions</a>
+                    <a href="${mapsUrl}" target="_blank" class="location-directions-button" onclick="event.stopPropagation()">Get Directions</a>
                 `;
+
+                // Add click handler for popup
+                if (location.popup) {
+                    card.addEventListener('click', function(e) {
+                        // Don't open popup if clicking on directions button
+                        if (e.target.closest('.location-directions-button')) {
+                            return;
+                        }
+                        openLocationPopup(location);
+                    });
+                }
 
                 locationsGrid.appendChild(card);
             });
@@ -1659,6 +1925,133 @@
 
         // Initialize locations on page load
         document.addEventListener('DOMContentLoaded', loadLocations);
+
+        // Location Popup Functions
+        let currentPopupOverlay = null;
+
+        function openLocationPopup(location) {
+            // Create overlay if it doesn't exist
+            if (!currentPopupOverlay) {
+                currentPopupOverlay = document.createElement('div');
+                currentPopupOverlay.className = 'location-popup-overlay';
+                currentPopupOverlay.setAttribute('role', 'dialog');
+                currentPopupOverlay.setAttribute('aria-modal', 'true');
+                document.body.appendChild(currentPopupOverlay);
+            }
+
+            // Build popup content
+            let popupHTML = `
+                <div class="location-popup">
+                    <button class="location-popup-close" aria-label="Close popup">&times;</button>
+                    <div class="location-popup-header">
+                        <h3 class="location-popup-title">${location.name}</h3>
+                        <div class="location-popup-address">${location.address}, Camano Island, WA</div>
+                    </div>
+                    <div class="location-popup-content">
+            `;
+
+            // Add website if available
+            if (location.popup.website) {
+                popupHTML += `
+                    <div class="location-popup-section">
+                        <div class="location-popup-section-label">Website</div>
+                        <div class="location-popup-section-content">
+                            <a href="${location.popup.website}" target="_blank" rel="noopener noreferrer">${location.popup.website}</a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Add email if available
+            if (location.popup.email) {
+                popupHTML += `
+                    <div class="location-popup-section">
+                        <div class="location-popup-section-label">Contact</div>
+                        <div class="location-popup-section-content">
+                            <a href="mailto:${location.popup.email}">${location.popup.email}</a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Add hours if available
+            if (location.popup.hours) {
+                popupHTML += `
+                    <div class="location-popup-section">
+                        <div class="location-popup-section-label">Hours</div>
+                        <div class="location-popup-section-content">${location.popup.hours}</div>
+                    </div>
+                `;
+            }
+
+            popupHTML += `
+                    </div>
+                </div>
+            `;
+
+            currentPopupOverlay.innerHTML = popupHTML;
+
+            // Show popup with animation
+            setTimeout(() => {
+                currentPopupOverlay.classList.add('active');
+            }, 10);
+
+            // Add event listeners
+            const closeBtn = currentPopupOverlay.querySelector('.location-popup-close');
+            closeBtn.addEventListener('click', closeLocationPopup);
+
+            // Close on overlay click
+            currentPopupOverlay.addEventListener('click', function(e) {
+                if (e.target === currentPopupOverlay) {
+                    closeLocationPopup();
+                }
+            });
+
+            // Close on ESC key
+            document.addEventListener('keydown', handleEscKey);
+
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+
+            // Track popup open with Umami
+            if (window.umami) {
+                window.umami.track('location-popup-open', {
+                    location: location.name,
+                    locationId: location.number
+                });
+            }
+        }
+
+        function closeLocationPopup() {
+            if (!currentPopupOverlay) return;
+
+            currentPopupOverlay.classList.remove('active');
+
+            // Remove overlay after animation
+            setTimeout(() => {
+                if (currentPopupOverlay && currentPopupOverlay.parentNode) {
+                    currentPopupOverlay.parentNode.removeChild(currentPopupOverlay);
+                    currentPopupOverlay = null;
+                }
+            }, 300);
+
+            // Remove ESC key listener
+            document.removeEventListener('keydown', handleEscKey);
+
+            // Restore body scroll
+            document.body.style.overflow = '';
+
+            // Track popup close with Umami
+            if (window.umami) {
+                window.umami.track('location-popup-close');
+            }
+        }
+
+        function handleEscKey(e) {
+            if (e.key === 'Escape') {
+                closeLocationPopup();
+            }
+        }
 
         // Cloud animation system
         const cloudLayer = document.querySelector('.cloud-layer');
