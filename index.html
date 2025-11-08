@@ -420,7 +420,7 @@
             font-weight: 400;
             line-height: 1.6;
             text-align: center;
-            padding-top: 10px;
+            padding: 40px 0;
             text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
             max-width: 800px;
             margin: 0 auto 20px auto;
@@ -940,6 +940,23 @@
             position: relative;
             padding-bottom: 40px;
             overflow-x: clip;
+        }
+
+        /* Animated Car */
+        .scroll-car {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            height: 180px;
+            z-index: 11;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .scroll-car img {
+            height: 100%;
+            width: auto;
+            display: block;
         }
 
         .decorative-dots {
@@ -1686,6 +1703,11 @@
 
     <!-- Lower Content Wrapper -->
     <div class="lower-content-wrapper">
+        <!-- Animated Car -->
+        <div class="scroll-car" id="scrollCar">
+            <img src="car.png" alt="Driving car">
+        </div>
+
         <!-- Decorative Dots Border -->
         <div class="decorative-dots">
             <span class="dot"></span>
@@ -2602,6 +2624,67 @@
         }
 
         // The initArtHopMap function will be called by the Google Maps API callback
+
+        // Scroll-based Car Animation
+        function initCarAnimation() {
+            const car = document.getElementById('scrollCar');
+            const lowerContentWrapper = document.querySelector('.lower-content-wrapper');
+
+            if (!car || !lowerContentWrapper) return;
+
+            let ticking = false;
+
+            function updateCarPosition() {
+                // Get the position of the lower content wrapper
+                const wrapperRect = lowerContentWrapper.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                // Calculate when the dots section is visible
+                // Start animation when wrapper enters viewport
+                const scrollStart = windowHeight - wrapperRect.top;
+
+                // Animation should complete when wrapper is mostly scrolled past
+                const animationRange = windowHeight + 200;
+
+                // Calculate progress (0 to 1)
+                let progress = scrollStart / animationRange;
+                progress = Math.max(0, Math.min(1, progress)); // Clamp between 0 and 1
+
+                // Calculate car position
+                // Start: mostly off-screen right (only front 20% visible)
+                // End: fully off-screen left
+                const carWidth = car.offsetWidth || 200; // Fallback width if not loaded yet
+                const startX = window.innerWidth - (carWidth * 0.2); // 80% hidden on right
+                const endX = -carWidth; // Fully off screen left
+
+                const currentX = startX + (progress * (endX - startX));
+
+                // Apply transform
+                car.style.transform = `translateX(${currentX}px)`;
+
+                ticking = false;
+            }
+
+            function onScroll() {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateCarPosition);
+                    ticking = true;
+                }
+            }
+
+            // Initialize
+            updateCarPosition();
+
+            // Listen to scroll events
+            window.addEventListener('scroll', onScroll, { passive: true });
+        }
+
+        // Initialize car animation when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCarAnimation);
+        } else {
+            initCarAnimation();
+        }
     </script>
 </body>
 </html>
