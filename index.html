@@ -313,8 +313,8 @@
             transform: translateX(-50%);
             width: 90%;
             max-width: 1000px;
-            font-size: clamp(0.9rem, 1.8vw, 1.2rem);
-            font-weight: 400;
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            font-weight: 500;
             text-align: center;
             opacity: 0.8;
             letter-spacing: 4px;
@@ -327,7 +327,7 @@
         /* Content container */
         .content {
             position: absolute;
-            bottom: 20%;
+            top: 80px;
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
@@ -336,10 +336,14 @@
             width: 90%;
             max-width: 800px;
             padding: 20px;
+            min-height: calc(80vh - 120px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
 
         .content h1 {
-            margin-bottom: 20px;
+            margin: 0 0 20px 0;
             animation: fadeInUp 1s ease-out;
         }
 
@@ -347,6 +351,8 @@
             max-width: 100%;
             width: clamp(300px, 90vw, 600px);
             height: auto;
+            display: block;
+            margin: 0 auto;
             filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.5));
             opacity: 0.35;
             transition: opacity 0.3s ease;
@@ -359,8 +365,8 @@
 
         .content .subtitle {
             font-size: clamp(1rem, 2vw, 1.5rem);
-            font-weight: 300;
-            margin-top: 20px;
+            font-weight: 500;
+            margin-top: 10px;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
             letter-spacing: 1px;
             animation: fadeInUp 1.2s ease-out;
@@ -384,12 +390,14 @@
         }
 
         .info-block {
-            background-color: rgba(0, 0, 0, 0.40);
+            background-color: rgba(0, 0, 0, 0.50);
             padding: 20px;
             margin-top: 40px;
-            border-radius: 15px;
+            border-radius: 20px;
             backdrop-filter: blur(10px);
             display: inline-block;
+            margin: 0 auto;
+            max-width: 24rem;
         }
 
         .event-buttons {
@@ -758,6 +766,7 @@
             .content {
                 bottom: 15%;
                 width: 95%;
+                min-height: calc(85vh - 100px);
             }
 
             .times {
@@ -818,6 +827,23 @@
             pointer-events: none;
         }
 
+        /* Event Actions Section */
+        .event-actions-section {
+            padding: 60px 20px;
+            background: linear-gradient(
+                to bottom,
+                rgba(45, 35, 65, 0.95) 0%,
+                rgba(60, 45, 80, 0.9) 100%
+            );
+            position: relative;
+        }
+
+        .event-actions-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
         .locations-container {
             position: relative;
             max-width: 1200px;
@@ -826,16 +852,13 @@
         }
 
         .locations-intro {
-            color: #e5c791;
-            font-size: clamp(1.6rem, 3vw, 1.8rem);
-            font-weight: 200;
+            font-size: clamp(1rem, 1.2vw, 1.8rem);
+            font-weight: 400;
             line-height: 1.6;
             text-align: center;
-            margin-top: 40px;
+            margin-top: 10px;
             text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .locations-container h2 {
@@ -1028,6 +1051,7 @@
             font-size: clamp(1rem, 2vw, 1.2rem);
             text-align: center;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
         }
 
         .map-embed {
@@ -1046,6 +1070,54 @@
             width: 100%;
             height: 100%;
             border: none;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .map-placeholder:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .map-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .map-placeholder::after {
+            content: 'Click to open interactive map';
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(74, 61, 94, 0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .map-placeholder:hover::after {
+            opacity: 1;
+        }
+
+        .map-embed.active .map-placeholder {
+            display: none;
         }
 
         @media (max-width: 768px) {
@@ -1209,15 +1281,7 @@
             <h1><img src="logo-black_white.png" alt="ArtHop"></h1>
             <div class="info-block">
                 <div class="date">Dec 6<span class="smaller-text">&</span>7<span class="times"><span class="middle-dot"> · </span>10<span class="smaller-text">am</span>-4<span class="smaller-text">pm</span></span></div>
-                <div class="event-buttons">
-                    <a href="arthop-2025.ics" download class="calendar-button">📅 Add to Cal</a>
-                    <a href="https://www.facebook.com/events/1144879013823740" target="_blank" rel="noopener noreferrer" class="facebook-button">
-                        <svg class="facebook-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                        Event
-                    </a>
-                </div>
+                <p class="locations-intro">Holiday gifts, art, crafts, and more from local artists and makers.</p>
                 <div class="subtitle">Camano Island, WA</div>
             </div>
         </div>
@@ -1228,14 +1292,18 @@
         <p class="header">Gifts of fine art and craft, galleries  and creative spaces.</p>
     </div>
 
-    <!-- Map Section -->
-    <section class="map-section">
-        <div class="map-container">
-            <!-- Embedded Map with all ArtHop locations -->
-            <div class="map-embed">
-                <div id="arthop-map" style="width: 100%; height: 100%;"></div>
+    <!-- Event Actions Section -->
+    <section class="event-actions-section">
+        <div class="event-actions-container">
+            <div class="event-buttons">
+                <a href="arthop-2025.ics" download class="calendar-button">📅 Add to Calendar</a>
+                <a href="https://www.facebook.com/events/1144879013823740" target="_blank" rel="noopener noreferrer" class="facebook-button">
+                    <svg class="facebook-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook Event
+                </a>
             </div>
-            <p class="map-intro">All locations on Camano Island, WA - within 2 miles</p>
         </div>
     </section>
 
@@ -1245,9 +1313,20 @@
             <div id="locations-grid" class="locations-grid">
                 <!-- Locations will be dynamically inserted here -->
             </div>
-            <h3 class="locations-intro">
-               Holiday gifts, art, crafts, and more from local artists and makers.
-            </h3>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-container">
+            <p class="map-intro">All locations on Camano Island, WA - within 2 miles</p>
+            <!-- Embedded Map with all ArtHop locations -->
+            <div class="map-embed" id="map-embed">
+                <div class="map-placeholder" id="map-placeholder">
+                    <img src="map.png" alt="ArtHop Locations Map">
+                </div>
+                <div id="arthop-map" style="width: 100%; height: 100%; display: none;"></div>
+            </div>
         </div>
     </section>
 
@@ -1270,17 +1349,17 @@
         },
         {
             "number": 3,
-            "name": "South Camano Grange",
-            "address": "2227 S Camano Dr",
-            "artists": [],
-            "notes": "Winter market (Sat only) - farmers, artisans, music, hot fare"
-        },
-        {
-            "number": 4,
             "name": "Dragon's Gate Studios",
             "address": "2296 S Camano Dr",
             "artists": ["Dolors Ruscha", "Marc Boutté"],
             "notes": ""
+        },
+        {
+            "number": 4,
+            "name": "South Camano Grange",
+            "address": "2227 S Camano Dr",
+            "artists": [],
+            "notes": "Winter market (Sat only) - farmers, artisans, music, hot fare"
         },
         {
             "number": 5,
@@ -1515,6 +1594,28 @@
             console.log('Cloud system disabled - mobile device detected');
         }
 
+        // Handle map placeholder click
+        let mapInitialized = false;
+        const mapPlaceholder = document.getElementById('map-placeholder');
+        const mapEmbed = document.getElementById('map-embed');
+        const arthopMap = document.getElementById('arthop-map');
+
+        if (mapPlaceholder) {
+            mapPlaceholder.addEventListener('click', function() {
+                // Hide placeholder
+                mapPlaceholder.style.display = 'none';
+                // Show interactive map
+                arthopMap.style.display = 'block';
+                mapEmbed.classList.add('active');
+
+                // Initialize map if not already done
+                if (!mapInitialized) {
+                    mapInitialized = true;
+                    initArtHopMap();
+                }
+            });
+        }
+
         // Generate map with all ArtHop locations using Google Maps JavaScript API
         function initArtHopMap() {
             // Get locations data from the JSON
@@ -1536,15 +1637,15 @@
                 },
                 {
                     number: 3,
-                    name: 'South Camano Grange',
-                    address: '2227 S Camano Dr, Camano Island, WA 98282',
-                    position: { lat: 48.1199, lng: -122.5012 }
-                },
-                {
-                    number: 4,
                     name: "Dragon's Gate Studios",
                     address: '2296 S Camano Dr, Camano Island, WA 98282',
                     position: { lat: 48.1188, lng: -122.5023 }
+                },
+                {
+                    number: 4,
+                    name: 'South Camano Grange',
+                    address: '2227 S Camano Dr, Camano Island, WA 98282',
+                    position: { lat: 48.1199, lng: -122.5012 }
                 },
                 {
                     number: 5,
