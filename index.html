@@ -840,6 +840,11 @@
             pointer-events: auto;
         }
 
+        .view-toggle-button.content-toggled {
+            opacity: 0.3;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
         .view-toggle-button:hover {
             opacity: 1;
             background: rgba(0, 0, 0, 0.6);
@@ -1516,8 +1521,10 @@
             isContentHidden = !isContentHidden;
             if (isContentHidden) {
                 container.classList.add('content-hidden');
+                viewToggleBtn.classList.add('content-toggled');
             } else {
                 container.classList.remove('content-hidden');
+                viewToggleBtn.classList.remove('content-toggled');
             }
         });
 
