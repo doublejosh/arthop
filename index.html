@@ -992,10 +992,25 @@
             .locations-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
+                padding: 0 10px;
             }
 
             .locations-section {
                 padding: 60px 15px;
+            }
+
+            .location-card {
+                padding: 20px;
+            }
+
+            .map-embed {
+                width: 95%;
+                max-height: 500px;
+            }
+
+            .map-placeholder img {
+                max-height: 500px;
+                object-fit: contain;
             }
         }
 
@@ -1056,9 +1071,10 @@
 
         .map-embed {
             position: relative;
-            width: 60%;
+            width: 90%;
             max-width: 600px;
-            height: 700px;
+            height: auto;
+            min-height: 400px;
             margin: 0 auto 40px;
             border-radius: 15px;
             overflow: hidden;
@@ -1074,7 +1090,7 @@
 
         .map-placeholder {
             width: 100%;
-            height: 100%;
+            height: auto;
             cursor: pointer;
             border-radius: 12px;
             overflow: hidden;
@@ -1090,8 +1106,8 @@
 
         .map-placeholder img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            object-fit: contain;
             display: block;
         }
 
@@ -1323,7 +1339,7 @@
             <!-- Embedded Map with all ArtHop locations -->
             <div class="map-embed" id="map-embed">
                 <div class="map-placeholder" id="map-placeholder">
-                    <img src="map.png" alt="ArtHop Locations Map">
+                    <img src="camano-art-hop-map.png" alt="ArtHop Locations Map">
                 </div>
                 <div id="arthop-map" style="width: 100%; height: 100%; display: none;"></div>
             </div>
