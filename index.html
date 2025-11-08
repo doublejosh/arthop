@@ -1152,12 +1152,15 @@
             width: 90%;
             max-width: 600px;
             height: auto;
-            min-height: 400px;
             margin: 0 auto 40px;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             border: 2px solid rgba(240, 221, 176, 0.3);
+        }
+
+        .map-embed.active {
+            min-height: 400px;
         }
 
         .map-embed #arthop-map {
@@ -1170,11 +1173,13 @@
             width: 100%;
             height: auto;
             cursor: pointer;
-            border-radius: 12px;
             overflow: hidden;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .map-placeholder:hover {
@@ -1185,7 +1190,6 @@
         .map-placeholder img {
             width: 100%;
             height: auto;
-            object-fit: contain;
             display: block;
         }
 
@@ -1221,7 +1225,12 @@
 
             .map-embed {
                 width: 100%;
-                height: 600px;
+                height: auto;
+            }
+
+            .map-embed.active {
+                height: 500px;
+                min-height: 500px;
             }
         }
     </style>
@@ -1531,6 +1540,63 @@
         // Check scroll position on load and scroll
         window.addEventListener('scroll', checkScrollPosition);
         window.addEventListener('load', checkScrollPosition);
+
+        // Umami tracking for all links and buttons
+        function setupUmamiTracking() {
+            // Track all links
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    const text = this.textContent.trim() || this.getAttribute('aria-label') || 'Link';
+
+                    // Determine link type
+                    let eventName = 'link-click';
+                    if (href && href.endsWith('.ics')) {
+                        eventName = 'calendar-download';
+                    } else if (href && href.includes('facebook.com')) {
+                        eventName = 'facebook-event';
+                    } else if (href && href.includes('google.com/maps')) {
+                        eventName = 'directions-click';
+                    }
+
+                    // Track with Umami
+                    if (window.umami) {
+                        window.umami.track(eventName, {
+                            url: href,
+                            text: text
+                        });
+                    }
+                });
+            });
+
+            // Track view toggle button
+            if (viewToggleBtn) {
+                viewToggleBtn.addEventListener('click', function() {
+                    if (window.umami) {
+                        window.umami.track('view-toggle', {
+                            action: isContentHidden ? 'hide-content' : 'show-content'
+                        });
+                    }
+                });
+            }
+
+            // Track map placeholder click
+            const mapPlaceholder = document.getElementById('map-placeholder');
+            if (mapPlaceholder) {
+                mapPlaceholder.addEventListener('click', function() {
+                    if (window.umami) {
+                        window.umami.track('map-open', { action: 'interactive-map' });
+                    }
+                });
+            }
+        }
+
+        // Initialize tracking after DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupUmamiTracking);
+        } else {
+            setupUmamiTracking();
+        }
 
         // Parallax effect - only on desktop
         const layers = document.querySelectorAll('[data-speed]');
