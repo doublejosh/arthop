@@ -371,9 +371,6 @@
             mix-blend-mode: soft-light;
         }
 
-        .content h1 img:hover {
-            opacity: 0.5;
-        }
 
         .content .info-block {
             background-color: rgba(0, 0, 0, 0.65);
@@ -957,6 +954,33 @@
             height: 100%;
             width: auto;
             display: block;
+        }
+
+        /* Car drive-by animation for tranquility mode */
+        @keyframes carDriveBy {
+            0% {
+                transform: translateX(calc(100vw + 100%));
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        @keyframes carDriveByReverse {
+            0% {
+                transform: translateX(-100%) scaleX(-1);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100%)) scaleX(-1);
+            }
+        }
+
+        .scroll-car.tranquility-drive {
+            animation: carDriveBy 7s linear;
+        }
+
+        .scroll-car.tranquility-drive-reverse {
+            animation: carDriveByReverse 7s linear;
         }
 
         .decorative-dots {
@@ -2629,12 +2653,21 @@
         function initCarAnimation() {
             const car = document.getElementById('scrollCar');
             const lowerContentWrapper = document.querySelector('.lower-content-wrapper');
+            const container = document.querySelector('.container');
 
             if (!car || !lowerContentWrapper) return;
 
             let ticking = false;
+            let tranquilityLoopTimeout = null;
+            let isTranquilityMode = false;
 
             function updateCarPosition() {
+                // Skip scroll-based positioning if in tranquility mode and animation is running
+                if (isTranquilityMode) {
+                    ticking = false;
+                    return;
+                }
+
                 // Get the position of the lower content wrapper
                 const wrapperRect = lowerContentWrapper.getBoundingClientRect();
                 const windowHeight = window.innerHeight;
@@ -2671,6 +2704,99 @@
                     ticking = true;
                 }
             }
+
+            // Tranquility mode car animation
+            function startCarDriveBy() {
+                // Randomly choose direction (50/50)
+                const goingRight = Math.random() < 0.5;
+
+                // Generate random color variation using filters
+                const hueRotate = Math.floor(Math.random() * 360); // 0-360 degrees
+                const saturate = (Math.random() * 1.7) + 0.3; // 0.3-2.0
+                const brightness = (Math.random() * 0.4) + 0.8; // 0.8-1.2
+
+                // Apply random color filter
+                car.style.filter = `hue-rotate(${hueRotate}deg) saturate(${saturate}) brightness(${brightness})`;
+
+                // Add appropriate animation class
+                if (goingRight) {
+                    car.classList.add('tranquility-drive-reverse');
+                } else {
+                    car.classList.add('tranquility-drive');
+                }
+
+                // Remove class after animation completes (7s)
+                setTimeout(() => {
+                    car.classList.remove('tranquility-drive');
+                    car.classList.remove('tranquility-drive-reverse');
+
+                    // Move car off-screen (position depends on direction)
+                    if (goingRight) {
+                        // If went right, hide on right side
+                        car.style.transform = 'translateX(calc(100vw + 100%))';
+                    } else {
+                        // If went left, hide on right side for next cycle
+                        car.style.transform = 'translateX(calc(100vw + 100%))';
+                    }
+
+                    // Schedule next drive-by if still in tranquility mode
+                    if (isTranquilityMode) {
+                        scheduleNextDriveBy();
+                    }
+                }, 7000);
+            }
+
+            function scheduleNextDriveBy() {
+                if (!isTranquilityMode) return;
+
+                // Random delay between 10-25 seconds
+                const delay = Math.random() * (25000 - 10000) + 10000;
+
+                tranquilityLoopTimeout = setTimeout(() => {
+                    if (isTranquilityMode) {
+                        startCarDriveBy();
+                    }
+                }, delay);
+            }
+
+            function startTranquilityMode() {
+                isTranquilityMode = true;
+                // Position car off-screen right initially
+                car.style.transform = 'translateX(calc(100vw + 100%))';
+                scheduleNextDriveBy();
+            }
+
+            function stopTranquilityMode() {
+                isTranquilityMode = false;
+
+                // Clear any pending timeouts
+                if (tranquilityLoopTimeout) {
+                    clearTimeout(tranquilityLoopTimeout);
+                    tranquilityLoopTimeout = null;
+                }
+
+                // Remove animation class
+                car.classList.remove('tranquility-drive');
+
+                // Resume scroll-based positioning
+                updateCarPosition();
+            }
+
+            // Watch for tranquility mode changes
+            const observer = new MutationObserver(() => {
+                const isHidden = container.classList.contains('content-hidden');
+
+                if (isHidden && !isTranquilityMode) {
+                    startTranquilityMode();
+                } else if (!isHidden && isTranquilityMode) {
+                    stopTranquilityMode();
+                }
+            });
+
+            observer.observe(container, {
+                attributes: true,
+                attributeFilter: ['class']
+            });
 
             // Initialize
             updateCarPosition();
