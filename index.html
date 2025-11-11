@@ -527,9 +527,6 @@
         @keyframes flyLeftToRight {
             from {
                 left: -20%;
-                opacity: 0;
-            }
-            5% {
                 opacity: 1;
             }
             95% {
@@ -544,9 +541,6 @@
         @keyframes flyRightToLeft {
             from {
                 right: -20%;
-                opacity: 0;
-            }
-            5% {
                 opacity: 1;
             }
             95% {
@@ -2662,10 +2656,11 @@
         if (window.innerWidth > 768) {
             console.log('Cloud system initialized - window width:', window.innerWidth);
 
-            // Spawn first cloud immediately
+            // Spawn initial clouds immediately
             spawnCloud();
-
-            // Spawn second cloud quickly
+            setTimeout(spawnCloud, 100);
+            setTimeout(spawnCloud, 200);
+            setTimeout(spawnCloud, 300);
             setTimeout(spawnCloud, 500);
 
             setInterval(() => {
