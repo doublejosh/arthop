@@ -1646,7 +1646,7 @@
             .landscape-mode-message,
             .content .info-block {
                 backdrop-filter: none !important;
-                background: rgba(0, 0, 0, 0.85) !important;
+                background: rgba(0, 0, 0, 0.75) !important;
             }
 
             /* Hide info-block in hero on mobile */
@@ -2033,10 +2033,15 @@
             "name": "South Camano Grange",
             "address": "2227 S Camano Dr",
             "artists": [],
-            "notes": "Winter market (Sat only) - farmers, artisans, music, hot fare",
+            "artistLinks": [
+                {"name": "Camano Farm Ashram", "url": "https://camanofarmashram.com/"}
+            ],
+            "notes": "\"Winter market\" (Sat only) - farmers, artisans, music, hot fare. Organized by Camano Farm Ashram.",
+            "website": "https://camanofarmashram.com/",
             "popup": {
                 "phone": "(425) 754-7421",
                 "email": "southcamano930@gmail.com",
+                "website": "https://camanofarmashram.com/",
                 "facebook": "https://www.facebook.com/profile.php?id=100064592985672",
                 "news": {
                     "title": "South Camano Grange gets facelift thanks to grant funding",
@@ -2212,16 +2217,20 @@
                         return `<a href="${artist.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${artist.name}</a>`;
                     }).join(', ');
 
+                    // Use "Groups" label for location #4, otherwise "Artists"
+                    const artistsLabel = location.number === 4 ? 'Groups' : 'Artists';
                     artistsHTML = `
                         <div class="location-artists">
-                            <div class="location-artists-label">Artists</div>
+                            <div class="location-artists-label">${artistsLabel}</div>
                             <div class="location-artists-list">${artistLinksHTML}</div>
                         </div>
                     `;
                 } else if (location.artists && location.artists.length > 0) {
+                    // Use "Groups" label for location #4, otherwise "Artists"
+                    const artistsLabel = location.number === 4 ? 'Groups' : 'Artists';
                     artistsHTML = `
                         <div class="location-artists">
-                            <div class="location-artists-label">Artists</div>
+                            <div class="location-artists-label">${artistsLabel}</div>
                             <div class="location-artists-list">${location.artists.join(', ')}</div>
                         </div>
                     `;
