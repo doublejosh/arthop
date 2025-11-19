@@ -381,7 +381,7 @@
             border-radius: 20px;
             backdrop-filter: blur(10px);
             display: inline-block;
-            margin: 10px auto 80px auto;
+            margin: 10px auto 20px auto;
             max-width: 24rem;
             mix-blend-mode: multiply;
             position: relative;
@@ -819,12 +819,12 @@
 
         /* Parallax effect hint */
         .parallax-hint {
-            position: absolute;
-            bottom: 5%;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
             color: rgba(255, 255, 255, 0.9);
-            font-size: 0.9rem;
+            font-size: 1.2rem;
             z-index: 10;
             animation: float 2s ease-in-out infinite;
             display: none;
@@ -925,10 +925,10 @@
 
         @keyframes float {
             0%, 100% {
-                transform: translateX(-50%) translateY(0px);
+                transform: translateY(0px);
             }
             50% {
-                transform: translateX(-50%) translateY(-10px);
+                transform: translateY(-10px);
             }
         }
 
@@ -936,7 +936,7 @@
         .locations-section {
             position: relative;
             min-height: 100vh;
-            padding: 80px 20px;
+            padding: 20px 20px 80px 20px;
             overflow: hidden;
         }
 
@@ -1070,6 +1070,14 @@
             max-width: 800px;
             margin: 0 auto;
             text-align: center;
+        }
+        .event-actions-container h2 {
+            color: #f0ddb0;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
         }
 
         .locations-container {
@@ -1860,10 +1868,9 @@
                 <div class="date">Dec 6<span class="smaller-text">&</span>7<span class="times"><span class="middle-dot"> · </span>10<span class="smaller-text">am</span>-4<span class="smaller-text">pm</span></span></div>
                 <div class="subtitle">Camano Island, WA</div>
             </div>
+            <!-- Parallax hint -->
+            <div class="parallax-hint">Scroll for more details</div>
         </div>
-
-        <!-- Parallax hint -->
-        <div class="parallax-hint">Scroll for more details</div>
 
         <p class="header">Gifts of fine art and craft, galleries  and creative spaces.</p>
     </div>
@@ -1919,35 +1926,33 @@
 
         <!-- Event Actions Section -->
         <section class="event-actions-section">
-            <p class="events-intro">
-                Holiday gifts, art, crafts, and more from local artists and makers.
-            </p>
             <div class="info-block">
                 <div class="date">Dec 6<span class="smaller-text">&</span>7<span class="times"><span class="middle-dot"> · </span>10<span class="smaller-text">am</span>-4<span class="smaller-text">pm</span></span></div>
                 <div class="subtitle">Camano Island, WA</div>
-            </div>
-            <div class="event-actions-container">
-                <div class="event-buttons">
-                    <a href="arthop-2025.ics" download class="calendar-button">📅 Add to Calendar</a>
-                    <a href="https://www.facebook.com/events/1144879013823740" target="_blank" rel="noopener noreferrer" class="facebook-button">
-                        <svg class="facebook-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                        Facebook Event
-                    </a>
-                </div>
             </div>
         </section>
 
         <!-- Locations Section -->
         <section class="locations-section">
             <div class="locations-container">
-                <h2>Locations</h2>
                 <div id="locations-grid" class="locations-grid">
                     <!-- Locations will be dynamically inserted here -->
                 </div>
             </div>
         </section>
+
+        <div class="event-actions-container">
+            <h2>Save the Date</h2>
+            <div class="event-buttons">
+                <a href="arthop-2025.ics" download class="calendar-button">📅 Add to Calendar</a>
+                <a href="https://www.facebook.com/events/1144879013823740" target="_blank" rel="noopener noreferrer" class="facebook-button">
+                    <svg class="facebook-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Facebook Event
+                </a>
+            </div>
+        </div>
 
         <!-- Map Section -->
         <section class="map-section">
@@ -2060,23 +2065,6 @@
     </script>
 
     <script>
-        // Hide parallax hint on first scroll
-        const parallaxHint = document.querySelector('.parallax-hint');
-        let hasScrolled = false;
-
-        function hideParallaxHint() {
-            if (!hasScrolled && window.scrollY > 50) {
-                hasScrolled = true;
-                parallaxHint.style.opacity = '0';
-                parallaxHint.style.pointerEvents = 'none';
-                setTimeout(() => {
-                    parallaxHint.style.display = 'none';
-                }, 300); // Wait for fade out
-            }
-        }
-
-        window.addEventListener('scroll', hideParallaxHint, { passive: true });
-
         // Toggle View Button - Show/Hide Content
         const viewToggleBtn = document.getElementById('viewToggleBtn');
         const container = document.querySelector('.container');
@@ -2851,8 +2839,8 @@
                     cachedDotsWidth = dotsContainer ? dotsContainer.offsetWidth : cachedWindowWidth;
                 }
 
-                // Calculate car position limited to 50% of dots width, centered within dots container
-                const maxTravelDistance = cachedDotsWidth * 0.5;
+                // Calculate car position limited to 75% of dots width, centered within dots container
+                const maxTravelDistance = cachedDotsWidth * 0.75;
 
                 // Find where dots container is positioned (centered in viewport)
                 const dotsLeftEdge = (cachedWindowWidth - cachedDotsWidth) / 2;
