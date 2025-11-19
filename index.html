@@ -358,6 +358,7 @@
         }
 
         .content h1 {
+            position: relative;
             margin: 60px 0 20px 0;
             animation: fadeInUp 1s ease-out;
         }
@@ -368,10 +369,10 @@
             height: auto;
             display: block;
             margin: 0 auto;
-            filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.5));
-            opacity: 0.35;
+            opacity: 0.6;
             transition: opacity 0.3s ease;
-            mix-blend-mode: multiply;
+            filter: brightness(0.7) saturate(0.7)
+            
         }
 
 
@@ -629,10 +630,10 @@
         @keyframes sunGlow {
             0% {
                 background: radial-gradient(circle,
-                    #FFF4A3 0%,
-                    #FFD700 30%,
-                    #FFA500 70%,
-                    #FF8C00 100%);
+                    #FFF88F 0%,
+                    #FFD000 30%,
+                    #FF9500 70%,
+                    #FF7700 100%);
                 width: 450px;
                 height: 450px;
                 border-radius: 50%;
@@ -640,10 +641,10 @@
             }
             20.83% {
                 background: radial-gradient(circle,
-                    #FBD5A1 0%,
-                    #F7BE78 30%,
-                    #F1A96E 70%,
-                    #E28449 100%);
+                    #FFCC77 0%,
+                    #FFAA44 30%,
+                    #FF8833 70%,
+                    #E85522 100%);
                 width: 425px;
                 height: 425px;
                 border-radius: 50%;
@@ -651,10 +652,10 @@
             }
             41.67% {
                 background: radial-gradient(circle,
-                    #f7b760 0%,
-                    #f5a850 30%,
-                    #e8943d 70%,
-                    #d67d2a 100%);
+                    #FFA533 0%,
+                    #FF8822 30%,
+                    #E86611 70%,
+                    #CC4400 100%);
                 width: 400px;
                 height: 400px;
                 border-radius: 50%;
@@ -704,69 +705,69 @@
 
         /* Mountain gradient animations */
         @keyframes mountainBackColor1 {
-            0% { stop-color: #A8C8D8; }
-            20.83% { stop-color: #92B7C7; }
-            41.67% { stop-color: #7ba6b5; }
-            62.5% { stop-color: #92B7C7; }
-            83.33%, 100% { stop-color: #A8C8D8; }
+            0% { stop-color: #85B8E8; }
+            20.83% { stop-color: #68A0D5; }
+            41.67% { stop-color: #4D88C2; }
+            62.5% { stop-color: #68A0D5; }
+            83.33%, 100% { stop-color: #85B8E8; }
         }
         @keyframes mountainBackColor2 {
-            0% { stop-color: #8FB5C8; }
-            20.83% { stop-color: #7DA4B6; }
-            41.67% { stop-color: #6a93a4; }
-            62.5% { stop-color: #7DA4B6; }
-            83.33%, 100% { stop-color: #8FB5C8; }
+            0% { stop-color: #5FA0D8; }
+            20.83% { stop-color: #4888C5; }
+            41.67% { stop-color: #3370B2; }
+            62.5% { stop-color: #4888C5; }
+            83.33%, 100% { stop-color: #5FA0D8; }
         }
         @keyframes mountainBackColor3 {
-            0% { stop-color: #789FB5; }
-            20.83% { stop-color: #6990A5; }
-            41.67% { stop-color: #5a8194; }
-            62.5% { stop-color: #6990A5; }
-            83.33%, 100% { stop-color: #789FB5; }
+            0% { stop-color: #4088C5; }
+            20.83% { stop-color: #2F70B2; }
+            41.67% { stop-color: #1F589F; }
+            62.5% { stop-color: #2F70B2; }
+            83.33%, 100% { stop-color: #4088C5; }
         }
 
         @keyframes mountainMidColor1 {
-            0% { stop-color: #8AA8BD; }
-            20.83% { stop-color: #7797AB; }
-            41.67% { stop-color: #648599; }
-            62.5% { stop-color: #7797AB; }
-            83.33%, 100% { stop-color: #8AA8BD; }
+            0% { stop-color: #6A98CD; }
+            20.83% { stop-color: #5280BB; }
+            41.67% { stop-color: #3D68A9; }
+            62.5% { stop-color: #5280BB; }
+            83.33%, 100% { stop-color: #6A98CD; }
         }
         @keyframes mountainMidColor2 {
-            0% { stop-color: #7595AB; }
-            20.83% { stop-color: #658499; }
-            41.67% { stop-color: #547387; }
-            62.5% { stop-color: #658499; }
-            83.33%, 100% { stop-color: #7595AB; }
+            0% { stop-color: #5080BB; }
+            20.83% { stop-color: #3868A9; }
+            41.67% { stop-color: #255097; }
+            62.5% { stop-color: #3868A9; }
+            83.33%, 100% { stop-color: #5080BB; }
         }
         @keyframes mountainMidColor3 {
-            0% { stop-color: #658297; }
-            20.83% { stop-color: #557286; }
-            41.67% { stop-color: #456275; }
-            62.5% { stop-color: #557286; }
-            83.33%, 100% { stop-color: #658297; }
+            0% { stop-color: #3A6CA7; }
+            20.83% { stop-color: #285895; }
+            41.67% { stop-color: #194483; }
+            62.5% { stop-color: #285895; }
+            83.33%, 100% { stop-color: #3A6CA7; }
         }
 
         @keyframes mountainFrontColor1 {
-            0% { stop-color: #7A6B8E; }
-            20.83% { stop-color: #625476; }
-            41.67% { stop-color: #4a3d5e; }
-            62.5% { stop-color: #625476; }
-            83.33%, 100% { stop-color: #7A6B8E; }
+            0% { stop-color: #6B3A8D; }
+            20.83% { stop-color: #552E70; }
+            41.67% { stop-color: #402255; }
+            62.5% { stop-color: #552E70; }
+            83.33%, 100% { stop-color: #6B3A8D; }
         }
         @keyframes mountainFrontColor2 {
-            0% { stop-color: #6B5A7F; }
-            20.83% { stop-color: #544569; }
-            41.67% { stop-color: #3d2f52; }
-            62.5% { stop-color: #544569; }
-            83.33%, 100% { stop-color: #6B5A7F; }
+            0% { stop-color: #5A2A7E; }
+            20.83% { stop-color: #461F62; }
+            41.67% { stop-color: #321548; }
+            62.5% { stop-color: #461F62; }
+            83.33%, 100% { stop-color: #5A2A7E; }
         }
         @keyframes mountainFrontColor3 {
-            0% { stop-color: #5A4A6B; }
-            20.83% { stop-color: #453657; }
-            41.67% { stop-color: #2f2242; }
-            62.5% { stop-color: #453657; }
-            83.33%, 100% { stop-color: #5A4A6B; }
+            0% { stop-color: #4A1A6E; }
+            20.83% { stop-color: #381252; }
+            41.67% { stop-color: #260A38; }
+            62.5% { stop-color: #381252; }
+            83.33%, 100% { stop-color: #4A1A6E; }
         }
 
         #mountainBackGrad stop:nth-child(1) {
@@ -944,10 +945,10 @@
         .lower-content-wrapper {
             background: linear-gradient(
                 to bottom,
-                #5A4A6B 0%,
-                #3d2f52 30%,
-                #2f2242 60%,
-                #1a1328 100%
+                #4A1A6E 0%,
+                #381252 30%,
+                #260A38 60%,
+                #15051F 100%
             );
             position: relative;
             padding-bottom: 40px;
@@ -1749,9 +1750,9 @@
             <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="none" style="position: absolute; bottom: 0;">
                 <defs>
                     <linearGradient id="mountainBackGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#A8C8D8;stop-opacity:1" />
-                        <stop offset="50%" style="stop-color:#8FB5C8;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#789FB5;stop-opacity:1" />
+                        <stop offset="0%" style="stop-color:#85B8E8;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#5FA0D8;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#4088C5;stop-opacity:1" />
                     </linearGradient>
                 </defs>
                 <path d="M -200 850 Q 0 750 200 800 Q 400 850 600 780 Q 800 710 1000 760 Q 1200 810 1400 750 Q 1600 700 1800 780 Q 2000 850 2120 800 L 2120 1080 L -200 1080 Z" fill="url(#mountainBackGrad)"/>
@@ -1763,9 +1764,9 @@
             <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="none" style="position: absolute; bottom: 0;">
                 <defs>
                     <linearGradient id="mountainMidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#8AA8BD;stop-opacity:1" />
-                        <stop offset="50%" style="stop-color:#7595AB;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#658297;stop-opacity:1" />
+                        <stop offset="0%" style="stop-color:#6A98CD;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#5080BB;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#3A6CA7;stop-opacity:1" />
                     </linearGradient>
                 </defs>
                 <path d="M -200 900 Q 100 800 400 850 Q 700 900 1000 820 Q 1300 740 1600 820 Q 1800 860 2000 840 Q 2060 850 2120 860 L 2120 1080 L -200 1080 Z" fill="url(#mountainMidGrad)"/>
@@ -1800,9 +1801,9 @@
             <svg width="100%" height="120%" viewBox="0 0 1920 1200" preserveAspectRatio="none" style="position: absolute; bottom: -10%;">
                 <defs>
                     <linearGradient id="mountainFrontGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" style="stop-color:#7A6B8E;stop-opacity:1" />
-                        <stop offset="40%" style="stop-color:#6B5A7F;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#5A4A6B;stop-opacity:1" />
+                        <stop offset="0%" style="stop-color:#6B3A8D;stop-opacity:1" />
+                        <stop offset="40%" style="stop-color:#5A2A7E;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#4A1A6E;stop-opacity:1" />
                     </linearGradient>
                 </defs>
                 <path d="M -200 700 Q -50 850 100 920 Q 250 990 400 900 Q 600 780 800 850 Q 1000 920 1200 880 Q 1400 840 1600 900 Q 1800 960 2000 920 Q 2060 910 2120 930 L 2120 1300 L -200 1300 Z" fill="url(#mountainFrontGrad)"/>
@@ -1863,7 +1864,7 @@
 
         <!-- Main content -->
         <div class="content">
-            <h1><img src="logo-black_white.png" alt="ArtHop"></h1>
+            <h1><img src="logo-deep-color.png" alt="ArtHop"></h1>
             <div class="info-block">
                 <div class="date">Dec 6<span class="smaller-text">&</span>7<span class="times"><span class="middle-dot"> · </span>10<span class="smaller-text">am</span>-4<span class="smaller-text">pm</span></span></div>
                 <div class="subtitle">Camano Island, WA</div>
@@ -2008,7 +2009,11 @@
             "popup": {
                 "website": "http://www.matzkefineart.com/",
                 "email": "matzke@camano.net",
-                "hours": "Open every Friday - Saturday - Sunday 11-5<br>Monday - Thursday by Appt."
+                "hours": "Open every Friday - Saturday - Sunday 11-5<br>Monday - Thursday by Appt.",
+                "images": [
+                    "artist-images/honey-shrunk-art.jpg",
+                    "artist-images/honey-shrunk-art-2.jpg"
+                ]
             }
         },
         {
@@ -2023,8 +2028,8 @@
             "notes": "",
             "popup": {
                 "images": [
-                    "spaceship-bus-shelter-camano-island-solar-system-gate-dragon-sculpture.jpg",
-                    "spaceship-bus-shelter-camano-island.jpg"
+                    "artist-images/spaceship-bus-shelter-camano-island-solar-system-gate-dragon-sculpture.jpg",
+                    "artist-images/spaceship-bus-shelter-camano-island.jpg"
                 ]
             }
         },
@@ -2303,7 +2308,7 @@
                 `;
 
                 location.popup.images.forEach(image => {
-                    popupHTML += `<img src="${image}" alt="${location.name}" class="location-popup-image">`;
+                    popupHTML += `<a href="${image}" target="_blank" rel="noopener noreferrer"><img src="${image}" alt="${location.name}" class="location-popup-image"></a>`;
                 });
 
                 popupHTML += `
@@ -2857,8 +2862,9 @@
                 // Center the 80% travel range within the dots container
                 const travelRangeOffset = (cachedDotsWidth - maxTravelDistance) / 2;
 
-                // Start at right edge of centered 80% zone, end at left edge
-                const startX = dotsLeftEdge + travelRangeOffset + maxTravelDistance;
+                // Start position: peek from right edge of screen (show ~150px of car)
+                const peekAmount = 150;
+                const startX = cachedWindowWidth - peekAmount;
                 const endX = dotsLeftEdge + travelRangeOffset;
 
                 const currentX = startX + (progress * (endX - startX));
@@ -2947,8 +2953,8 @@
             function scheduleNextDriveBy() {
                 if (!isTranquilityMode) return;
 
-                // Random delay between 10-25 seconds
-                const delay = Math.random() * (25000 - 10000) + 10000;
+                // Random delay between 4-10 seconds
+                const delay = Math.random() * (10000 - 4000) + 4000;
 
                 tranquilityLoopTimeout = setTimeout(() => {
                     if (isTranquilityMode) {
