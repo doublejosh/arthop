@@ -23,6 +23,7 @@ Dragon's Gate Studios
 2296 S Camano Dr
 Dolors Ruscha
 Marc Boutté
+Claire Dole
 
 
 #5
@@ -31,8 +32,6 @@ The Compound
 Monika DeNasha
 Doug Landreth
 Brenda Bolte
-Betsy Morris
 David Taber
-Shogo Ota
+Lisa Dahl
 Amy Bush
-Josh Lind
