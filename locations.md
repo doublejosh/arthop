@@ -8,7 +8,7 @@ Lee Beitz
 Matzke Fine Art Gallery & Sculpture Park
 2345 Blanche Way
 “Honey I Shrunk the Art”
-40 artists, 36th annual gallery show
+40 artists, annual gallery show
 
 
 #3
