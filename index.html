@@ -382,13 +382,12 @@
 
 
         .content .info-block {
-            background-color: rgba(0, 0, 0, 0.65);
+            background-color: rgba(0, 0, 0, 0.25);
             padding: 20px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
             display: inline-block;
             margin: 10px auto 20px auto;
-            max-width: 24rem;
             mix-blend-mode: multiply;
             position: relative;
             z-index: 11;
@@ -1231,9 +1230,51 @@
         }
 
         .event-actions-container {
-            max-width: 800px;
-            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            max-width: 640px;
+            width: calc(100% - 40px);
+            box-sizing: border-box;
+            margin: 60px auto;
+            padding: 50px 40px;
             text-align: center;
+            background:
+                radial-gradient(circle at 30% 20%,
+                    rgba(255, 214, 138, 0.35) 0%,
+                    rgba(232, 184, 98, 0.12) 30%,
+                    transparent 60%),
+                radial-gradient(ellipse at 50% 100%,
+                    #6b3a8d 0%,
+                    #4a3d5e 45%,
+                    #241a35 100%);
+            border: 1px solid rgba(240, 221, 176, 0.35);
+            border-radius: 18px;
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.45),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transform: rotate(-2.5deg);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .event-actions-container:hover {
+            transform: rotate(-1deg) translateY(-4px);
+            box-shadow:
+                0 28px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(232, 184, 98, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .event-actions-container {
+                transition: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .event-actions-container {
+                padding: 40px 20px;
+                transform: rotate(-1.5deg);
+            }
         }
 
         .event-actions-container h2 {
@@ -1434,10 +1475,6 @@
                 max-height: 500px;
                 object-fit: contain;
             }
-        }
-
-        .smaller-text {
-            font-size: 0.7em;
         }
 
         /* Location Popup Overlay and Modal */
@@ -1827,7 +1864,6 @@
                 padding: 20px;
                 border-radius: 20px;
                 margin: 0 auto 30px auto;
-                max-width: 24rem;
                 text-align: center;
             }
 
@@ -2044,8 +2080,8 @@
         <div class="content">
             <h1><img src="logo-deep-color.png" alt="ArtHop"></h1>
             <div class="info-block">
-                <div class="date">Dec 4<span class="smaller-text">&</span>5<span class="times"><span class="middle-dot">
-                            · </span>10<span class="smaller-text">am</span>-4<span class="smaller-text">pm</span></span>
+                <div class="date">Dec 4&5, 2026<span class="times"><span class="middle-dot">
+                            · </span>10am-4pm</span>
                 </div>
                 <div class="subtitle">Camano Island, WA</div>
             </div>
@@ -2108,8 +2144,8 @@
         <!-- Event Actions Section -->
         <section class="event-actions-section">
             <div class="info-block">
-                <div class="date">Dec 4<span class="smaller-text">&</span>5<span class="times"><span class="middle-dot">
-                            · </span>10<span class="smaller-text">am</span>-4<span class="smaller-text">pm</span></span>
+                <div class="date">Dec 4&5, 2026<span class="times"><span class="middle-dot">
+                            · </span>10am-4pm</span>
                 </div>
                 <div class="subtitle">Camano Island, WA</div>
             </div>
