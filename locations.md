@@ -21,9 +21,9 @@ farmers, artisans, music, hot fare
 #4
 Dragon's Gate Studios 
 2296 S Camano Dr
-Dolors Ruscha
+Dolors Rushà
 Marc Boutté
-Claire Dole
+Marie-Claire Dole
 
 
 #5
