@@ -2291,13 +2291,19 @@
             "artistLinks": [],
             "notes": "Fri: Open House, Krampus pictures 2-4. Sat: Holiday Market - local vendors, handmade gifts, crafts, and seasonal treats. Listen on Camano.fm",
             "popup": {
-                "phone": "(425) 754-7421",
                 "email": "southcamano930@gmail.com",
-                "facebook": "https://www.facebook.com/profile.php?id=100064592985672",
-                "news": {
-                    "title": "South Camano Grange gets facelift thanks to grant funding",
-                    "url": "https://www.goskagit.com/scnews/south-camano-grange-gets-facelift-thanks-to-grant-funding/article_5726e4b6-cbe8-11ef-9532-8356b4f0dbb9.html"
-                }
+                "website": "https://southcamanogrange.org",
+                "facebook": "https://www.facebook.com/profile.php?id=61589962162322",
+                "news": [
+                    {
+                        "title": "Local farm partners with South Camano Grange to launch monthly market",
+                        "url": "https://www.goskagit.com/scnews/local-farm-partners-with-south-camano-grange-to-launch-monthly-market/article_690d9712-4a65-4b83-b834-c05c7dd5e519.html"
+                    },
+                    {
+                        "title": "South Camano Grange gets facelift thanks to grant funding",
+                        "url": "https://www.goskagit.com/scnews/south-camano-grange-gets-facelift-thanks-to-grant-funding/article_5726e4b6-cbe8-11ef-9532-8356b4f0dbb9.html"
+                    }
+                ]
             }
         },
         {
@@ -2670,11 +2676,15 @@
 
             // Add news if available
             if (location.popup.news) {
+                const newsItems = [].concat(location.popup.news);
+                const newsLinks = newsItems
+                    .map(item => `<a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.title}</a>`)
+                    .join('<br>');
                 popupHTML += `
                     <div class="location-popup-section">
                         <div class="location-popup-section-label">Recent News</div>
                         <div class="location-popup-section-content">
-                            <a href="${location.popup.news.url}" target="_blank" rel="noopener noreferrer">${location.popup.news.title}</a>
+                            ${newsLinks}
                         </div>
                     </div>
                 `;
