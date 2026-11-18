@@ -1002,7 +1002,7 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            margin: 40px auto;
+            margin: 80px auto 40px auto;
             padding: 15px 30px;
             background: rgba(0, 0, 0, 0.4);
             border: none;
@@ -2210,7 +2210,7 @@
 
         <!-- Press Section -->
         <section class="press-section" id="press">
-            <h2>Graphics</h2>
+            <h2>Press Graphics</h2>
             <div class="event-buttons">
                 <a href="logo-black_white.png" download="camano-art-hop-logo.png" class="calendar-button">⬇️
                     Logo (PNG)</a>
@@ -2320,7 +2320,8 @@
                 {"name": "David Taber", "url": "https://davidtaberart.wixsite.com/stickandstone"},
                 {"name": "Lisa Dahl", "url": "https://lisadahl.co/about/"},
                 {"name": "Amy Bush", "url": "https://loyalsmith.com/"}
-            ]
+            ],
+            "popup": {}
         }
     ]
     </script>
@@ -2579,13 +2580,14 @@
             }
 
             // Add artist links if available
-            if (location.popup.artistLinks && location.popup.artistLinks.length > 0) {
+            const popupArtistLinks = location.popup.artistLinks || location.artistLinks;
+            if (popupArtistLinks && popupArtistLinks.length > 0) {
                 popupHTML += `
                     <div class="location-popup-section">
                         <div class="location-popup-section-label">Artist Portfolios</div>
                         <div class="location-popup-section-content">
                 `;
-                location.popup.artistLinks.forEach((artist, index) => {
+                popupArtistLinks.forEach((artist, index) => {
                     if (index > 0) popupHTML += `<br>`;
                     popupHTML += `<a href="${artist.url}" target="_blank" rel="noopener noreferrer">${artist.name}</a>`;
                 });
