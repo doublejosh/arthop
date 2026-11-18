@@ -153,6 +153,18 @@ Example:
 </section>
 ```
 
+## Updating Locations (crawler / LLM content)
+
+Location data lives in the `<script id="locations-data">` JSON block in `index.html`. The page builds cards from it with JS, so a static copy is also baked into the HTML for crawlers and no-JS visitors, along with JSON-LD event data and `llms.txt`.
+
+After editing the locations JSON (or the event dates in `scripts/build-static.mjs`), run:
+
+```sh
+node scripts/build-static.mjs
+```
+
+This regenerates the content between the `STATIC-LOCATIONS` and `JSON-LD` markers in `index.html`, and rewrites `llms.txt`. Don't hand-edit those blocks.
+
 ## Deployment
 
 ### Local Testing
